@@ -1,0 +1,1266 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="3–12 岁家庭自驱力实操课 · 家长版。16 节课 + 7 张可填写工具表，家长阅读、对孩子执行。">
+<title>把「要我做」变成「我要做」｜3–12 岁家庭自驱力实操课</title>
+<style>
+/* ============ 主题变量 ============ */
+:root{
+  --bg:#F8F4EC; --surface:#FFFDF8; --surface2:#FBF6EE; --ink:#3A322A;
+  --brown:#8A5A2B; --brown2:#B07C46; --line:#E2D3BC; --line2:#EDE2D0;
+  --muted:#8B7E6E; --red:#B4553C; --cream:#F4E9D7; --green:#5C7A58;
+  --shadow:0 2px 14px rgba(96,72,42,.07); --fscale:1; --topH:60px;
+}
+body[data-theme="dark"]{
+  --bg:#1E1B18; --surface:#272320; --surface2:#2E2925; --ink:#EDE4D6;
+  --brown:#D7A469; --brown2:#C08C55; --line:#4A4038; --line2:#3B342E;
+  --muted:#A79A89; --red:#D98468; --cream:#3A3025; --green:#8FB08A;
+  --shadow:0 2px 14px rgba(0,0,0,.25);
+}
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  font-size:calc(15px * var(--fscale)); line-height:1.8;
+  -webkit-font-smoothing:antialiased;
+}
+a{ color:var(--brown); text-decoration:none; }
+button{ font:inherit; cursor:pointer; }
+strong{ color:var(--brown); font-weight:650; }
+::selection{ background:var(--cream); }
+
+/* ============ 顶栏 ============ */
+.topbar{
+  position:fixed; z-index:40; top:0; left:0; right:0; height:60px;
+  background:var(--surface); border-bottom:1px solid var(--line);
+  display:flex; align-items:center; gap:10px; padding:0 16px;
+}
+.brand{ display:flex; align-items:center; gap:10px; min-width:0; }
+.brand .mark{
+  width:30px; height:30px; flex:none; border-radius:9px; flex:none;
+  background:linear-gradient(145deg,var(--brown),var(--brown2)); color:#FFF9EE;
+  display:grid; place-items:center; font-size:15px; font-weight:700;
+}
+.brand b{ font-size:15px; letter-spacing:.3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.brand small{ display:block; font-size:10px; color:var(--muted); font-weight:400; letter-spacing:1px; }
+.top-spacer{ flex:1; }
+.agebar{ display:flex; background:var(--surface2); border:1px solid var(--line); border-radius:9px; padding:2px; gap:2px; }
+.agebar button{
+  border:0; background:transparent; color:var(--muted); font-size:12px;
+  padding:5px 9px; border-radius:7px; white-space:nowrap;
+}
+.agebar button.on{ background:var(--surface); color:var(--brown); font-weight:650; box-shadow:0 1px 4px rgba(0,0,0,.08); }
+.icon-btn{
+  width:34px; height:34px; flex:none; border:1px solid var(--line); background:var(--surface);
+  color:var(--ink); border-radius:9px; display:grid; place-items:center; font-size:15px;
+}
+.icon-btn:hover{ border-color:var(--brown2); color:var(--brown); }
+#menuBtn{ display:none; }
+.hint-search{ font-size:12px; color:var(--muted); border:1px solid var(--line); background:var(--surface);
+  border-radius:9px; padding:6px 11px; display:flex; align-items:center; gap:8px; }
+.hint-search kbd{ font:inherit; font-size:10px; background:var(--surface2); border:1px solid var(--line2); border-radius:4px; padding:0 4px; }
+#searchBtnM{ display:none; }
+/* iOS / 旧版浏览器不支持 color-mix 时，先给一个可读的底色 */
+.oops{ background:var(--surface2); }
+.box.warn{ background:var(--surface2); }
+mark{ background:var(--cream); }
+
+/* ============ 布局 ============ */
+.shell{ display:flex; padding-top:var(--topH); min-height:100vh; }
+.sidebar{
+  position:fixed; z-index:30; top:var(--topH); bottom:0; left:0; width:272px;
+  background:var(--surface); border-right:1px solid var(--line);
+  overflow-y:auto; padding:18px 14px 28px;
+}
+.side-progress{ background:var(--surface2); border:1px solid var(--line2); border-radius:12px; padding:13px 14px; margin-bottom:18px; }
+.side-progress .row{ display:flex; justify-content:space-between; font-size:12px; color:var(--muted); }
+.side-progress .row b{ color:var(--brown); font-size:17px; }
+.bar{ height:6px; border-radius:6px; background:var(--line2); overflow:hidden; margin-top:8px; }
+.bar i{ display:block; height:100%; background:linear-gradient(90deg,var(--brown),var(--brown2)); border-radius:6px; transition:width .3s; }
+.side-lbl{ font-size:10px; letter-spacing:2px; color:var(--muted); padding:0 8px; margin:16px 0 6px; }
+.navgroup{ margin-bottom:12px; }
+.navgroup > .gt{
+  display:flex; align-items:center; gap:7px; width:100%; border:0; background:transparent;
+  color:var(--brown); font-size:12.5px; font-weight:650; text-align:left;
+  padding:6px 8px; border-radius:7px;
+}
+.navgroup > .gt:hover{ background:var(--surface2); }
+.navgroup .arw{ font-size:9px; color:var(--muted); transition:transform .2s; }
+.navgroup.closed .arw{ transform:rotate(-90deg); }
+.navgroup.closed .items{ display:none; }
+.navitem{
+  display:flex; align-items:flex-start; gap:8px; width:100%; text-align:left;
+  border:0; background:transparent; color:var(--ink); font-size:12.5px; line-height:1.5;
+  padding:7px 8px 7px 10px; border-radius:8px; border-left:2px solid transparent;
+}
+.navitem:hover{ background:var(--surface2); }
+.navitem.on{ background:var(--cream); border-left-color:var(--brown); color:var(--brown); font-weight:600; }
+.navitem .n{ flex:none; width:auto; min-width:34px; white-space:nowrap; color:var(--brown2); font-size:11px; font-variant-numeric:tabular-nums; }
+.navitem .tx{ flex:1; min-width:0; }
+.navitem .dot{ flex:none; width:14px; height:14px; margin-top:2px; border:1.5px solid var(--line); border-radius:50%; }
+.navitem.done .dot{ background:var(--green); border-color:var(--green); position:relative; }
+.navitem.done .dot::after{ content:"✓"; color:#fff; font-size:9px; position:absolute; inset:0; display:grid; place-items:center; }
+.navitem.done .tx{ color:var(--muted); }
+.side-foot{ margin-top:20px; padding:12px 8px 0; border-top:1px solid var(--line2); font-size:11px; color:var(--muted); line-height:1.7; }
+.mask{ display:none; }
+
+.main{ flex:1; margin-left:272px; min-width:0; padding:34px 38px 90px; }
+.wrap{ max-width:860px; margin:0 auto; }
+
+/* ============ 文档通用 ============ */
+.crumb{ font-size:12px; color:var(--muted); margin-bottom:14px; display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+.crumb a{ color:var(--muted); flex:none; }
+.crumb > span{ min-width:0; }
+.crumb > span:last-child{ overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:min(64vw,440px); }
+.hint{ color:var(--muted); font-size:13px; margin:0 0 16px; }
+.crumb a:hover{ color:var(--brown); }
+.doc-h{ margin-bottom:6px; }
+.doc-h h1{ font-size:clamp(24px,3vw,32px); line-height:1.4; margin:0 0 10px; letter-spacing:.3px; color:var(--ink); }
+.doc-h .kicker{ font-size:11px; letter-spacing:2px; color:var(--brown2); margin-bottom:8px; }
+.lead{
+  background:var(--surface2); border:1px solid var(--line); border-left:3px solid var(--brown2);
+  padding:13px 17px; border-radius:10px; margin:0 0 24px; font-size:calc(14px * var(--fscale)); color:var(--ink);
+}
+.toolbar{ display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin:0 0 22px; padding-bottom:18px; border-bottom:1px solid var(--line2); }
+.btn{
+  border:1px solid var(--line); background:var(--surface); color:var(--ink);
+  border-radius:9px; padding:8px 13px; font-size:12.5px; display:inline-flex; align-items:center; gap:6px;
+}
+.btn:hover{ border-color:var(--brown2); color:var(--brown); }
+.btn.primary{ background:var(--brown); border-color:var(--brown); color:#FFF9EE; font-weight:600; }
+.btn.primary:hover{ opacity:.9; color:#FFF9EE; }
+.btn.is-done{ background:var(--green); border-color:var(--green); color:#fff; }
+.btn.ghost{ background:transparent; }
+.btn.sm{ padding:5px 9px; font-size:11.5px; }
+.toolbar .spacer{ flex:1; }
+.saved{ font-size:11px; color:var(--muted); }
+
+.doc-body{ font-size:calc(15px * var(--fscale)); }
+.doc-body p{ margin:0 0 .85em; }
+.doc-body h2{ font-size:22px; margin:0 0 12px; }
+.doc-body h3{ font-size:16px; color:var(--brown); margin:1.6em 0 .5em; }
+.doc-body ul{ padding-left:1.35em; margin:.2em 0 1em; }
+.doc-body li{ margin-bottom:.35em; }
+.sec-t{
+  font-size:14px; font-weight:650; color:var(--brown); margin:26px 0 10px;
+  padding-left:11px; border-left:3px solid var(--brown2); line-height:1.5;
+}
+.say{
+  background:var(--surface2); border:1px dashed var(--line); border-radius:10px;
+  padding:12px 16px 8px; margin:0 0 18px;
+}
+.say .q{ margin:0 0 8px; color:var(--ink); position:relative; padding-right:44px; }
+.copy{ position:absolute; right:0; top:1px; border:1px solid var(--line); background:var(--surface);
+  color:var(--muted); font-size:10.5px; border-radius:6px; padding:2px 6px; }
+.copy:hover{ color:var(--brown); border-color:var(--brown2); }
+.tiny{ font-size:calc(12px * var(--fscale)); color:var(--muted); }
+.oops{ background:color-mix(in srgb,var(--red) 8%,var(--surface)); border:1px solid color-mix(in srgb,var(--red) 28%,var(--line));
+  padding:13px 17px; border-radius:10px; margin:0 0 18px; }
+.oops b{ color:var(--red); }
+.case{ background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:13px 17px; margin:0 0 18px; font-size:calc(14px * var(--fscale)); }
+.case .tag{ display:block; font-size:11px; letter-spacing:1px; color:var(--brown2); margin-bottom:5px; }
+.box{ background:var(--surface2); border:1px solid var(--line); border-left:3px solid var(--brown2);
+  padding:13px 17px; border-radius:10px; margin:0 0 16px; }
+.box p:last-child{ margin-bottom:0; }
+.box.warn{ background:color-mix(in srgb,var(--red) 6%,var(--surface)); border-left-color:var(--red); }
+.big3{ display:flex; gap:10px; margin:0 0 20px; flex-wrap:wrap; }
+.big3 > div{ flex:1 1 180px; background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:14px; font-size:13px; line-height:1.7; }
+.big3 em{ display:block; font-style:normal; color:var(--brown2); font-size:11px; letter-spacing:1.5px; margin-bottom:6px; }
+
+/* 表格：网页版 */
+.tw{ overflow-x:auto; margin:0 0 18px; border:1px solid var(--line); border-radius:10px; -webkit-overflow-scrolling:touch; }
+table{ border-collapse:collapse; width:100%; font-size:calc(13.5px * var(--fscale)); }
+table th, table td{ border-bottom:1px solid var(--line2); border-right:1px solid var(--line2); padding:9px 11px; vertical-align:top; text-align:left; }
+table th:last-child, table td:last-child{ border-right:0; }
+table tr:last-child td{ border-bottom:0; }
+table th{ background:var(--surface2); color:var(--brown); font-weight:650; white-space:nowrap; }
+table.grid th{ background:var(--surface2); }
+table.grid td{ min-height:38px; }
+table.grid td.c{ text-align:center; }
+.ages td{ border-right:1px solid var(--line2); }
+.ages td.a{ width:92px; background:var(--surface2); color:var(--brown); font-weight:650; text-align:center; white-space:nowrap; }
+.ages tr.age-off{ opacity:.28; }
+.ages tr.age-on td.a{ box-shadow:inset 3px 0 0 var(--brown2); }
+body.age-filtered .ages tr.age-off{ display:none; }
+.grid th.col-on, .grid td.col-on{ background:color-mix(in srgb,var(--brown2) 12%,var(--surface)); }
+.t5 th, .t5 td{ font-size:calc(12.5px * var(--fscale)); line-height:1.6; }
+.t5 td:first-child{ white-space:nowrap; font-weight:600; }
+
+/* 可填写控件 */
+.field{
+  width:100%; border:0; border-bottom:1px dashed var(--line); background:transparent;
+  color:var(--ink); font:inherit; font-size:calc(13.5px * var(--fscale)); padding:3px 4px; outline:none;
+  border-radius:0; resize:vertical;
+}
+.field:focus{ border-bottom-color:var(--brown); background:color-mix(in srgb,var(--brown2) 7%,transparent); }
+td > .field{ min-height:32px; min-width:88px; }
+textarea.field{ min-height:60px; line-height:1.7; }
+.notes-area{ min-height:110px; border:1px dashed var(--line); border-radius:10px; padding:10px 12px; background:var(--surface); }
+.sig span{ display:inline-block; width:130px; }
+.sig .field{ width:130px; display:inline-block; }
+.chk{
+  width:28px; height:28px; border:1.5px solid var(--line); border-radius:5px; background:var(--surface);
+  color:transparent; font-size:11px; line-height:1; padding:0; margin:0 2px 2px 0; vertical-align:middle;
+}
+.chk.on{ background:var(--green); border-color:var(--green); color:#fff; }
+.opt{
+  border:1px solid var(--line); background:var(--surface); color:var(--muted);
+  border-radius:20px; padding:2px 9px; font-size:11.5px; margin:0 3px 2px 0;
+}
+.opt.on{ background:var(--brown); border-color:var(--brown); color:#FFF9EE; }
+.rec{ border:1px dashed var(--line); border-radius:10px; padding:12px 15px; margin:0 0 16px; }
+.rec .line{ display:inline-block; width:150px; }
+.rec .line .field{ width:100%; }
+.rec .field{ display:inline-block; width:150px; }
+mark{ background:color-mix(in srgb,var(--brown2) 38%,transparent); color:inherit; border-radius:3px; padding:0 1px; }
+
+/* 部分扉页 / 尾页 */
+.part-inner .no{ font-size:11px; letter-spacing:4px; color:var(--brown2); margin-bottom:14px; }
+.part-inner h2{ font-size:clamp(26px,4vw,36px); margin:0 0 12px; }
+.part-inner .desc{ color:var(--muted); max-width:620px; line-height:1.9; }
+.part-inner .bar{ width:52px; height:3px; background:var(--brown); margin:22px 0; }
+.part-inner .list{ color:var(--ink); line-height:2.1; font-size:14px; }
+.part-hero{ background:linear-gradient(140deg,var(--cream),var(--surface)); border:1px solid var(--line); border-radius:16px; padding:34px 30px; margin-bottom:24px; }
+.front{ line-height:1.85; }
+.deck{ color:var(--muted); margin-bottom:20px; }
+.end .box{ margin-top:24px; }
+
+/* ============ 首页 ============ */
+.hero{
+  background:linear-gradient(145deg,var(--cream) 0%,var(--surface) 58%,var(--surface2) 100%);
+  border:1px solid var(--line); border-radius:20px; padding:42px 40px 34px; position:relative; overflow:hidden;
+}
+.hero::after{ content:""; position:absolute; right:-70px; top:-70px; width:240px; height:240px;
+  border:1px solid var(--line); border-radius:50%; opacity:.5; }
+.hero .kicker{ font-size:11px; letter-spacing:3px; color:var(--brown2); margin-bottom:20px; }
+.hero h1{ font-size:clamp(30px,5vw,46px); line-height:1.35; margin:0 0 14px; letter-spacing:1px; }
+.hero h1 span{ display:block; }
+.hero .sub{ font-size:18px; color:var(--brown); margin-bottom:8px; }
+.hero .sub2{ color:var(--muted); line-height:1.9; max-width:560px; }
+.chips{ display:flex; flex-wrap:wrap; gap:8px; margin:24px 0 26px; }
+.chips b{ font-weight:500; font-size:12px; border:1px solid var(--line); background:var(--surface);
+  padding:5px 12px; border-radius:20px; color:var(--ink); }
+.hero-cta{ display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+.hero-note{ margin-top:20px; padding-top:16px; border-top:1px solid var(--line); font-size:11.5px; color:var(--muted); line-height:1.8; }
+.resume{ display:inline-flex; align-items:center; gap:8px; font-size:12.5px; color:var(--brown);
+  background:var(--surface); border:1px dashed var(--brown2); border-radius:9px; padding:7px 12px; }
+.section{ margin-top:38px; }
+.section > h2{ font-size:19px; margin:0 0 6px; }
+.section > .sd{ color:var(--muted); font-size:13px; margin:0 0 18px; }
+.two{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.card{ background:var(--surface); border:1px solid var(--line); border-radius:13px; padding:18px 20px; box-shadow:var(--shadow); }
+.card h3{ font-size:14px; margin:0 0 10px; color:var(--brown); }
+.card p, .card li{ font-size:13px; line-height:1.8; margin:0 0 8px; }
+.card ul{ padding-left:1.2em; margin:0; }
+.card.warn{ border-color:color-mix(in srgb,var(--red) 30%,var(--line)); }
+.grid-cards{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+.mini{ background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:15px 16px; }
+.mini .num{ font-size:11px; letter-spacing:1px; color:var(--brown2); }
+.mini b{ display:block; font-size:14px; margin:5px 0 4px; }
+.mini p{ margin:0; font-size:12px; color:var(--muted); line-height:1.7; }
+.mapgroup{ background:var(--surface); border:1px solid var(--line); border-radius:12px; margin-bottom:10px; overflow:hidden; }
+.mapgroup > .mh{ display:flex; align-items:center; gap:10px; padding:12px 16px; background:var(--surface2); font-size:13.5px; font-weight:650; color:var(--brown); }
+.mapgroup > .mh .idx{ font-size:10px; letter-spacing:1px; color:var(--brown2); }
+.mapgroup .mitems{ padding:6px 10px 10px; }
+.maplink{ display:flex; gap:10px; align-items:baseline; padding:5px 8px; border-radius:7px; font-size:13px; }
+.maplink:hover{ background:var(--surface2); }
+.maplink .n{ color:var(--brown2); font-size:11.5px; min-width:48px; }
+.toolgrid{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+.toolcard{ background:var(--surface); border:1px solid var(--line); border-radius:11px; padding:13px 14px; text-align:left; }
+.toolcard:hover{ border-color:var(--brown2); }
+.toolcard b{ display:block; font-size:13px; margin-bottom:3px; }
+.toolcard span{ font-size:11px; color:var(--muted); }
+.disclaimer{ background:var(--surface2); border:1px solid var(--line); border-radius:12px; padding:18px 20px; font-size:12px; color:var(--muted); line-height:1.85; }
+.disclaimer b{ color:var(--ink); }
+.footer{ margin-top:40px; padding-top:18px; border-top:1px solid var(--line2); font-size:11.5px; color:var(--muted); line-height:1.9; }
+
+/* ============ 进度页 ============ */
+.statrow{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:24px; }
+.stat{ background:var(--surface); border:1px solid var(--line); border-radius:13px; padding:18px; }
+.stat b{ display:block; font-size:28px; color:var(--brown); line-height:1.3; }
+.stat span{ font-size:12px; color:var(--muted); }
+.weekgrid{ display:grid; grid-template-columns:repeat(6,1fr); gap:8px; margin:12px 0 20px; }
+.weekcell{ aspect-ratio:1.5; border:1px solid var(--line); background:var(--surface); border-radius:9px;
+  display:grid; place-items:center; font-size:12px; color:var(--muted); }
+.weekcell.on{ background:var(--green); border-color:var(--green); color:#fff; font-weight:600; }
+.listrow{ display:flex; align-items:center; gap:10px; padding:9px 4px; border-bottom:1px solid var(--line2); font-size:13px; }
+.listrow:last-child{ border-bottom:0; }
+.listrow .g{ flex:1; }
+.notebox{ background:var(--surface2); border:1px solid var(--line2); border-radius:9px; padding:11px 13px; margin-bottom:9px; font-size:12.5px; white-space:pre-wrap; }
+.notebox b{ display:block; color:var(--brown); margin-bottom:4px; font-size:12px; }
+.setting{ background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:16px 18px; margin-bottom:12px; }
+.setting h3{ margin:0 0 6px; font-size:14px; color:var(--brown); }
+.setting p{ margin:0 0 10px; font-size:12px; color:var(--muted); }
+.setting .row{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+.setting input[type=password]{ border:1px solid var(--line); background:var(--surface2); color:var(--ink); border-radius:8px; padding:7px 10px; font:inherit; font-size:13px; }
+
+/* ============ 搜索 / 弹层 / 提示 ============ */
+.overlay{ position:fixed; inset:0; z-index:70; background:rgba(30,24,16,.42); display:flex; justify-content:center; align-items:flex-start; padding:9vh 16px 16px; }
+.hidden{ display:none !important; }
+.searchbox{ width:min(640px,100%); background:var(--surface); border:1px solid var(--line); border-radius:15px; box-shadow:0 18px 50px rgba(0,0,0,.22); overflow:hidden; }
+.searchbox .si{ display:flex; align-items:center; gap:10px; padding:14px 16px; border-bottom:1px solid var(--line2); }
+.searchbox input{ flex:1; border:0; background:transparent; color:var(--ink); font:inherit; font-size:15px; outline:none; }
+.sres{ max-height:56vh; overflow-y:auto; padding:8px; }
+.sitem{ display:block; width:100%; text-align:left; border:0; background:transparent; color:var(--ink); padding:10px 12px; border-radius:9px; }
+.sitem:hover{ background:var(--surface2); }
+.sitem b{ font-size:13.5px; }
+.sitem .tag{ font-size:10px; color:var(--brown2); border:1px solid var(--line); border-radius:4px; padding:1px 5px; margin-left:6px; }
+.sitem p{ margin:4px 0 0; font-size:12px; color:var(--muted); line-height:1.6; }
+.sitem mark{ font-weight:600; }
+.sempty{ padding:26px; text-align:center; color:var(--muted); font-size:13px; }
+.toast{ position:fixed; z-index:90; left:50%; bottom:34px; transform:translate(-50%,20px); opacity:0;
+  background:var(--ink); color:var(--bg); padding:9px 18px; border-radius:9px; font-size:12.5px; transition:.25s; pointer-events:none; }
+.toast.show{ opacity:1; transform:translate(-50%,0); }
+.gate{ position:fixed; inset:0; z-index:100; background:var(--bg); display:grid; place-items:center; padding:20px; }
+.gate .gcard{ width:min(360px,100%); background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:28px; text-align:center; box-shadow:var(--shadow); }
+.gate h2{ font-size:18px; margin:0 0 8px; }
+.gate p{ font-size:12px; color:var(--muted); line-height:1.8; }
+.gate input{ width:100%; border:1px solid var(--line); background:var(--surface2); color:var(--ink); border-radius:9px; padding:10px 12px; font:inherit; text-align:center; letter-spacing:3px; margin:14px 0 10px; outline:none; }
+.bottombar{ display:none; }
+
+/* ============ 本机记录提示 / 分龄状态 / 备份 ============ */
+.notice-bar{
+  display:flex; align-items:flex-start; gap:10px; flex-wrap:wrap;
+  background:var(--cream); border:1px solid var(--line); border-left:3px solid var(--brown2);
+  border-radius:10px; padding:11px 14px; margin:0 0 16px; font-size:12.5px; line-height:1.75;
+}
+.notice-bar b{ color:var(--brown); font-weight:650; }
+.notice-bar .nb-tx{ flex:1; min-width:200px; }
+.notice-bar button{
+  flex:none; border:1px solid var(--brown2); background:var(--surface); color:var(--brown);
+  border-radius:8px; padding:5px 12px; font-size:12px; min-height:32px;
+}
+.notice-bar a{ align-self:center; font-size:12px; white-space:nowrap; }
+.age-tip{ background:var(--surface2); border-left-color:var(--brown); }
+.import-confirm{
+  margin-top:10px; padding:11px 13px; border:1px solid var(--red); border-radius:9px;
+  background:color-mix(in srgb,var(--red) 6%,var(--surface)); font-size:12.5px; line-height:1.7;
+}
+.import-confirm .btn{ margin-top:8px; }
+/* 宽表：右侧渐隐 + 明确提示 */
+.tw.has-more{ box-shadow:inset -16px 0 15px -15px rgba(138,90,43,.55); }
+/* 搜索：结果条数与口语推荐词 */
+.scount{ padding:6px 12px 8px; font-size:11.5px; color:var(--muted); border-bottom:1px solid var(--line2); }
+.sug{ display:flex; flex-wrap:wrap; gap:7px; justify-content:center; margin-top:12px; }
+.sug button{ border:1px solid var(--line); background:var(--surface); color:var(--brown);
+  border-radius:20px; padding:6px 12px; font-size:12px; min-height:32px; }
+/* 分龄速查表：与课程分龄表保持一致，真的隐藏其他档 */
+body.age-filtered .t5 th.col-off, body.age-filtered .t5 td.col-off{ display:none; }
+
+/* ============ 响应式：平板 / 手机 ============ */
+.brand b.short{ display:none; }
+.table-hint{ display:none; align-items:center; gap:9px; flex-wrap:wrap;
+  background:var(--surface2); border:1px dashed var(--brown2); border-radius:9px;
+  padding:9px 12px; margin:0 0 12px; font-size:12px; color:var(--brown); line-height:1.6; }
+.table-hint .ar{ font-size:15px; color:var(--brown); }
+.table-hint .btn{ padding:5px 10px; font-size:11.5px; }
+/* 列数多的表格在窄屏保持可读，交给 .tw 横向滑动 */
+table.cols3{ min-width:480px; }
+table.cols4{ min-width:600px; }
+table.cols5{ min-width:700px; }
+table.cols6{ min-width:800px; }
+
+@media (max-width:1000px){
+  .sidebar{ transform:translateX(-100%); transition:transform .25s; box-shadow:0 0 30px rgba(0,0,0,.15); }
+  body.nav-open .sidebar{ transform:translateX(0); }
+  body.nav-open .mask{ display:block; position:fixed; inset:var(--topH) 0 0; z-index:25; background:rgba(0,0,0,.32); }
+  .main{ margin-left:0; padding:26px 20px 96px; }
+  #menuBtn{ display:grid; }
+  .brand small{ display:none; }
+  .hint-search{ display:none; }
+  #searchBtnM{ display:grid; }
+  .toolgrid{ grid-template-columns:repeat(2,1fr); }
+  .grid-cards{ grid-template-columns:repeat(2,1fr); }
+}
+@media (max-width:760px){
+  .two{ grid-template-columns:1fr; }
+}
+@media (max-width:640px){
+  /* 顶栏折成两行：第一行品牌＋菜单，第二行整条分龄切换 */
+  .topbar{ flex-wrap:wrap; height:auto; min-height:56px; padding:8px 11px 7px; gap:7px; row-gap:7px; }
+  .agebar{ order:5; width:100%; }
+  .agebar button{ flex:1; padding:6px 4px; font-size:11.5px; }
+  .agebar button[data-age="all"]{ display:block; }
+  .brand b{ font-size:13px; }
+  .brand b.long{ display:none; }
+  .brand b.short{ display:inline; }
+  .brand .mark{ width:27px; height:27px; font-size:13px; }
+  .icon-btn{ width:32px; height:32px; }
+  #themeBtn,#fontBtn{ display:none; }
+  .main{ padding:20px 15px 100px; }
+  .hero{ padding:26px 20px 22px; border-radius:16px; }
+  .hero .kicker{ margin-bottom:14px; }
+  .hero .sub{ font-size:16px; }
+  .hero .chips{ margin:18px 0 20px; }
+  .hero .chips b{ font-size:11px; padding:4px 9px; }
+  .hero-cta .btn{ flex:1 1 auto; justify-content:center; }
+  .statrow{ grid-template-columns:repeat(3,1fr); gap:7px; }
+  .stat{ padding:12px 10px; }
+  .stat b{ font-size:21px; }
+  .stat span{ font-size:10.5px; line-height:1.4; display:block; }
+  .weekgrid{ grid-template-columns:repeat(4,1fr); gap:6px; }
+  .weekcell{ font-size:10.5px; }
+  .grid-cards,.toolgrid{ grid-template-columns:repeat(2,1fr); gap:8px; }
+  .big3 > div{ flex:1 1 100%; }
+  .mini{ padding:12px; }
+  .card{ padding:15px 16px; }
+  .doc-h h1{ font-size:23px; }
+  .section > h2{ font-size:17px; }
+  .toolbar{ gap:6px; }
+  .toolbar .btn{ padding:7px 10px; font-size:12px; }
+  .crumb{ font-size:11px; }
+  .sig .field,.sig span{ width:100px; }
+  .rec .field,.rec .line{ width:110px; display:inline-block; }
+  .chk{ width:38px; height:38px; font-size:16px; margin:1px 3px 3px 0; }
+  .opt{ padding:7px 14px; font-size:12.5px; min-height:34px; }
+  .copy{ font-size:12px; padding:7px 11px; min-height:34px; min-width:44px; }
+  .say .q{ padding-right:58px; }
+  td > .field{ min-height:38px; }
+  .table-hint{ display:flex; }
+  .searchbox input,.gate input{ font-size:16px; }  /* 防止 iOS 聚焦时自动放大页面 */
+  .overlay{ padding:6vh 12px 12px; }
+  .sres{ max-height:62vh; }
+  .bottombar{
+    display:flex; position:fixed; z-index:35; left:0; right:0; bottom:0; height:54px;
+    background:var(--surface); border-top:1px solid var(--line); padding-bottom:env(safe-area-inset-bottom);
+  }
+  .bottombar a{ flex:1; display:grid; place-items:center; gap:2px; font-size:10.5px; color:var(--muted); }
+  .bottombar a .bi{ font-size:17px; line-height:1; }
+  .bottombar a.on{ color:var(--brown); font-weight:650; }
+}
+@media (max-width:380px){
+  .grid-cards,.toolgrid{ grid-template-columns:1fr; }
+  .hero h1{ font-size:28px; }
+  .agebar button{ font-size:10.5px; padding:6px 2px; }
+}
+
+/* ============ 打印：只输出当前页 ============ */
+@media print{
+  @page{ size:A4; margin:16mm 14mm; }
+  body{ background:#fff; color:#222; font-size:10.5pt; }
+  .topbar,.sidebar,.bottombar,.mask,.toolbar,.no-print,.overlay,.toast,.hero-cta,.copy,.crumb,.agebar{ display:none !important; }
+  .shell{ padding:0; display:block; }
+  .main{ margin:0; padding:0; }
+  .wrap{ max-width:none; }
+  .card,.box,.say,.oops,.case,.rec,.mini,.toolcard{ box-shadow:none; break-inside:avoid; }
+  .tw{ overflow:visible; border:0; }
+  table{ font-size:9pt; }
+  table.cols3,table.cols4,table.cols5,table.cols6{ min-width:0; }
+  table th,table td{ border:1px solid #ccc; padding:5px 6px; }
+  .field{ border-bottom:1px solid #bbb; }
+  /* 空格子印成空白书写线，不要把「……」占位符印到纸上 */
+  .field::placeholder{ color:transparent !important; }
+  textarea.field{ overflow:visible !important; }
+  .notes-area{ min-height:90px; }
+  .table-hint,.notice-bar,.sug,.import-confirm{ display:none !important; }
+  /* 打印件永远是全龄版：屏幕上的分龄筛选不影响纸张内容 */
+  body.age-filtered .ages tr.age-off{ display:table-row !important; opacity:1 !important; }
+  .ages tr.age-off,.ages tr.age-on td.a{ opacity:1 !important; box-shadow:none !important; }
+  [data-col],body.age-filtered .t5 th.col-off,body.age-filtered .t5 td.col-off{ background:transparent !important; display:table-cell !important; }
+  .chk,.opt{ background:#fff !important; color:#222 !important; border:1px solid #bbb !important; border-radius:2px !important; }
+  .section{ break-inside:avoid; }
+  a{ color:inherit; }
+}
+</style>
+</head>
+<body data-theme="light">
+
+<div id="gate" class="gate hidden">
+  <div class="gcard">
+    <div class="brand" style="justify-content:center;margin-bottom:14px"><div class="mark">自</div><b>3–12 岁家庭自驱力实操课</b></div>
+    <h2>请输入本机访问码</h2>
+    <p>这是本机遮罩，仅用于避免家人误点，不是加密保护，也不能替代购买核销。</p>
+    <input id="gateInput" type="password" inputmode="numeric" placeholder="••••" autocomplete="off">
+    <button class="btn primary" id="gateOk" style="width:100%;justify-content:center">进入</button>
+    <p id="gateErr" style="color:var(--red);min-height:18px"></p>
+  </div>
+</div>
+
+<div id="app">
+  <header class="topbar" id="topbar">
+    <button class="icon-btn" id="menuBtn" aria-label="目录">☰</button>
+    <a class="brand" href="#/home"><span class="mark">自</span><span><b class="long">把「要我做」变成「我要做」</b><b class="short">自驱力实操课</b><small>3–12 岁家庭自驱力实操课 · 家长版</small></span></a>
+    <span class="top-spacer"></span>
+    <div class="agebar" id="agebar">
+      <button data-age="all">全龄</button><button data-age="a1">3–6 岁</button>
+      <button data-age="a2">7–9 岁</button><button data-age="a3">10–12 岁</button>
+    </div>
+    <button class="hint-search" id="searchBtn"><span>⌕</span> 搜索课程 <kbd>/</kbd></button>
+    <button class="icon-btn" id="searchBtnM" aria-label="搜索">⌕</button>
+    <button class="icon-btn" id="themeBtn" aria-label="切换主题">☾</button>
+    <button class="icon-btn" id="fontBtn" aria-label="字号">Aa</button>
+  </header>
+
+  <div class="shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="side-progress">
+        <div class="row"><span>已学完</span><span><b id="pgDone">0</b> / 16 课</span></div>
+        <div class="bar"><i id="pgBar" style="width:0%"></i></div>
+      </div>
+      <div class="side-lbl">课程目录</div>
+      <nav id="nav"></nav>
+      <div class="side-foot no-print">
+        <div style="display:flex;gap:6px;margin-bottom:12px">
+          <button class="btn sm" id="themeBtn2">☾ 深色 / 浅色</button>
+          <button class="btn sm" id="fontBtn2">Aa 字号</button>
+        </div>
+        一周 1–2 课，一次只改一件事，做满 7 天再往下走。<br>
+        家庭教育经验整理 · 不评估 · 不承诺结果。
+      </div>
+    </aside>
+    <div class="mask" id="mask"></div>
+    <main class="main">
+      <div class="wrap no-print" id="globalTips">
+        <div class="notice-bar hidden" id="backupTip"></div>
+        <div class="notice-bar age-tip hidden" id="ageTip"></div>
+      </div>
+      <div class="wrap" id="view"></div>
+    </main>
+  </div>
+
+  <nav class="bottombar">
+    <a href="#/home" data-b="home"><span class="bi">⌂</span>首页</a>
+    <a href="#/progress" data-b="progress"><span class="bi">◎</span>进度</a>
+    <a href="#/tools" data-b="tools"><span class="bi">▤</span>工具表</a>
+    <a href="#/about" data-b="about"><span class="bi">ⓘ</span>说明</a>
+  </nav>
+</div>
+
+<div id="searchPanel" class="overlay hidden">
+  <div class="searchbox">
+    <div class="si"><span style="color:var(--brown)">⌕</span><input id="searchInput" placeholder="搜索课程、话术、场景…例如「作业」「电子产品」「复盘」" autocomplete="off"><button class="btn sm ghost" id="searchClose">关闭</button></div>
+    <div class="sres" id="searchRes"></div>
+  </div>
+</div>
+<div id="toast" class="toast"></div>
+
+<script>window.COURSE = {"title":"把「要我做」变成「我要做」","course":"3–12 岁家庭自驱力实操课","docs":{"intro":{"id":"intro","kind":"reading","no":0,"title":"开始之前","lead":"","hint":"","sections":[],"say":[],"plain":"开始之前 先花 5 分钟确认这套课适不适合你家，比直接翻到第一课更省时间。 这份课是给谁的 家里有 3–12 岁的孩子，早上要催起床、晚上要催作业、出门要催收拾，一天说很多遍「快点」。 试过奖励贴纸、打卡表、积分兑换，头两周有用，之后就悄悄回到原样。 想让孩子自己安排，又担心一放手就彻底散架；家里几个人管法不一致，孩子会挑最松的那一个。 你愿意用几周时间，慢慢把「催」换成「搭」，而不是找一个更快的催促办法。 这份课不是给谁的 想要几天内让孩子变自觉的速效方案。 这套课给不了。习惯的改动以周为单位，第 15 课专门讲「断断续续」这件事。 孩子已经出现持续的情绪低落、长期回避上学、睡眠或食欲明显变化、伤害自己的言语。 请先联系学校老师或寻求专业支持，本册不替代评估与帮助，也不处理这类情况。 想找择校、升学路径、竞赛、提分、学区信息。 本册完全不涉及，也不评价任何学校与课程。 你会拿到什么 16 节课 ：每节读 15–20 分钟，配一个 10 分钟内能做完的家庭动作。 三段分龄调整 ：同一件事，3–6 岁、7–9 岁、10–12 岁做法不一样，逐课写明。 「照着说」话术 ：可直接念出口的句子，不用自己临场组织语言。 7 张可打印工具表 ：约定表、周计划、复盘表、话术卡、分龄速查、12 周推进表、没做到记录页。 每课一处「没搞定怎么办」 ：孩子不配合、家长忍不住、老人插手，都比顺利的那一版更常见。 怎么用 一周推进 1–2 课，不要一口气读完。读完一节，只挑一个动作，做满 7 天，再加下一个。 工具表建议打印出来贴在冰箱或书桌边，手写比存在手机里更容易坚持。 三个原则： 一次只改一件事 ； 先稳 7 天再谈升级 ； 记录「没做到」比记录「做到了」更有用 。 孩子各不相同，表里的内容按自家情况改。完成七八成就够了，不必逐条达标。","html":"<h2>开始之前<\/h2>\n  <div class=\"deck\">先花 5 分钟确认这套课适不适合你家，比直接翻到第一课更省时间。<\/div>\n\n  <h3>这份课是给谁的<\/h3>\n  <div class=\"box\">\n    <p>家里有 3–12 岁的孩子，早上要催起床、晚上要催作业、出门要催收拾，一天说很多遍「快点」。<\/p>\n    <p>试过奖励贴纸、打卡表、积分兑换，头两周有用，之后就悄悄回到原样。<\/p>\n    <p>想让孩子自己安排，又担心一放手就彻底散架；家里几个人管法不一致，孩子会挑最松的那一个。<\/p>\n    <p>你愿意用几周时间，慢慢把「催」换成「搭」，而不是找一个更快的催促办法。<\/p>\n  <\/div>\n\n  <h3>这份课不是给谁的<\/h3>\n  <div class=\"box warn\">\n    <p><strong>想要几天内让孩子变自觉的速效方案。<\/strong>这套课给不了。习惯的改动以周为单位，第 15 课专门讲「断断续续」这件事。<\/p>\n    <p><strong>孩子已经出现持续的情绪低落、长期回避上学、睡眠或食欲明显变化、伤害自己的言语。<\/strong>请先联系学校老师或寻求专业支持，本册不替代评估与帮助，也不处理这类情况。<\/p>\n    <p><strong>想找择校、升学路径、竞赛、提分、学区信息。<\/strong>本册完全不涉及，也不评价任何学校与课程。<\/p>\n  <\/div>\n\n  <h3>你会拿到什么<\/h3>\n  <ul>\n    <li><strong>16 节课<\/strong>：每节读 15–20 分钟，配一个 10 分钟内能做完的家庭动作。<\/li>\n    <li><strong>三段分龄调整<\/strong>：同一件事，3–6 岁、7–9 岁、10–12 岁做法不一样，逐课写明。<\/li>\n    <li><strong>「照着说」话术<\/strong>：可直接念出口的句子，不用自己临场组织语言。<\/li>\n    <li><strong>7 张可打印工具表<\/strong>：约定表、周计划、复盘表、话术卡、分龄速查、12 周推进表、没做到记录页。<\/li>\n    <li><strong>每课一处「没搞定怎么办」<\/strong>：孩子不配合、家长忍不住、老人插手，都比顺利的那一版更常见。<\/li>\n  <\/ul>\n\n  <h3>怎么用<\/h3>\n  <div class=\"box\">\n    <p>一周推进 1–2 课，不要一口气读完。读完一节，只挑一个动作，做满 7 天，再加下一个。<\/p>\n    <p>工具表建议打印出来贴在冰箱或书桌边，手写比存在手机里更容易坚持。<\/p>\n    <p>三个原则：<strong>一次只改一件事<\/strong>；<strong>先稳 7 天再谈升级<\/strong>；<strong>记录「没做到」比记录「做到了」更有用<\/strong>。<\/p>\n    <p>孩子各不相同，表里的内容按自家情况改。完成七八成就够了，不必逐条达标。<\/p>\n  <\/div>"},"notice":{"id":"notice","kind":"reading","no":0,"title":"使用前请读完","lead":"","hint":"","sections":[],"say":[],"plain":"使用前请读完 三句话，说清楚这套课能做什么、不能做什么。 01 不是评估 不做能力、性格或发育方面的判断，也不给任何孩子贴标签。 02 不承诺结果 不设达标线，完成七八成即可，随时可以停下来重来。 03 不替代专业支持 遇到持续的情绪或上学困难，先找学校老师或专业人士。 细则 本册是家庭教育做法的整理与改写，不是心理评估、发育诊断或医疗建议，也不替代学校教育与专业支持，不承诺任何学习结果、成绩变化或行为改变。 书中的场景与案例来自编写时所依据的一套育儿分享材料，已做匿名化处理，仅用于说明做法；它们不代表普遍效果，也不是编写者的亲身经历。 素材中原有的升学排名、成绩指标、效果比较等内容，在编写本册时已整体剔除。 版权：仅限购买者本人家庭使用。请勿转发、公开传播、二次销售，或用于任何形式的商业培训与转授。工具页可自行打印，供本家庭反复填写。 写这几条不是为了让谁紧张。恰恰相反——先把边界说清楚，后面 16 节课才能轻一点：不用跟别人家比，不用每天打卡，也不用担心某一天没做到。 如果孩子出现持续的情绪低落、长期回避上学、睡眠或食欲明显变化，或说出伤害自己的话，请立刻把这套课放到一边，先联系学校老师或寻求专业支持。第 16 课会完整列出这条边界。","html":"<h2>使用前请读完<\/h2>\n  <div class=\"deck\">三句话，说清楚这套课能做什么、不能做什么。<\/div>\n  <div class=\"big3\">\n    <div><em>01　不是评估<\/em>不做能力、性格或发育方面的判断，也不给任何孩子贴标签。<\/div>\n    <div><em>02　不承诺结果<\/em>不设达标线，完成七八成即可，随时可以停下来重来。<\/div>\n    <div><em>03　不替代专业支持<\/em>遇到持续的情绪或上学困难，先找学校老师或专业人士。<\/div>\n  <\/div>\n  <h3>细则<\/h3>\n  <div class=\"box warn\">\n    <p>本册是家庭教育做法的整理与改写，不是心理评估、发育诊断或医疗建议，也不替代学校教育与专业支持，不承诺任何学习结果、成绩变化或行为改变。<\/p>\n    <p>书中的场景与案例来自编写时所依据的一套育儿分享材料，已做匿名化处理，仅用于说明做法；它们不代表普遍效果，也不是编写者的亲身经历。<\/p>\n    <p>素材中原有的升学排名、成绩指标、效果比较等内容，在编写本册时已整体剔除。<\/p>\n    <p>版权：仅限购买者本人家庭使用。请勿转发、公开传播、二次销售，或用于任何形式的商业培训与转授。工具页可自行打印，供本家庭反复填写。<\/p>\n  <\/div>\n  <div class=\"box\">\n    <p>写这几条不是为了让谁紧张。恰恰相反——先把边界说清楚，后面 16 节课才能轻一点：不用跟别人家比，不用每天打卡，也不用担心某一天没做到。<\/p>\n    <p>如果孩子出现持续的情绪低落、长期回避上学、睡眠或食欲明显变化，或说出伤害自己的话，请立刻把这套课放到一边，先联系学校老师或寻求专业支持。第 16 课会完整列出这条边界。<\/p>\n  <\/div>"},"part1":{"id":"part1","kind":"part","no":0,"title":"先把地基弄清楚","lead":"","hint":"","sections":[],"say":[],"plain":"PART 01 先把地基弄清楚 很多「孩子不自觉」的问题，其实不是孩子的问题，是家里少了一根柱子。 这两课不要求你做任何改变，只请你把现在的做法看清楚。 第 1 课 自驱不是性格，是三样东西叠出来的 第 2 课 3–12 岁三段地图，和家长的位置变化","html":"<div class=\"part-inner\">\n    <div class=\"no\">PART 01<\/div>\n    <div class=\"bar\"><\/div>\n    <h2>先把地基弄清楚<\/h2>\n    <div class=\"desc\">很多「孩子不自觉」的问题，其实不是孩子的问题，是家里少了一根柱子。\n    这两课不要求你做任何改变，只请你把现在的做法看清楚。<\/div>\n    <div class=\"list\">第 1 课　自驱不是性格，是三样东西叠出来的<br>\n    第 2 课　3–12 岁三段地图，和家长的位置变化<\/div>\n  <\/div>"},"l1":{"id":"l1","kind":"lesson","no":1,"title":"第 1 课 自驱不是性格，是三样东西叠出来的","lead":"这一课解决：为什么有的孩子不用推，有的人推一下动一下。以及，从哪里下手才不会白使劲。","hint":"","sections":["先看懂","今天做什么（10 分钟）","照着说","分龄调整","没搞定怎么办"],"say":["「今天这两件事，你想先做哪一件？」 （给两个选项，不是「你看着办」）","「你定，我按你定的来。」","孩子选完、你忍不住想改口时：「先按你说的试一次，做完我们再一起看。」"],"plain":"第 1 课 自驱不是性格，是三样东西叠出来的 这一课解决：为什么有的孩子不用推，有的人推一下动一下。以及，从哪里下手才不会白使劲。 先看懂 家长很容易把「自觉」当成性格：有的孩子天生省心，有的天生要催。但把日常拆开看，一个孩子愿意自己动起来，通常是因为三件事同时成立。 他说了算一点 （掌控感）：这件事里，有他能自己决定的部分。 他够得着 （成就感）：难度刚好，做完看得见结果。 他知道先做哪个 （次序感）：面前摆着几件事，他自己能排出顺序。 三根柱子缺一根，孩子就会退回到「等大人安排」。家长最常补错的是第三根：一直在替孩子排顺序、报进度、提醒下一步，孩子始终没有机会练「自己排」这一步。催得越细，练得越少。 一个判断方法：回想最近一次孩子主动开始做某件事——不一定是学习，搭积木、收拾书包、给花浇水都算。问自己三个问题：那件事里，哪部分是他自己定的？他怎么知道自己做好了？先后顺序是谁排的？ 今天做什么（10 分钟） 拿一张纸，写下最近一周你替孩子做的 5 个决定。比如「先写哪一科」「几点开始」「书包放哪」「玩多久」「水杯带不带」。在每条后面标一个字： 放 ＝这周可以交给他； 缓 ＝再等一两个月； 守 ＝涉及安全、作息或健康，暂时由大人守住。 只标，不改。今晚不新增任何动作，也不跟孩子宣布「以后你自己来」。这张纸是给家长看的，第 7 课会再用一次。 照着说 「今天这两件事，你想先做哪一件？」 （给两个选项，不是「你看着办」） 「你定，我按你定的来。」 孩子选完、你忍不住想改口时：「先按你说的试一次，做完我们再一起看。」 分龄调整 3–6 岁 只放「顺序」和「样式」：先穿袜子还是先穿鞋、用哪个杯子、绘本读哪本。选项不超过 2 个，说完就照做。 7–9 岁 可以放「先做哪一项」「做多久」，但结束时间仍由大人守住。放出去的是顺序，不是边界。 10–12 岁 试着把「什么时候开始」也交出去，只保留一个双方一起定下来的截止时间。 没搞定怎么办 最常见的翻车： 家长给了选择，孩子选了，家长又觉得选得不好，当场改回去。一次就够让孩子下次回答「随便吧」。 如果这周出现这种反复，不要追加新动作，只把这一条重新放一次，连做三天。孩子试探的是「这次是不是真的」，不是哪个选项更好。 另一种情况是全家人都在替他决定，你放出去的一件，转头被别人收回去——这属于第 14 课的问题，先记下来，不用现在处理。 本周我准备放出去的一件事： 孩子的选择：","html":"<h2>第 1 课　自驱不是性格，是三样东西叠出来的<\/h2>\n  <div class=\"lead\">这一课解决：为什么有的孩子不用推，有的人推一下动一下。以及，从哪里下手才不会白使劲。<\/div>\n\n  <div class=\"sec-t\">先看懂<\/div>\n  <p>家长很容易把「自觉」当成性格：有的孩子天生省心，有的天生要催。但把日常拆开看，一个孩子愿意自己动起来，通常是因为三件事同时成立。<\/p>\n  <p><strong>他说了算一点<\/strong>（掌控感）：这件事里，有他能自己决定的部分。<strong>他够得着<\/strong>（成就感）：难度刚好，做完看得见结果。<strong>他知道先做哪个<\/strong>（次序感）：面前摆着几件事，他自己能排出顺序。<\/p>\n  <p>三根柱子缺一根，孩子就会退回到「等大人安排」。家长最常补错的是第三根：一直在替孩子排顺序、报进度、提醒下一步，孩子始终没有机会练「自己排」这一步。催得越细，练得越少。<\/p>\n  <p>一个判断方法：回想最近一次孩子主动开始做某件事——不一定是学习，搭积木、收拾书包、给花浇水都算。问自己三个问题：那件事里，哪部分是他自己定的？他怎么知道自己做好了？先后顺序是谁排的？<\/p>\n\n  <div class=\"sec-t\">今天做什么（10 分钟）<\/div>\n  <p>拿一张纸，写下最近一周你替孩子做的 5 个决定。比如「先写哪一科」「几点开始」「书包放哪」「玩多久」「水杯带不带」。在每条后面标一个字：<\/p>\n  <p><strong>放<\/strong>＝这周可以交给他；<strong>缓<\/strong>＝再等一两个月；<strong>守<\/strong>＝涉及安全、作息或健康，暂时由大人守住。<\/p>\n  <p>只标，不改。今晚不新增任何动作，也不跟孩子宣布「以后你自己来」。这张纸是给家长看的，第 7 课会再用一次。<\/p>\n\n  <div class=\"sec-t\">照着说<\/div>\n  <div class=\"say\">\n    <p class=\"q\">「今天这两件事，你想先做哪一件？」<span class=\"tiny\">（给两个选项，不是「你看着办」）<\/span><\/p>\n    <p class=\"q\">「你定，我按你定的来。」<\/p>\n    <p class=\"q\">孩子选完、你忍不住想改口时：「先按你说的试一次，做完我们再一起看。」<\/p>\n  <\/div>\n\n  <div class=\"sec-t\">分龄调整<\/div>\n  <table class=\"ages\">\n    <tr><td class=\"a\">3–6 岁<\/td><td>只放「顺序」和「样式」：先穿袜子还是先穿鞋、用哪个杯子、绘本读哪本。选项不超过 2 个，说完就照做。<\/td><\/tr>\n    <tr><td class=\"a\">7–9 岁<\/td><td>可以放「先做哪一项」「做多久」，但结束时间仍由大人守住。放出去的是顺序，不是边界。<\/td><\/tr>\n    <tr><td class=\"a\">10–12 岁<\/td><td>试着把「什么时候开始」也交出去，只保留一个双方一起定下来的截止时间。<\/td><\/tr>\n  <\/table>\n\n  <div class=\"sec-t\">没搞定怎么办<\/div>\n  <div class=\"oops\">\n    <p><b>最常见的翻车：<\/b>家长给了选择，孩子选了，家长又觉得选得不好，当场改回去。一次就够让孩子下次回答「随便吧」。<\/p>\n    <p>如果这周出现这种反复，不要追加新动作，只把这一条重新放一次，连做三天。孩子试探的是「这次是不是真的」，不是哪个选项更好。<\/p>\n    <p>另一种情况是全家人都在替他决定，你放出去的一件，转头被别人收回去——这属于第 14 课的问题，先记下来，不用现在处理。<\/p>\n  <\/div>\n\n  <div class=\"rec\">本周我准备放出去的一件事：<span class=\"line\"><\/span>　孩子的选择：<span class=\"line\"><\/span><\/div>\n<div class=\"notes\"><\/div>"},"l2":{"id":"l2","kind":"lesson","no":2,"title":"第 2 课 3–12 岁三段地图，和家长的位置变化","lead":"这一课解决：同一句话，对 4 岁和 11 岁说，效果完全不同。先弄清你手里现在该拿什么角色。","hint":"","sections":["先看懂","今天做什么（10 分钟）","照着说","没搞定怎么办"],"say":["「这件事我陪你，但我不替你做。」","「你先试试，卡住了叫我。」","「我今天只提醒一次，剩下你自己记着。」 （对 9 岁以上，且要真的做到只提醒一次）"],"plain":"第 2 课 3–12 岁三段地图，和家长的位置变化 这一课解决：同一句话，对 4 岁和 11 岁说，效果完全不同。先弄清你手里现在该拿什么角色。 先看懂 这套课把 3–12 岁分成三段。分段不是按知识量，是按「孩子能自己承担多少」来分的。同一件事——比如自己收拾书包——在三段里的做法和话说得完全不一样。 3–6 岁 种子期 重点是把关系和自理打底：能不能自己穿、自己收、自己选、自己表达「我不想」。这个阶段最忌一上来就灌要求；先让孩子觉得「我说了有人听」，后面才谈得上配合。规则要少、要具体、要天天一样。 7–9 岁 搭架子 重点是把日常变成稳定流程：固定时间、固定位置、固定顺序，规则由孩子参与定下来。家长仍坐在主驾，但开始邀请孩子看图、自己打勾。这个阶段先练习惯，不必盯结果。 10–12 岁 坐副驾 重点是把「自己排、自己记、自己复盘」交出去。家长退到观察和引导的位置，允许安排得不好、允许漏一项。素材里反复出现的一个判断是：习惯打底之后，大约十岁前后可以开始逐步交还掌控感——不是某天突然放手，是一年一年往外挪。 家长的位置跟着变： 搭架子的人 → 坐副驾的人 → 管后勤的人 。最难的不是学会新做法，是及时退出旧做法。孩子已经能自己排了，家长还在每天报进度，他会干脆不排。 材料里的一个做法 有人把「交还」比作陪人学开车：初学的时候副驾有副刹车，该踩就踩；等他开稳了，该加速就让他加速，副驾别再碰踏板。同一份材料里也提到，孩子自己坐车坐反了方向、一路坐到终点再折回来，家长从定位上看得见，但没提醒，等他自己发现、自己走回来。 这里说的不是「不提醒」，而是先分清：哪些后果孩子承担得起，哪些必须大人兜住。第 10 课专门划这条线。 今天做什么（10 分钟） 在第 1 课那张纸的背面，写一句你现在的默认动作。三选一，凭直觉，不用美化： 催 （反复提醒、报进度）／ 替 （嫌慢干脆自己上手）／ 陪 （在旁边，但不插手）。 再写一句你希望三个月后的默认动作。两句话之间的差距，就是这套课要陪你走的距离。别急着改，第 15 课会回来看这一页。 照着说 「这件事我陪你，但我不替你做。」 「你先试试，卡住了叫我。」 「我今天只提醒一次，剩下你自己记着。」 （对 9 岁以上，且要真的做到只提醒一次） 没搞定怎么办 年龄对不上是常态。 孩子 10 岁但从没自己排过事，别直接按第三段的做法放手，会从「一直被安排」跳到「完全没人管」。从第二段的固定流程开始补两周，再往外挪。 反过来，7 岁的孩子已经很会自己安排，也别硬把他按回第一段的全程陪伴。看孩子实际能承担多少，比看生日更准。 还有一类常见情况：家长觉得自己是「陪」，孩子感受到的是「盯」。判断标准很简单——你坐在旁边时，手里是不是还拿着那张进度表。 我现在的默认动作： 三个月后希望是：","html":"<h2>第 2 课　3–12 岁三段地图，和家长的位置变化<\/h2>\n  <div class=\"lead\">这一课解决：同一句话，对 4 岁和 11 岁说，效果完全不同。先弄清你手里现在该拿什么角色。<\/div>\n\n  <div class=\"sec-t\">先看懂<\/div>\n  <p>这套课把 3–12 岁分成三段。分段不是按知识量，是按「孩子能自己承担多少」来分的。同一件事——比如自己收拾书包——在三段里的做法和话说得完全不一样。<\/p>\n  <table class=\"ages\">\n    <tr><td class=\"a\">3–6 岁<br>种子期<\/td><td>重点是把关系和自理打底：能不能自己穿、自己收、自己选、自己表达「我不想」。这个阶段最忌一上来就灌要求；先让孩子觉得「我说了有人听」，后面才谈得上配合。规则要少、要具体、要天天一样。<\/td><\/tr>\n    <tr><td class=\"a\">7–9 岁<br>搭架子<\/td><td>重点是把日常变成稳定流程：固定时间、固定位置、固定顺序，规则由孩子参与定下来。家长仍坐在主驾，但开始邀请孩子看图、自己打勾。这个阶段先练习惯，不必盯结果。<\/td><\/tr>\n    <tr><td class=\"a\">10–12 岁<br>坐副驾<\/td><td>重点是把「自己排、自己记、自己复盘」交出去。家长退到观察和引导的位置，允许安排得不好、允许漏一项。素材里反复出现的一个判断是：习惯打底之后，大约十岁前后可以开始逐步交还掌控感——不是某天突然放手，是一年一年往外挪。<\/td><\/tr>\n  <\/table>\n  <p>家长的位置跟着变：<strong>搭架子的人 → 坐副驾的人 → 管后勤的人<\/strong>。最难的不是学会新做法，是及时退出旧做法。孩子已经能自己排了，家长还在每天报进度，他会干脆不排。<\/p>\n\n  <div class=\"case\">\n    <span class=\"tag\">材料里的一个做法<\/span>\n    有人把「交还」比作陪人学开车：初学的时候副驾有副刹车，该踩就踩；等他开稳了，该加速就让他加速，副驾别再碰踏板。同一份材料里也提到，孩子自己坐车坐反了方向、一路坐到终点再折回来，家长从定位上看得见，但没提醒，等他自己发现、自己走回来。<br>\n    <span class=\"tiny\">这里说的不是「不提醒」，而是先分清：哪些后果孩子承担得起，哪些必须大人兜住。第 10 课专门划这条线。<\/span>\n  <\/div>\n\n  <div class=\"sec-t\">今天做什么（10 分钟）<\/div>\n  <p>在第 1 课那张纸的背面，写一句你现在的默认动作。三选一，凭直觉，不用美化：<\/p>\n  <p><strong>催<\/strong>（反复提醒、报进度）／<strong>替<\/strong>（嫌慢干脆自己上手）／<strong>陪<\/strong>（在旁边，但不插手）。<\/p>\n  <p>再写一句你希望三个月后的默认动作。两句话之间的差距，就是这套课要陪你走的距离。别急着改，第 15 课会回来看这一页。<\/p>\n\n  <div class=\"sec-t\">照着说<\/div>\n  <div class=\"say\">\n    <p class=\"q\">「这件事我陪你，但我不替你做。」<\/p>\n    <p class=\"q\">「你先试试，卡住了叫我。」<\/p>\n    <p class=\"q\">「我今天只提醒一次，剩下你自己记着。」<span class=\"tiny\">（对 9 岁以上，且要真的做到只提醒一次）<\/span><\/p>\n  <\/div>\n\n  <div class=\"sec-t\">没搞定怎么办<\/div>\n  <div class=\"oops\">\n    <p><b>年龄对不上是常态。<\/b>孩子 10 岁但从没自己排过事，别直接按第三段的做法放手，会从「一直被安排」跳到「完全没人管」。从第二段的固定流程开始补两周，再往外挪。<\/p>\n    <p>反过来，7 岁的孩子已经很会自己安排，也别硬把他按回第一段的全程陪伴。看孩子实际能承担多少，比看生日更准。<\/p>\n    <p>还有一类常见情况：家长觉得自己是「陪」，孩子感受到的是「盯」。判断标准很简单——你坐在旁边时，手里是不是还拿着那张进度表。<\/p>\n  <\/div>\n\n  <div class=\"rec\">我现在的默认动作：<span class=\"line\"><\/span>　三个月后希望是：<span class=\"line\"><\/span><\/div>\n<div class=\"notes\"><\/div>"},"part2":{"id":"part2","kind":"part","no":0,"title":"四个基础动作","lead":"","hint":"","sections":[],"say":[],"plain":"PART 02 四个基础动作 这四件事不炫，但后面所有「孩子自己来」都靠它们托着。 顺序别颠倒：先有清楚的边界，才有可以交还的自由。 第 3 课 先立规矩，再谈自主 第 4 课 把时间变成看得见的东西 第 5 课 正反馈怎么给才有用 第 6 课 见世面不是花钱，是讲底层","html":"<div class=\"part-inner\">\n    <div class=\"no\">PART 02<\/div>\n    <div class=\"bar\"><\/div>\n    <h2>四个基础动作<\/h2>\n    <div class=\"desc\">这四件事不炫，但后面所有「孩子自己来」都靠它们托着。\n    顺序别颠倒：先有清楚的边界，才有可以交还的自由。<\/div>\n    <div class=\"list\">第 3 课　先立规矩，再谈自主<br>\n    第 4 课　把时间变成看得见的东西<br>\n    第 5 课　正反馈怎么给才有用<br>\n    第 6 课　见世面不是花钱，是讲底层<\/div>\n  <\/div>"},"l3":{"id":"l3","kind":"lesson","no":3,"title":"第 3 课 先立规矩，再谈自主","lead":"这一课解决：规则总也立不住，一说就变成拉锯。做一张孩子自己参与写下来的约定表。","hint":"","sections":["先看懂","今天做什么（约 20 分钟，分两次）","关于奖励与后果","照着说","分龄调整","没搞定怎么办"],"say":["「咱们一起定三条，你先说，我来记。」","「这条我不同意改，但不是因为你不好，是因为睡太晚第二天会很难受。」","「这版先用到下周日，到时候我们一起看要不要改。」","「今天这条没做到，按之前说好的来。明天重新算。」"],"plain":"第 3 课 先立规矩，再谈自主 这一课解决：规则总也立不住，一说就变成拉锯。做一张孩子自己参与写下来的约定表。 先看懂 很多家庭的规则是「家长宣布、孩子执行、家长反复提醒」。这种规则靠家长的记忆力维持，家长一忙就断，孩子一闹就松，最后双方都累。 能自己转起来的规则，通常有三个共同点： 条数少 （3–5 条，贴得出来才记得住）； 孩子参与写 （他自己说出来的，比听来的更认）； 写清终点 （做到什么程度算完成、这一阶段到哪天结束）。 素材里那份家庭约定表有个细节值得留下：表格是孩子亲笔签名确认的，而且不是一年半载不变，随阶段目标调整。签名不是形式，是让「这是我们一起定的」变成一件看得见的事。 今天做什么（约 20 分钟，分两次） 第一次，家长自己先写。 在纸上划出 3–5 条真正不能松的底线，只写「守」的那类：作息、安全、固定的作业位置、基本自理。其余先不写。条数一旦超过 5 条，就等于没有重点。 第二次，跟孩子一起补。 不要念你的清单，先问：「你觉得咱们家哪几件事，做到了应该记一笔？哪几件没做到会有点麻烦？」把他说的原话逐条记下来，哪怕很幼稚。再把你那 3–5 条底线拿出来，说明为什么这几条不能改。 每条后面写清「做到什么样算完成」和「这一版用到哪天」。比如「每天睡前把书包收到门口」比「自己收拾好」清楚得多。最后各自签名，贴到冰箱或书桌边。工具页 T1 可以直接打印。 关于奖励与后果 可以用小奖励，也可以不用钱：多讲一个睡前故事、周末多半小时一起玩、自己挑晚饭吃什么，都比现金更不容易滑成「做一件事换一样东西」。后果要事先约定、当场兑现、不追加、不翻旧账。 本册不涉及体罚、罚站、当众批评，也不建议把分数、名次写进约定表。 原因很直接：这些会让孩子的注意力从「我把事做好了」移到「我别被抓到」。 照着说 「咱们一起定三条，你先说，我来记。」 「这条我不同意改，但不是因为你不好，是因为睡太晚第二天会很难受。」 「这版先用到下周日，到时候我们一起看要不要改。」 「今天这条没做到，按之前说好的来。明天重新算。」 分龄调整 3–6 岁 最多 3 条，配图画或照片，用「做到了贴一个圈」代替写字。签名改成按手印或画个小记号。 7–9 岁 3–5 条，可以让孩子自己抄一遍。奖励以「一起做的事」为主，当天兑现。 10–12 岁 让孩子主持这次小会，家长只保留否决安全类条款的权利。约定里加一条「家长不做的部分」——比如不反复催、不翻旧账，双方都签。 没搞定怎么办 表贴出来三天就没人看了。 多半是条数太多，或者大人自己先没照着做。别加新规则，把表擦到只剩 2 条，重新签一次。 孩子把奖励谈成交易。 「我收书包你给我什么？」——这时把「一起做的事」类奖励往下压，直接说：「这本来就是家里每个人都要做的一份，我们记一笔是为了看得见，不是为了换东西。」 有人不认这张表。 先别急着统一全家，第 14 课会处理。这一周只要一位家长照着执行就够了。 我们家这版约定共 条，用到 （日期）。","html":"<h2>第 3 课　先立规矩，再谈自主<\/h2>\n  <div class=\"lead\">这一课解决：规则总也立不住，一说就变成拉锯。做一张孩子自己参与写下来的约定表。<\/div>\n\n  <div class=\"sec-t\">先看懂<\/div>\n  <p>很多家庭的规则是「家长宣布、孩子执行、家长反复提醒」。这种规则靠家长的记忆力维持，家长一忙就断，孩子一闹就松，最后双方都累。<\/p>\n  <p>能自己转起来的规则，通常有三个共同点：<strong>条数少<\/strong>（3–5 条，贴得出来才记得住）；<strong>孩子参与写<\/strong>（他自己说出来的，比听来的更认）；<strong>写清终点<\/strong>（做到什么程度算完成、这一阶段到哪天结束）。<\/p>\n  <p>素材里那份家庭约定表有个细节值得留下：表格是孩子亲笔签名确认的，而且不是一年半载不变，随阶段目标调整。签名不是形式，是让「这是我们一起定的」变成一件看得见的事。<\/p>\n\n  <div class=\"sec-t\">今天做什么（约 20 分钟，分两次）<\/div>\n  <p><strong>第一次，家长自己先写。<\/strong>在纸上划出 3–5 条真正不能松的底线，只写「守」的那类：作息、安全、固定的作业位置、基本自理。其余先不写。条数一旦超过 5 条，就等于没有重点。<\/p>\n  <p><strong>第二次，跟孩子一起补。<\/strong>不要念你的清单，先问：「你觉得咱们家哪几件事，做到了应该记一笔？哪几件没做到会有点麻烦？」把他说的原话逐条记下来，哪怕很幼稚。再把你那 3–5 条底线拿出来，说明为什么这几条不能改。<\/p>\n  <p>每条后面写清「做到什么样算完成」和「这一版用到哪天」。比如「每天睡前把书包收到门口」比「自己收拾好」清楚得多。最后各自签名，贴到冰箱或书桌边。工具页 T1 可以直接打印。<\/p>\n\n  <div class=\"sec-t\">关于奖励与后果<\/div>\n  <p>可以用小奖励，也可以不用钱：多讲一个睡前故事、周末多半小时一起玩、自己挑晚饭吃什么，都比现金更不容易滑成「做一件事换一样东西」。后果要事先约定、当场兑现、不追加、不翻旧账。<\/p>\n  <p><strong>本册不涉及体罚、罚站、当众批评，也不建议把分数、名次写进约定表。<\/strong>原因很直接：这些会让孩子的注意力从「我把事做好了」移到「我别被抓到」。<\/p>\n\n  <div class=\"sec-t\">照着说<\/div>\n  <div class=\"say\">\n    <p class=\"q\">「咱们一起定三条，你先说，我来记。」<\/p>\n    <p class=\"q\">「这条我不同意改，但不是因为你不好，是因为睡太晚第二天会很难受。」<\/p>\n    <p class=\"q\">「这版先用到下周日，到时候我们一起看要不要改。」<\/p>\n    <p class=\"q\">「今天这条没做到，按之前说好的来。明天重新算。」<\/p>\n  <\/div>\n\n  <div class=\"sec-t\">分龄调整<\/div>\n  <table class=\"ages\">\n    <tr><td class=\"a\">3–6 岁<\/td><td>最多 3 条，配图画或照片，用「做到了贴一个圈」代替写字。签名改成按手印或画个小记号。<\/td><\/tr>\n    <tr><td class=\"a\">7–9 岁<\/td><td>3–5 条，可以让孩子自己抄一遍。奖励以「一起做的事」为主，当天兑现。<\/td><\/tr>\n    <tr><td class=\"a\">10–12 岁<\/td><td>让孩子主持这次小会，家长只保留否决安全类条款的权利。约定里加一条「家长不做的部分」——比如不反复催、不翻旧账，双方都签。<\/td><\/tr>\n  <\/table>\n\n  <div class=\"sec-t\">没搞定怎么办<\/div>\n  <div class=\"oops\">\n    <p><b>表贴出来三天就没人看了。<\/b>多半是条数太多，或者大人自己先没照着做。别加新规则，把表擦到只剩 2 条，重新签一次。<\/p>\n    <p><b>孩子把奖励谈成交易。<\/b>「我收书包你给我什么？」——这时把「一起做的事」类奖励往下压，直接说：「这本来就是家里每个人都要做的一份，我们记一笔是为了看得见，不是为了换东西。」<\/p>\n    <p><b>有人不认这张表。<\/b>先别急着统一全家，第 14 课会处理。这一周只要一位家长照着执行就够了。<\/p>\n  <\/div>\n\n  <div class=\"rec\">我们家这版约定共 <span class=\"line\"><\/span> 条，用到 <span class=\"line\"><\/span>（日期）。<\/div>\n<div class=\"notes\"><\/div>"},"l4":{"id":"l4","kind":"lesson","no":4,"title":"第 4 课 把时间变成看得见的东西","lead":"这一课解决：孩子不是不想做，是「再玩一会儿」「马上就好」对他来说没有长度。","hint":"","sections":["先看懂","今天做什么（15 分钟）","照着说","分龄调整","没搞定怎么办"],"say":["「我们先不催快，先看看你现在能专心多久。」","「计时器响了就停，剩下没做完的明天再说。」 （说到做到，别拖堂）","「这一题先放一放，把后面能做的做完，回头再看它。」","「这一周都是 20 分钟，做满 7 天舒服了，下周我们再加一点点。」"],"plain":"第 4 课 把时间变成看得见的东西 这一课解决：孩子不是不想做，是「再玩一会儿」「马上就好」对他来说没有长度。 先看懂 时间对小孩是抽象的。你说「二十分钟」，他脑子里没有二十分钟。所以第一步不是买计时器，是把时间画出来、切开来、跟每天的事绑在一起。 素材里给过一条很朴素的路径： 先看学校课程表 ，让孩子明白一天是由一段段时间组成的； 再迁移到周末 ，由他自己排上午做什么、下午做什么； 再迁移到假期 。同一份材料里也明确提到，时间管理可以从幼儿园中大班起步，做法是把玩的时间集中到固定几天，先保住睡眠。 第二步是 专注时长分段练 ：从孩子现在坐得住的时长起步，稳满 7 天再加 5 分钟，15 → 20 → 25 → 30，别一次跳到 45。十分钟全神贯注，比五十分钟边做边磨更值。这里说的是「坐得住」这件事，不是任何评估或诊断。 第三步是 先易后难 ：遇到卡住的先跳过，把能做的都做完再回头；简单的部分要求先读完整再下笔。这个顺序本身就是在练第 8 课要讲的次序感。 今天做什么（15 分钟） 和孩子一起画一张「一天的样子」：横着画一条线，把起床、出门、放学、晚饭、睡觉标上去，中间空着的地方让他自己涂。不用精确到分钟，能看出先后就够。 然后挑一段固定任务（不一定是作业，拼图、练琴、整理书桌都行），用计时器量一次：他现在能 uninterrupted 做多久？记下这个数，作为起点。今天不加量，只测。 把「先读完整再下笔」「卡住先跳过」写在小纸条上，放在他做那件事的位置旁边。工具页 T2 用来记这一周。 照着说 「我们先不催快，先看看你现在能专心多久。」 「计时器响了就停，剩下没做完的明天再说。」 （说到做到，别拖堂） 「这一题先放一放，把后面能做的做完，回头再看它。」 「这一周都是 20 分钟，做满 7 天舒服了，下周我们再加一点点。」 分龄调整 3–6 岁 用图片作息条（起床／吃饭／玩／洗澡／睡觉），每段配沙漏或一首歌的长度。分段起步可能是 5–10 分钟，完全正常。 7–9 岁 从 15 分钟起步，7 天稳了再升 5 分钟。周末让他自己排上午／下午两格，不排具体分钟。 10–12 岁 把整段 evening 交给他排，只共同守住睡觉时间。允许他自己决定先做哪一科、中间休不休息。 没搞定怎么办 加了 5 分钟就崩。 退回到上一个稳住的时长，再稳 7 天。加量不是升级，是试探；崩了说明试探得太早，退回不丢人。 计时器一响孩子非要继续。 这其实是好信号，但别顺势拖堂，否则「到点就停」这条规则会失效。可以说：「记下来，明天这一格我们调长一点。」 作息图画完就扔了。 说明它挂在墙上而不是用在当下。把它挪到他每天真正会经过的地方，或者只留「放学后那一格」，其余全删。 孩子坐不住的原因有很多种，节奏快慢也因人而异。如果长期完全无法进行，并且明显影响到日常生活，先把这件事交给专业人士看一看，不必在这套课里硬找方法。 今天的起点时长： 分钟 这周保持不变，下周再评估。","html":"<h2>第 4 课　把时间变成看得见的东西<\/h2>\n  <div class=\"lead\">这一课解决：孩子不是不想做，是「再玩一会儿」「马上就好」对他来说没有长度。<\/div>\n\n  <div class=\"sec-t\">先看懂<\/div>\n  <p>时间对小孩是抽象的。你说「二十分钟」，他脑子里没有二十分钟。所以第一步不是买计时器，是把时间画出来、切开来、跟每天的事绑在一起。<\/p>\n  <p>素材里给过一条很朴素的路径：<strong>先看学校课程表<\/strong>，让孩子明白一天是由一段段时间组成的；<strong>再迁移到周末<\/strong>，由他自己排上午做什么、下午做什么；<strong>再迁移到假期<\/strong>。同一份材料里也明确提到，时间管理可以从幼儿园中大班起步，做法是把玩的时间集中到固定几天，先保住睡眠。<\/p>\n  <p>第二步是<strong>专注时长分段练<\/strong>：从孩子现在坐得住的时长起步，稳满 7 天再加 5 分钟，15 → 20 → 25 → 30，别一次跳到 45。十分钟全神贯注，比五十分钟边做边磨更值。这里说的是「坐得住」这件事，不是任何评估或诊断。<\/p>\n  <p>第三步是<strong>先易后难<\/strong>：遇到卡住的先跳过，把能做的都做完再回头；简单的部分要求先读完整再下笔。这个顺序本身就是在练第 8 课要讲的次序感。<\/p>\n\n  <div class=\"sec-t\">今天做什么（15 分钟）<\/div>\n  <p>和孩子一起画一张「一天的样子」：横着画一条线，把起床、出门、放学、晚饭、睡觉标上去，中间空着的地方让他自己涂。不用精确到分钟，能看出先后就够。<\/p>\n  <p>然后挑一段固定任务（不一定是作业，拼图、练琴、整理书桌都行），用计时器量一次：他现在能 uninterrupted 做多久？记下这个数，作为起点。今天不加量，只测。<\/p>\n  <p>把「先读完整再下笔」「卡住先跳过」写在小纸条上，放在他做那件事的位置旁边。工具页 T2 用来记这一周。<\/p>\n\n  <div class=\"sec-t\">照着说<\/div>\n  <div class=\"say\">\n    <p class=\"q\">「我们先不催快，先看看你现在能专心多久。」<\/p>\n    <p class=\"q\">「计时器响了就停，剩下没做完的明天再说。」<span class=\"tiny\">（说到做到，别拖堂）<\/span><\/p>\n    <p class=\"q\">「这一题先放一放，把后面能做的做完，回头再看它。」<\/p>\n    <p class=\"q\">「这一周都是 20 分钟，做满 7 天舒服了，下周我们再加一点点。」<\/p>\n  <\/div>\n\n  <div class=\"sec-t\">分龄调整<\/div>\n  <table class=\"ages\">\n    <tr><td class=\"a\">3–6 岁<\/td><td>用图片作息条（起床／吃饭／玩／洗澡／睡觉），每段配沙漏或一首歌的长度。分段起步可能是 5–10 分钟，完全正常。<\/td><\/tr>\n    <tr><td class=\"a\">7–9 岁<\/td><td>从 15 分钟起步，7 天稳了再升 5 分钟。周末让他自己排上午／下午两格，不排具体分钟。<\/td><\/tr>\n    <tr><td class=\"a\">10–12 岁<\/td><td>把整段 evening 交给他排，只共同守住睡觉时间。允许他自己决定先做哪一科、中间休不休息。<\/td><\/tr>\n  <\/table>\n\n  <div class=\"sec-t\">没搞定怎么办<\/div>\n  <div class=\"oops\">\n    <p><b>加了 5 分钟就崩。<\/b>退回到上一个稳住的时长，再稳 7 天。加量不是升级，是试探；崩了说明试探得太早，退回不丢人。<\/p>\n    <p><b>计时器一响孩子非要继续。<\/b>这其实是好信号，但别顺势拖堂，否则「到点就停」这条规则会失效。可以说：「记下来，明天这一格我们调长一点。」<\/p>\n    <p><b>作息图画完就扔了。<\/b>说明它挂在墙上而不是用在当下。把它挪到他每天真正会经过的地方，或者只留「放学后那一格」，其余全删。<\/p>\n    <p>孩子坐不住的原因有很多种，节奏快慢也因人而异。如果长期完全无法进行，并且明显影响到日常生活，先把这件事交给专业人士看一看，不必在这套课里硬找方法。<\/p>\n  <\/div>\n\n  <div class=\"rec\">今天的起点时长：<span class=\"line\"><\/span> 分钟　这周保持不变，下周再评估。<\/div>\n<div class=\"notes\"><\/div>"},"l5":{"id":"l5","kind":"lesson","no":5,"title":"第 5 课 正反馈怎么给才有用","lead":"这一课解决：「你真棒」说多了没反应，一指出问题孩子就塌了。把夸奖换成三件具体的事。","hint":"","sections":["先看懂","今天做什么（5 分钟，连做 7 天）","照着说","分龄调整","没搞定怎么办"],"say":["「刚才你一直在弄那个，中间没起来。」","「今天我没叫你，你自己就开始了。」","「昨天玩了 30 分钟，今天 15 分钟你就自己停了。」","别人夸孩子时：「是的，他这点确实挺稳的。」 （不补「但是他……」）","孩子没做好时：「这次没成，我们先歇一会儿，等下再看。」"],"plain":"第 5 课 正反馈怎么给才有用 这一课解决：「你真棒」说多了没反应，一指出问题孩子就塌了。把夸奖换成三件具体的事。 先看懂 「你真棒」「你真聪明」听着舒服，但孩子听不出自己到底做对了什么，下次不知道该重复哪一步。有效的反馈要落到 他刚刚做的那个动作 上。 素材里反复出现的做法，是把表扬收窄到三件事： 专注 （刚才那 20 分钟你没起来）、 主动 （你没等我叫就开始了）、 克服惰性 （昨天玩了半小时，今天自己停在第 15 分钟）。第三件最容易被忽略——家长往往只盯「还差多少」，看不见「比昨天少了一点」。 另外两个常见误区： 过度谦虚 （别人夸孩子，家长抢着说「哪有哪有，他毛病多着呢」）； 只纠错不确认 （一整天里孩子听到的全是哪里没做好）。素材里有人提到，幼儿园发一张纸让写优点和缺点，她两面都写满了优点——理由不是孩子没缺点，是「这么小，谈不上什么缺点」。 今天做什么（5 分钟，连做 7 天） 今天只做一件事：找一次「比昨天少一点」或「没等提醒就做了」的瞬间，把那个动作原样说出来。不加评价、不接「但是」、不顺势提下一个要求。说完就停。 晚上在 T2 的记录页写一行：我说了哪句、孩子什么反应。连写 7 天，第 9 课复盘时会用到。 照着说 「刚才你一直在弄那个，中间没起来。」 「今天我没叫你，你自己就开始了。」 「昨天玩了 30 分钟，今天 15 分钟你就自己停了。」 别人夸孩子时：「是的，他这点确实挺稳的。」 （不补「但是他……」） 孩子没做好时：「这次没成，我们先歇一会儿，等下再看。」 分龄调整 3–6 岁 当场说、蹲下说、配一个拥抱。句子越短越好，说清动作就行，不用讲道理。 7–9 岁 把「比昨天少一点」说成看得见的数字或次数，孩子会自己开始记。 10–12 岁 别当着别人夸，容易尴尬。私下、简短、就事论事，说完不加要求。 没搞定怎么办 一整天找不到可说的。 多半是标准定太高了。把标准降到「今天有没有哪一刻，他比昨天少磨蹭了一点点」，通常找得到；真找不到，就只说一句「今天挺不容易的」，不硬编。 夸完忍不住接「但是」。 「今天很主动，但是字写得还是潦草」——前面那句就作废了。把「但是」放到另一次对话里，隔一顿饭再说。 孩子对夸奖没反应，甚至烦。 可能之前夸得太密、太笼统，也可能是他正处在受挫里。先停下所有评价，只做陪伴，等他主动提起再接话。第 13 课会讲这时候怎么说。 今天我说的那一句：","html":"<h2>第 5 课　正反馈怎么给才有用<\/h2>\n  <div class=\"lead\">这一课解决：「你真棒」说多了没反应，一指出问题孩子就塌了。把夸奖换成三件具体的事。<\/div>\n\n  <div class=\"sec-t\">先看懂<\/div>\n  <p>「你真棒」「你真聪明」听着舒服，但孩子听不出自己到底做对了什么，下次不知道该重复哪一步。有效的反馈要落到<strong>他刚刚做的那个动作<\/strong>上。<\/p>\n  <p>素材里反复出现的做法，是把表扬收窄到三件事：<strong>专注<\/strong>（刚才那 20 分钟你没起来）、<strong>主动<\/strong>（你没等我叫就开始了）、<strong>克服惰性<\/strong>（昨天玩了半小时，今天自己停在第 15 分钟）。第三件最容易被忽略——家长往往只盯「还差多少」，看不见「比昨天少了一点」。<\/p>\n  <p>另外两个常见误区：<strong>过度谦虚<\/strong>（别人夸孩子，家长抢着说「哪有哪有，他毛病多着呢」）；<strong>只纠错不确认<\/strong>（一整天里孩子听到的全是哪里没做好）。素材里有人提到，幼儿园发一张纸让写优点和缺点，她两面都写满了优点——理由不是孩子没缺点，是「这么小，谈不上什么缺点」。<\/p>\n\n  <div class=\"sec-t\">今天做什么（5 分钟，连做 7 天）<\/div>\n  <p>今天只做一件事：找一次「比昨天少一点」或「没等提醒就做了」的瞬间，把那个动作原样说出来。不加评价、不接「但是」、不顺势提下一个要求。说完就停。<\/p>\n  <p>晚上在 T2 的记录页写一行：我说了哪句、孩子什么反应。连写 7 天，第 9 课复盘时会用到。<\/p>\n\n  <div class=\"sec-t\">照着说<\/div>\n  <div class=\"say\">\n    <p class=\"q\">「刚才你一直在弄那个，中间没起来。」<\/p>\n    <p class=\"q\">「今天我没叫你，你自己就开始了。」<\/p>\n    <p class=\"q\">「昨天玩了 30 分钟，今天 15 分钟你就自己停了。」<\/p>\n    <p class=\"q\">别人夸孩子时：「是的，他这点确实挺稳的。」<span class=\"tiny\">（不补「但是他……」）<\/span><\/p>\n    <p class=\"q\">孩子没做好时：「这次没成，我们先歇一会儿，等下再看。」<\/p>\n  <\/div>\n\n  <div class=\"sec-t\">分龄调整<\/div>\n  <table class=\"ages\">\n    <tr><td class=\"a\">3–6 岁<\/td><td>当场说、蹲下说、配一个拥抱。句子越短越好，说清动作就行，不用讲道理。<\/td><\/tr>\n    <tr><td class=\"a\">7–9 岁<\/td><td>把「比昨天少一点」说成看得见的数字或次数，孩子会自己开始记。<\/td><\/tr>\n    <tr><td class=\"a\">10–12 岁<\/td><td>别当着别人夸，容易尴尬。私下、简短、就事论事，说完不加要求。<\/td><\/tr>\n  <\/table>\n\n  <div class=\"sec-t\">没搞定怎么办<\/div>\n  <div class=\"oops\">\n    <p><b>一整天找不到可说的。<\/b>多半是标准定太高了。把标准降到「今天有没有哪一刻，他比昨天少磨蹭了一点点」，通常找得到；真找不到，就只说一句「今天挺不容易的」，不硬编。<\/p>\n    <p><b>夸完忍不住接「但是」。<\/b>「今天很主动，但是字写得还是潦草」——前面那句就作废了。把「但是」放到另一次对话里，隔一顿饭再说。<\/p>\n    <p><b>孩子对夸奖没反应，甚至烦。<\/b>可能之前夸得太密、太笼统，也可能是他正处在受挫里。先停下所有评价，只做陪伴，等他主动提起再接话。第 13 课会讲这时候怎么说。<\/p>\n  <\/div>\n\n  <div class=\"rec\">今天我说的那一句：<span class=\"line\"><\/span><\/div>\n<div class=\"notes\"><\/div>"},"l6":{"id":"l6","kind":"lesson","no":6,"title":"第 6 课 见世面不是花钱，是讲底层","lead":"这一课解决：想让孩子「有点想头」，又不想变成报班和打卡。真正起作用的是见完之后的那几句对话。","hint":"","sections":["先看懂","今天做什么（本周找一次，约 15 分钟）","照着说","分龄调整","没搞定怎么办"],"say":["「你先说，我听听你怎么看。」","「我原来的想法跟你不太一样，我说说我的，你听听哪个更说得通。」","「这个我不太懂，我们一起问问。」","「今天不用得出结论，看到什么记着就行。」"],"plain":"第 6 课 见世面不是花钱，是讲底层 这一课解决：想让孩子「有点想头」，又不想变成报班和打卡。真正起作用的是见完之后的那几句对话。 先看懂 素材里最一致的一条主张是：孩子得先见过真实世界怎么运转，才谈得上自己想往哪走。带孩子去上班、去展会、去工厂、见不同的人、看一件事怎么从头做到尾——重点不在地方有多高级，在家长有没有把背后的道理讲给他听。 同一份材料里，家长每次带孩子经历一件事，习惯追问「对方为什么这样说」「我们为什么这样做」，让孩子先讲自己的看法，最后家长再补上自己的原因。 先让孩子说，家长后补 ，顺序反了就又变成一堂课。 这里说的「见世面」不等于消费：菜市场怎么定价、快递站怎么分拣、修车师傅怎么判断毛病、家里这个月的钱花在哪儿，都是现成的素材。3–12 岁孩子需要的不是远方，是有人愿意把身边的事拆开给他看。 材料里的一个场景 有个孩子十来岁时被带到包装线上做了一天纸盒，一个人一个岗，一天拿到 50 元。家里平时吃饭多由大人请客，他对钱没什么概念，后来让他拿这一周的收入请一次客，发现不够买单。回家路上他自己总结：靠力气挣钱很辛苦，得靠脑子。家长没有趁机讲一番大道理，只是顺着聊了聊不同工作到底差在哪儿。 这个做法不适合照搬到小龄孩子身上，也不必刻意制造「吃苦」。可借鉴的只有一点：让孩子接触真实的分工与代价，然后让他自己说结论。 今天做什么（本周找一次，约 15 分钟） 挑一件本周本来就要做的事，带上孩子：取快递、买菜、修东西、去银行、去你工作单位门口转一圈都行。过程中只做三个追问，别多： 「你觉得他刚才为什么这么做？」 → 等他说完，不纠正。 「换你会怎么做？」 → 让他讲一个不同版本。 「那我们家这件事，跟它哪里一样、哪里不一样？」 → 把话头拉回他自己的生活。 最后你才补一句自己的看法，一句话就够。不总结中心思想，不落到「所以你要好好读书」。 照着说 「你先说，我听听你怎么看。」 「我原来的想法跟你不太一样，我说说我的，你听听哪个更说得通。」 「这个我不太懂，我们一起问问。」 「今天不用得出结论，看到什么记着就行。」 分龄调整 3–6 岁 只问「你看到了什么」「他在做什么」，不追问原因。时间控制在十几分钟，孩子跑神就结束。 7–9 岁 三个追问都能用，但别要求回答得有条理。可以让孩子画下来或回家讲给另一个人听。 10–12 岁 可以加一层「代价」：这件事要花多少时间、多少钱、放弃了什么。允许他的结论跟你完全不同。 没搞定怎么办 追问变成拷问。 孩子一答不上来，家长就补讲解、再追一句，两轮之后他就不说话了。答不上来时直接说「我也不知道，我们看看」，比追问更有效。 忍不住收尾到学习上。 「所以你看，不好好读书以后就只能……」——这一句会把前面十几分钟全抵消。孩子记的是被比较的难受，不是见到的东西。 没条件出门。 家里就有：一起看一张水电账单、拆一个坏掉的小家电、把一周的菜钱摆出来算一算。见世面的核心是「把真实运转讲开」，不是地点。 这周带他看的一件事： 他自己说的结论：","html":"<h2>第 6 课　见世面不是花钱，是讲底层<\/h2>\n  <div class=\"lead\">这一课解决：想让孩子「有点想头」，又不想变成报班和打卡。真正起作用的是见完之后的那几句对话。<\/div>\n\n  <div class=\"sec-t\">先看懂<\/div>\n  <p>素材里最一致的一条主张是：孩子得先见过真实世界怎么运转，才谈得上自己想往哪走。带孩子去上班、去展会、去工厂、见不同的人、看一件事怎么从头做到尾——重点不在地方有多高级，在家长有没有把背后的道理讲给他听。<\/p>\n  <p>同一份材料里，家长每次带孩子经历一件事，习惯追问「对方为什么这样说」「我们为什么这样做」，让孩子先讲自己的看法，最后家长再补上自己的原因。<strong>先让孩子说，家长后补<\/strong>，顺序反了就又变成一堂课。<\/p>\n  <p>这里说的「见世面」不等于消费：菜市场怎么定价、快递站怎么分拣、修车师傅怎么判断毛病、家里这个月的钱花在哪儿，都是现成的素材。3–12 岁孩子需要的不是远方，是有人愿意把身边的事拆开给他看。<\/p>\n\n  <div class=\"case\">\n    <span class=\"tag\">材料里的一个场景<\/span>\n    有个孩子十来岁时被带到包装线上做了一天纸盒，一个人一个岗，一天拿到 50 元。家里平时吃饭多由大人请客，他对钱没什么概念，后来让他拿这一周的收入请一次客，发现不够买单。回家路上他自己总结：靠力气挣钱很辛苦，得靠脑子。家长没有趁机讲一番大道理，只是顺着聊了聊不同工作到底差在哪儿。<br>\n    <span class=\"tiny\">这个做法不适合照搬到小龄孩子身上，也不必刻意制造「吃苦」。可借鉴的只有一点：让孩子接触真实的分工与代价，然后让他自己说结论。<\/span>\n  <\/div>\n\n  <div class=\"sec-t\">今天做什么（本周找一次，约 15 分钟）<\/div>\n  <p>挑一件本周本来就要做的事，带上孩子：取快递、买菜、修东西、去银行、去你工作单位门口转一圈都行。过程中只做三个追问，别多：<\/p>\n  <p><strong>「你觉得他刚才为什么这么做？」<\/strong>→ 等他说完，不纠正。<strong>「换你会怎么做？」<\/strong>→ 让他讲一个不同版本。<strong>「那我们家这件事，跟它哪里一样、哪里不一样？」<\/strong>→ 把话头拉回他自己的生活。<\/p>\n  <p>最后你才补一句自己的看法，一句话就够。不总结中心思想，不落到「所以你要好好读书」。<\/p>\n\n  <div class=\"sec-t\">照着说<\/div>\n  <div class=\"say\">\n    <p class=\"q\">「你先说，我听听你怎么看。」<\/p>\n    <p class=\"q\">「我原来的想法跟你不太一样，我说说我的，你听听哪个更说得通。」<\/p>\n    <p class=\"q\">「这个我不太懂，我们一起问问。」<\/p>\n    <p class=\"q\">「今天不用得出结论，看到什么记着就行。」<\/p>\n  <\/div>\n\n  <div class=\"sec-t\">分龄调整<\/div>\n  <table class=\"ages\">\n    <tr><td class=\"a\">3–6 岁<\/td><td>只问「你看到了什么」「他在做什么」，不追问原因。时间控制在十几分钟，孩子跑神就结束。<\/td><\/tr>\n    <tr><td class=\"a\">7–9 岁<\/td><td>三个追问都能用，但别要求回答得有条理。可以让孩子画下来或回家讲给另一个人听。<\/td><\/tr>\n    <tr><td class=\"a\">10–12 岁<\/td><td>可以加一层「代价」：这件事要花多少时间、多少钱、放弃了什么。允许他的结论跟你完全不同。<\/td><\/tr>\n  <\/table>\n\n  <div class=\"sec-t\">没搞定怎么办<\/div>\n  <div class=\"oops\">\n    <p><b>追问变成拷问。<\/b>孩子一答不上来，家长就补讲解、再追一句，两轮之后他就不说话了。答不上来时直接说「我也不知道，我们看看」，比追问更有效。<\/p>\n    <p><b>忍不住收尾到学习上。<\/b>「所以你看，不好好读书以后就只能……」——这一句会把前面十几分钟全抵消。孩子记的是被比较的难受，不是见到的东西。<\/p>\n    <p><b>没条件出门。<\/b>家里就有：一起看一张水电账单、拆一个坏掉的小家电、把一周的菜钱摆出来算一算。见世面的核心是「把真实运转讲开」，不是地点。<\/p>\n  <\/div>\n\n  <div class=\"rec\">这周带他看的一件事：<span class=\"line\"><\/span>　他自己说的结论：<span class=\"line\"><\/span><\/div>\n<div class=\"notes\"><\/div>"},"part3":{"id":"part3","kind":"part","no":0,"title":"把掌控感一点点交回去","lead":"","hint":"","sections":[],"say":[],"plain":"PART 03 把掌控感一点点交回去 这四课是整套课的中段，也是最容易做反的一段。 交还不是撒手，是把「自己排、自己记、自己承担」一件件挪过去，同时把边界说清楚。 第 7 课 「这件事你自己定」到底放到什么程度 第 8 课 次序感：让孩子自己排先做哪个 第 9 课 周日 15 分钟：周计划与复盘四问 第 10 课 允许试错：忍住不提醒的那条线","html":"<div class=\"part-inner\">\n    <div class=\"no\">PART 03<\/div>\n    <div class=\"bar\"><\/div>\n    <h2>把掌控感一点点交回去<\/h2>\n    <div class=\"desc\">这四课是整套课的中段，也是最容易做反的一段。\n    交还不是撒手，是把「自己排、自己记、自己承担」一件件挪过去，同时把边界说清楚。<\/div>\n    <div class=\"list\">第 7 课　「这件事你自己定」到底放到什么程度<br>\n    第 8 课　次序感：让孩子自己排先做哪个<br>\n    第 9 课　周日 15 分钟：周计划与复盘四问<br>\n    第 10 课　允许试错：忍住不提醒的那条线<\/div>\n  <\/div>"},"l7":{"id":"l7","kind":"lesson","no":7,"title":"第 7 课 「这件事你自己定」到底放到什么程度","lead":"这一课解决：一说放手就散架，一收回来又回到天天催。中间其实有一段可以走得比较稳的路。","hint":"","sections":["先看懂","今天做什么（10 分钟）","照着说","分龄调整","没搞定怎么办"],"say":["「这一块从今天起你自己定，我不再一遍遍问了。」","「睡觉时间还是我们一起守，别的你安排。」","「做七八成就行，剩下的周日我们一起看。」","想插手时改用：「需要我帮忙就说一声，我在旁边。」"],"plain":"第 7 课 「这件事你自己定」到底放到什么程度 这一课解决：一说放手就散架，一收回来又回到天天催。中间其实有一段可以走得比较稳的路。 先看懂 把第 1 课那张标了「放 / 缓 / 守」的纸拿出来。这一课只处理标了「放」的那几条。 交还掌控感，交的从来不是「随便你」，而是三样一起交： 权利 （这部分你定）、 责任 （结果你自己看）、 边界 （哪几条不能碰、什么时候一起复盘）。少交一样都会出问题：只给权利不给责任，会变成想怎样就怎样；只给责任不给权利，会变成「出了事都怪你」。 素材里有一句很直白的判断：孩子对一件事没有掌控感，就很难从这件事里长出自己的动力。同一份材料也反复提醒，家长要从「随时盯着、随时纠正」退到「旁边看着、事后引导」，而且 孩子能完成七八成就够了 ，不必样样到位。追求 100 分的结果，通常是家长把事又接回来。 今天做什么（10 分钟） 从「放」的清单里只挑 一件 ，写清楚三行： ① 哪一部分由他定（越具体越好，比如「放学后先做哪一科、中间休不休息」）；② 哪几条仍然由大人守（比如「睡觉时间」「必须完成」）；③ 什么时候一起看结果（比如「周日晚上」）。 把这三行念给孩子听，然后就真的不做这一件了。本周家长的动作只有一个： 把已经说出口的提醒咽回去 。可以在手机备忘录记一笔「今天忍住几次」，不用告诉孩子。 照着说 「这一块从今天起你自己定，我不再一遍遍问了。」 「睡觉时间还是我们一起守，别的你安排。」 「做七八成就行，剩下的周日我们一起看。」 想插手时改用：「需要我帮忙就说一声，我在旁边。」 分龄调整 3–6 岁 这一课基本不适用，别硬放。对应做法是「有限选择」：两个选项、当天有效、不涉及作息与安全。 7–9 岁 只放一件小事，比如「先做哪一科」或「书包放哪」。边界要写在纸上、贴在桌上，每周复盘一次。 10–12 岁 可以放一整段（放学后到睡前），并加一句「家长这周不主动问」。出现漏项也先等他自己发现。 没搞定怎么办 放了三天，家长忍不住全收回来。 这几乎一定会出现。收回来之后别自我批评，也别宣布「再试一次」，只把范围缩小一半重来：原来放一整段，改成只放「先做哪一科」。 孩子直接躺平，什么都不做。 先分清是「不会排」还是「不想做」。不会排就退回第 8 课，先教排序；不想做往往是因为前面长期没有过掌控感，突然交过去他也不信，需要更小的步子。 老人或其他家人照旧催。 别在这一课里解决全家一致的问题，先把你负责的那一块稳住，第 14 课会专门处理。 这周交出去的一件事： 我守住的边界：","html":"<h2>第 7 课　「这件事你自己定」到底放到什么程度<\/h2>\n  <div class=\"lead\">这一课解决：一说放手就散架，一收回来又回到天天催。中间其实有一段可以走得比较稳的路。<\/div>\n\n  <div class=\"sec-t\">先看懂<\/div>\n  <p>把第 1 课那张标了「放 / 缓 / 守」的纸拿出来。这一课只处理标了「放」的那几条。<\/p>\n  <p>交还掌控感，交的从来不是「随便你」，而是三样一起交：<strong>权利<\/strong>（这部分你定）、<strong>责任<\/strong>（结果你自己看）、<strong>边界<\/strong>（哪几条不能碰、什么时候一起复盘）。少交一样都会出问题：只给权利不给责任，会变成想怎样就怎样；只给责任不给权利，会变成「出了事都怪你」。<\/p>\n  <p>素材里有一句很直白的判断：孩子对一件事没有掌控感，就很难从这件事里长出自己的动力。同一份材料也反复提醒，家长要从「随时盯着、随时纠正」退到「旁边看着、事后引导」，而且<strong>孩子能完成七八成就够了<\/strong>，不必样样到位。追求 100 分的结果，通常是家长把事又接回来。<\/p>\n\n  <div class=\"sec-t\">今天做什么（10 分钟）<\/div>\n  <p>从「放」的清单里只挑<strong>一件<\/strong>，写清楚三行：<\/p>\n  <p>① 哪一部分由他定（越具体越好，比如「放学后先做哪一科、中间休不休息」）；② 哪几条仍然由大人守（比如「睡觉时间」「必须完成」）；③ 什么时候一起看结果（比如「周日晚上」）。<\/p>\n  <p>把这三行念给孩子听，然后就真的不做这一件了。本周家长的动作只有一个：<strong>把已经说出口的提醒咽回去<\/strong>。可以在手机备忘录记一笔「今天忍住几次」，不用告诉孩子。<\/p>\n\n  <div class=\"sec-t\">照着说<\/div>\n  <div class=\"say\">\n    <p class=\"q\">「这一块从今天起你自己定，我不再一遍遍问了。」<\/p>\n    <p class=\"q\">「睡觉时间还是我们一起守，别的你安排。」<\/p>\n    <p class=\"q\">「做七八成就行，剩下的周日我们一起看。」<\/p>\n    <p class=\"q\">想插手时改用：「需要我帮忙就说一声，我在旁边。」<\/p>\n  <\/div>\n\n  <div class=\"sec-t\">分龄调整<\/div>\n  <table class=\"ages\">\n    <tr><td class=\"a\">3–6 岁<\/td><td>这一课基本不适用，别硬放。对应做法是「有限选择」：两个选项、当天有效、不涉及作息与安全。<\/td><\/tr>\n    <tr><td class=\"a\">7–9 岁<\/td><td>只放一件小事，比如「先做哪一科」或「书包放哪」。边界要写在纸上、贴在桌上，每周复盘一次。<\/td><\/tr>\n    <tr><td class=\"a\">10–12 岁<\/td><td>可以放一整段（放学后到睡前），并加一句「家长这周不主动问」。出现漏项也先等他自己发现。<\/td><\/tr>\n  <\/table>\n\n  <div class=\"sec-t\">没搞定怎么办<\/div>\n  <div class=\"oops\">\n    <p><b>放了三天，家长忍不住全收回来。<\/b>这几乎一定会出现。收回来之后别自我批评，也别宣布「再试一次」，只把范围缩小一半重来：原来放一整段，改成只放「先做哪一科」。<\/p>\n    <p><b>孩子直接躺平，什么都不做。<\/b>先分清是「不会排」还是「不想做」。不会排就退回第 8 课，先教排序；不想做往往是因为前面长期没有过掌控感，突然交过去他也不信，需要更小的步子。<\/p>\n    <p><b>老人或其他家人照旧催。<\/b>别在这一课里解决全家一致的问题，先把你负责的那一块稳住，第 14 课会专门处理。<\/p>\n  <\/div>\n\n  <div class=\"rec\">这周交出去的一件事：<span class=\"line\"><\/span>　我守住的边界：<span class=\"line\"><\/span><\/div>\n<div class=\"notes\"><\/div>"},"l8":{"id":"l8","kind":"lesson","no":8,"title":"第 8 课 次序感：让孩子自己排先做哪个","lead":"这一课解决：一放手孩子就卡住，不是懒，是从来没练过「几件事摆在一起，怎么排」。","hint":"","sections":["先看懂","今天做什么：三格排序法（10 分钟）","照着说","分龄调整","没搞定怎么办"],"say":["「这几件事，你觉得哪件最好做？先放这儿试试。」","「你排完我不改，做完我们再看顺不顺。」","「今天玩的时间想放在哪一格？你自己挪。」","「卡住的先跳过，把能做完的做完，回头再看它。」"],"plain":"第 8 课 次序感：让孩子自己排先做哪个 这一课解决：一放手孩子就卡住，不是懒，是从来没练过「几件事摆在一起，怎么排」。 先看懂 家长常常替孩子把顺序排好：先写数学、再背单词、最后收书包。孩子照做，看起来很顺，但「排序」这一步始终没练过。等到你说「你自己安排吧」，他面前是一团没分过类的事，自然就僵在那儿。 次序感是可以单练的，练法很朴素：每次把面前的几件事，让 孩子自己分难易、分主次 ，然后按他排的做一次，做完只回看「这么排顺不顺」，不评价排得好不好。素材里把这件事叫「建立他自己的次序感」，还提到一个细节：先做最容易的、难的放后面，是孩子自己试出来的顺序，不是大人规定的。 材料里的小例子 有个孩子从小不午睡，自己决定午休那段时间去学校练字，一两年下来没另外报班，后来在写字比赛里拿了名次；再后来为了看懂一部动画自己去学另一门语言，多年后读专业书时反过来用上了。 这里值得看的不是结果，是「那段时间我自己安排」这件事本身。别把例子当成可复制的路径，每个孩子能抓住的空档都不一样。 今天做什么：三格排序法（10 分钟） 拿一张纸画三格： 现在就做 ／ 等一会儿做 ／ 今天可以不做 。把今晚摆在他面前的 4–6 件事，一张张写成小纸条或短句，让孩子自己放进三格。家长不挪、不提示。 放完让他按第一格的顺序开始做。做完只问一句：「这么排，下次还这么排吗？」他说不改就不改。 一周做 2–3 次就够，不用天天练。周五晚上可以顺带排一下下周一上学要带什么、先做哪件。 照着说 「这几件事，你觉得哪件最好做？先放这儿试试。」 「你排完我不改，做完我们再看顺不顺。」 「今天玩的时间想放在哪一格？你自己挪。」 「卡住的先跳过，把能做完的做完，回头再看它。」 分龄调整 3–6 岁 只用两格：「先做」「后做」，用实物卡片或图片，一次 2–3 件事。比如先洗手还是先拿水果。 7–9 岁 三格都能用，但每格不超过 2 件。允许他全塞进「今天可以不做」，然后一起看看明天会怎样。 10–12 岁 加上「周五排下周一」和「哪件要花更久」，让他自己估时间，估错不纠正，周日复盘时再说。 没搞定怎么办 他把所有事都放进「今天可以不做」。 别急着改他的格子，先照着做一次——把后果留到明天，比当场讲道理有用。若涉及必须完成的事，事先就把它列为「边界」，不进格子。 排序排了十分钟还在排。 排序本身变成了拖延。给一个沙漏或一首歌的时间，时间到就按当前的摆法开始，不追求最优解。 家长看着那顺序实在别扭。 忍住。这一课练的是「排」这个动作，不是排得对不对。真要调整，放到周日复盘时以提问的方式说。 今晚他排的第一格第一件： 下次他说要改的是：","html":"<h2>第 8 课　次序感：让孩子自己排先做哪个<\/h2>\n  <div class=\"lead\">这一课解决：一放手孩子就卡住，不是懒，是从来没练过「几件事摆在一起，怎么排」。<\/div>\n\n  <div class=\"sec-t\">先看懂<\/div>\n  <p>家长常常替孩子把顺序排好：先写数学、再背单词、最后收书包。孩子照做，看起来很顺，但「排序」这一步始终没练过。等到你说「你自己安排吧」，他面前是一团没分过类的事，自然就僵在那儿。<\/p>\n  <p>次序感是可以单练的，练法很朴素：每次把面前的几件事，让<strong>孩子自己分难易、分主次<\/strong>，然后按他排的做一次，做完只回看「这么排顺不顺」，不评价排得好不好。素材里把这件事叫「建立他自己的次序感」，还提到一个细节：先做最容易的、难的放后面，是孩子自己试出来的顺序，不是大人规定的。<\/p>\n\n  <div class=\"case\">\n    <span class=\"tag\">材料里的小例子<\/span>\n    有个孩子从小不午睡，自己决定午休那段时间去学校练字，一两年下来没另外报班，后来在写字比赛里拿了名次；再后来为了看懂一部动画自己去学另一门语言，多年后读专业书时反过来用上了。<br>\n    <span class=\"tiny\">这里值得看的不是结果，是「那段时间我自己安排」这件事本身。别把例子当成可复制的路径，每个孩子能抓住的空档都不一样。<\/span>\n  <\/div>\n\n  <div class=\"sec-t\">今天做什么：三格排序法（10 分钟）<\/div>\n  <p>拿一张纸画三格：<strong>现在就做<\/strong>／<strong>等一会儿做<\/strong>／<strong>今天可以不做<\/strong>。把今晚摆在他面前的 4–6 件事，一张张写成小纸条或短句，让孩子自己放进三格。家长不挪、不提示。<\/p>\n  <p>放完让他按第一格的顺序开始做。做完只问一句：「这么排，下次还这么排吗？」他说不改就不改。<\/p>\n  <p>一周做 2–3 次就够，不用天天练。周五晚上可以顺带排一下下周一上学要带什么、先做哪件。<\/p>\n\n  <div class=\"sec-t\">照着说<\/div>\n  <div class=\"say\">\n    <p class=\"q\">「这几件事，你觉得哪件最好做？先放这儿试试。」<\/p>\n    <p class=\"q\">「你排完我不改，做完我们再看顺不顺。」<\/p>\n    <p class=\"q\">「今天玩的时间想放在哪一格？你自己挪。」<\/p>\n    <p class=\"q\">「卡住的先跳过，把能做完的做完，回头再看它。」<\/p>\n  <\/div>\n\n  <div class=\"sec-t\">分龄调整<\/div>\n  <table class=\"ages\">\n    <tr><td class=\"a\">3–6 岁<\/td><td>只用两格：「先做」「后做」，用实物卡片或图片，一次 2–3 件事。比如先洗手还是先拿水果。<\/td><\/tr>\n    <tr><td class=\"a\">7–9 岁<\/td><td>三格都能用，但每格不超过 2 件。允许他全塞进「今天可以不做」，然后一起看看明天会怎样。<\/td><\/tr>\n    <tr><td class=\"a\">10–12 岁<\/td><td>加上「周五排下周一」和「哪件要花更久」，让他自己估时间，估错不纠正，周日复盘时再说。<\/td><\/tr>\n  <\/table>\n\n  <div class=\"sec-t\">没搞定怎么办<\/div>\n  <div class=\"oops\">\n    <p><b>他把所有事都放进「今天可以不做」。<\/b>别急着改他的格子，先照着做一次——把后果留到明天，比当场讲道理有用。若涉及必须完成的事，事先就把它列为「边界」，不进格子。<\/p>\n    <p><b>排序排了十分钟还在排。<\/b>排序本身变成了拖延。给一个沙漏或一首歌的时间，时间到就按当前的摆法开始，不追求最优解。<\/p>\n    <p><b>家长看着那顺序实在别扭。<\/b>忍住。这一课练的是「排」这个动作，不是排得对不对。真要调整，放到周日复盘时以提问的方式说。<\/p>\n  <\/div>\n\n  <div class=\"rec\">今晚他排的第一格第一件：<span class=\"line\"><\/span>　下次他说要改的是：<span class=\"line\"><\/span><\/div>\n<div class=\"notes\"><\/div>"},"l9":{"id":"l9","kind":"lesson","no":9,"title":"第 9 课 周日 15 分钟：周计划与复盘四问","lead":"这一课解决：计划写了就忘、复盘变成批斗会。把一周的收口做短、做轻、留得住。","hint":"","sections":["先看懂","今天做什么（周日 15 分钟，用 T3）","照着说","分龄调整","没搞定怎么办"],"say":["「这周你想做成哪两三件？写成能打勾的那种。」","「哪一天要是特别累，我们改成什么？」","「没做成的那件，是卡在哪一步？」 （问步骤，不问态度）","「这周最顺的是哪一件？下周还这么来吗？」"],"plain":"第 9 课 周日 15 分钟：周计划与复盘四问 这一课解决：计划写了就忘、复盘变成批斗会。把一周的收口做短、做轻、留得住。 先看懂 素材里把「自己定周目标、定期回看」放在进阶阶段，不是起步就做。原因很实在：孩子还没体验过「我安排了、也做成了」，复盘就只是又被检查一遍。 两个最容易写坏的计划：一是 目标太空 ——「这周要更自觉」「下次考好一点」，孩子看完不知道今晚该干什么；二是 排得太满 ，一格不漏、没有休息、没有意外，一旦某天断了，整张表就作废，索性全放弃。所以计划里必须留出空白格，也允许有「这周不做什么」。 复盘只问四句，顺序别变： 这周你原本想做哪几件？做成了几件？没做成的是卡在哪儿？做得最顺的是哪一件？ 先问做成了的、再问卡住的，最后一定落在「最顺的那件」上收尾。 今天做什么（周日 15 分钟，用 T3） 前 5 分钟：孩子自己写这周 2–3 件想做的事，每件写成能打勾的样子（「睡前收书包，做 5 天」而不是「养成好习惯」）。再留两行空白，专门写「这周不做什么」和「如果周三很累，改成什么」——这就是计划 B。 中间 5 分钟：家长也写自己的一条，比如「这周不重复提醒同一件事」。放在同一张纸上，孩子看得见。 后 5 分钟：四问复盘上周。家长只记录、不评价、不追问「为什么又没做到」。没做成的事写进 T7，不在当场解决。 照着说 「这周你想做成哪两三件？写成能打勾的那种。」 「哪一天要是特别累，我们改成什么？」 「没做成的那件，是卡在哪一步？」 （问步骤，不问态度） 「这周最顺的是哪一件？下周还这么来吗？」 分龄调整 3–6 岁 不做周计划。改成「今天睡前一句话」：今天最开心的一件、明天想做的一件，家长代笔。 7–9 岁 1–2 件就够，用画图或贴纸打勾。四问只问前两句和最后一句。 10–12 岁 四问全用，由孩子主持、家长只当记录员。允许他决定「这周不做什么」，那也是计划的一部分。 没搞定怎么办 周日那 15 分钟总是被挤掉。 别补、别顺延到周三，就等下个周日。一次中断不代表体系崩了，第 15 课会专门讲这个。 复盘又变成数落。 一个信号：家长说话超过一半。把四问写在纸上照着念，念完就停，能明显压住发挥。 孩子每周都写同一句「这周好好写作业」。 说明还没到能自己拆目标的阶段，退回第 4 课，先练把时间切块。空目标不是态度问题，是技能没到。 这周我们家只推进的一件事：","html":"<h2>第 9 课　周日 15 分钟：周计划与复盘四问<\/h2>\n  <div class=\"lead\">这一课解决：计划写了就忘、复盘变成批斗会。把一周的收口做短、做轻、留得住。<\/div>\n\n  <div class=\"sec-t\">先看懂<\/div>\n  <p>素材里把「自己定周目标、定期回看」放在进阶阶段，不是起步就做。原因很实在：孩子还没体验过「我安排了、也做成了」，复盘就只是又被检查一遍。<\/p>\n  <p>两个最容易写坏的计划：一是<strong>目标太空<\/strong>——「这周要更自觉」「下次考好一点」，孩子看完不知道今晚该干什么；二是<strong>排得太满<\/strong>，一格不漏、没有休息、没有意外，一旦某天断了，整张表就作废，索性全放弃。所以计划里必须留出空白格，也允许有「这周不做什么」。<\/p>\n  <p>复盘只问四句，顺序别变：<strong>这周你原本想做哪几件？做成了几件？没做成的是卡在哪儿？做得最顺的是哪一件？<\/strong>先问做成了的、再问卡住的，最后一定落在「最顺的那件」上收尾。<\/p>\n\n  <div class=\"sec-t\">今天做什么（周日 15 分钟，用 T3）<\/div>\n  <p>前 5 分钟：孩子自己写这周 2–3 件想做的事，每件写成能打勾的样子（「睡前收书包，做 5 天」而不是「养成好习惯」）。再留两行空白，专门写「这周不做什么」和「如果周三很累，改成什么」——这就是计划 B。<\/p>\n  <p>中间 5 分钟：家长也写自己的一条，比如「这周不重复提醒同一件事」。放在同一张纸上，孩子看得见。<\/p>\n  <p>后 5 分钟：四问复盘上周。家长只记录、不评价、不追问「为什么又没做到」。没做成的事写进 T7，不在当场解决。<\/p>\n\n  <div class=\"sec-t\">照着说<\/div>\n  <div class=\"say\">\n    <p class=\"q\">「这周你想做成哪两三件？写成能打勾的那种。」<\/p>\n    <p class=\"q\">「哪一天要是特别累，我们改成什么？」<\/p>\n    <p class=\"q\">「没做成的那件，是卡在哪一步？」<span class=\"tiny\">（问步骤，不问态度）<\/span><\/p>\n    <p class=\"q\">「这周最顺的是哪一件？下周还这么来吗？」<\/p>\n  <\/div>\n\n  <div class=\"sec-t\">分龄调整<\/div>\n  <table class=\"ages\">\n    <tr><td class=\"a\">3–6 岁<\/td><td>不做周计划。改成「今天睡前一句话」：今天最开心的一件、明天想做的一件，家长代笔。<\/td><\/tr>\n    <tr><td class=\"a\">7–9 岁<\/td><td>1–2 件就够，用画图或贴纸打勾。四问只问前两句和最后一句。<\/td><\/tr>\n    <tr><td class=\"a\">10–12 岁<\/td><td>四问全用，由孩子主持、家长只当记录员。允许他决定「这周不做什么」，那也是计划的一部分。<\/td><\/tr>\n  <\/table>\n\n  <div class=\"sec-t\">没搞定怎么办<\/div>\n  <div class=\"oops\">\n    <p><b>周日那 15 分钟总是被挤掉。<\/b>别补、别顺延到周三，就等下个周日。一次中断不代表体系崩了，第 15 课会专门讲这个。<\/p>\n    <p><b>复盘又变成数落。<\/b>一个信号：家长说话超过一半。把四问写在纸上照着念，念完就停，能明显压住发挥。<\/p>\n    <p><b>孩子每周都写同一句「这周好好写作业」。<\/b>说明还没到能自己拆目标的阶段，退回第 4 课，先练把时间切块。空目标不是态度问题，是技能没到。<\/p>\n  <\/div>\n\n  <div class=\"rec\">这周我们家只推进的一件事：<span class=\"line\"><\/span><\/div>\n<div class=\"notes\"><\/div>"},"l10":{"id":"l10","kind":"lesson","no":10,"title":"第 10 课 允许试错：忍住不提醒的那条线","lead":"这一课解决：知道该放手，但一看见孩子要吃亏就冲上去。先划清哪些后果可以让他自己承担。","hint":"","sections":["先看懂","今天做什么（10 分钟）","照着说","分龄调整","没搞定怎么办"],"say":["「这个我不提醒了，你自己记着；真忘了也没关系。」","出事之后：「有点麻烦，那下次你想怎么记？」 （不接「我早就说过」）","「需要我帮什么，你说；我不主动插手。」","涉及安全时直接、简短：「这个不行，我来。」 （不解释太多，事后再说理由）"],"plain":"第 10 课 允许试错：忍住不提醒的那条线 这一课解决：知道该放手，但一看见孩子要吃亏就冲上去。先划清哪些后果可以让他自己承担。 先看懂 「让孩子承担自然后果」听着简单，难的是当场那几秒：书包忘带、水杯没装、作业拖到很晚、出门磨蹭。家长一提醒，孩子这一次顺了，但「自己记着」这一步又没练到。 素材里那个「坐反方向、一路坐到终点再折回来」的例子，讲的正是这个：家长看得见位置，但没有出声提醒，等他自己发现、自己想办法回来。这个做法能成立，前提是 路线是熟的、时间是宽的、后果是能承受的 。 所以先划红线，再谈忍住： 大人必须立刻介入的： 人身安全、交通与用火用电、健康与用药、明显超出孩子承受能力的情绪崩溃、涉及他人财物或规则的事、会连带影响全家且无法挽回的安排。 可以让孩子自己承担的： 忘带非必需物品、顺序排得不好导致多花时间、玩的时间没留住、自己定的计划漏了一项、衣服选得不合适、零花钱提前花完。 拿不准的时候，一律按「介入」处理。少放一次不会有害，多放一次可能要花很久补回来。 今天做什么（10 分钟） 在 T7 上半页写下你家最近三次「差点冲上去」的场景，逐条标「可承担 / 必须介入」。只标，不演练。 本周挑一件「可承担」的小事，事先跟孩子说一句「这个我不提醒了，你自己记着」，然后真的不提醒。发生了就只做一件事：事后问「下次你想怎么记」，不追问「我早说过吧」。 照着说 「这个我不提醒了，你自己记着；真忘了也没关系。」 出事之后：「有点麻烦，那下次你想怎么记？」 （不接「我早就说过」） 「需要我帮什么，你说；我不主动插手。」 涉及安全时直接、简短：「这个不行，我来。」 （不解释太多，事后再说理由） 分龄调整 3–6 岁 这一课的范围极小：只放「玩具没收、外套选错」这类。安全与作息全部由大人兜住，不设「自然后果」。 7–9 岁 可放「忘带水杯、忘了把本子装进书包」，但事先确认学校那边不会因此产生大麻烦。 10–12 岁 可放「自己排的时间没留住」「周末安排冲突」。允许他自己跟老师或同学解释，家长不代劳。 没搞定怎么办 忍住了，但脸色没忍住。 孩子读的是表情，不是话。事后补一句「我刚才有点急，不是怪你」，比装作没事更管用。 后果太大，收不住。 说明这一条本该归在「必须介入」。别怪孩子，把清单改了就好，下一周换一件更小的。 孩子反复忘同一件。 那可能不是「不上心」，而是流程本身没搭好。退回第 4 课用可视化的方式固定下来（比如门口放一个固定的收纳筐），别一直用「让他承担后果」去试。 还有一句要写清楚：允许试错不等于冷眼旁观。孩子受挫时，陪伴和安慰照给，只是不替他把事情抹平。 这周我不提醒的一件小事：","html":"<h2>第 10 课　允许试错：忍住不提醒的那条线<\/h2>\n  <div class=\"lead\">这一课解决：知道该放手，但一看见孩子要吃亏就冲上去。先划清哪些后果可以让他自己承担。<\/div>\n\n  <div class=\"sec-t\">先看懂<\/div>\n  <p>「让孩子承担自然后果」听着简单，难的是当场那几秒：书包忘带、水杯没装、作业拖到很晚、出门磨蹭。家长一提醒，孩子这一次顺了，但「自己记着」这一步又没练到。<\/p>\n  <p>素材里那个「坐反方向、一路坐到终点再折回来」的例子，讲的正是这个：家长看得见位置，但没有出声提醒，等他自己发现、自己想办法回来。这个做法能成立，前提是<strong>路线是熟的、时间是宽的、后果是能承受的<\/strong>。<\/p>\n  <p>所以先划红线，再谈忍住：<\/p>\n  <div class=\"box warn\">\n    <p><strong>大人必须立刻介入的：<\/strong>人身安全、交通与用火用电、健康与用药、明显超出孩子承受能力的情绪崩溃、涉及他人财物或规则的事、会连带影响全家且无法挽回的安排。<\/p>\n    <p><strong>可以让孩子自己承担的：<\/strong>忘带非必需物品、顺序排得不好导致多花时间、玩的时间没留住、自己定的计划漏了一项、衣服选得不合适、零花钱提前花完。<\/p>\n    <p>拿不准的时候，一律按「介入」处理。少放一次不会有害，多放一次可能要花很久补回来。<\/p>\n  <\/div>\n\n  <div class=\"sec-t\">今天做什么（10 分钟）<\/div>\n  <p>在 T7 上半页写下你家最近三次「差点冲上去」的场景，逐条标「可承担 / 必须介入」。只标，不演练。<\/p>\n  <p>本周挑一件「可承担」的小事，事先跟孩子说一句「这个我不提醒了，你自己记着」，然后真的不提醒。发生了就只做一件事：事后问「下次你想怎么记」，不追问「我早说过吧」。<\/p>\n\n  <div class=\"sec-t\">照着说<\/div>\n  <div class=\"say\">\n    <p class=\"q\">「这个我不提醒了，你自己记着；真忘了也没关系。」<\/p>\n    <p class=\"q\">出事之后：「有点麻烦，那下次你想怎么记？」<span class=\"tiny\">（不接「我早就说过」）<\/span><\/p>\n    <p class=\"q\">「需要我帮什么，你说；我不主动插手。」<\/p>\n    <p class=\"q\">涉及安全时直接、简短：「这个不行，我来。」<span class=\"tiny\">（不解释太多，事后再说理由）<\/span><\/p>\n  <\/div>\n\n  <div class=\"sec-t\">分龄调整<\/div>\n  <table class=\"ages\">\n    <tr><td class=\"a\">3–6 岁<\/td><td>这一课的范围极小：只放「玩具没收、外套选错」这类。安全与作息全部由大人兜住，不设「自然后果」。<\/td><\/tr>\n    <tr><td class=\"a\">7–9 岁<\/td><td>可放「忘带水杯、忘了把本子装进书包」，但事先确认学校那边不会因此产生大麻烦。<\/td><\/tr>\n    <tr><td class=\"a\">10–12 岁<\/td><td>可放「自己排的时间没留住」「周末安排冲突」。允许他自己跟老师或同学解释，家长不代劳。<\/td><\/tr>\n  <\/table>\n\n  <div class=\"sec-t\">没搞定怎么办<\/div>\n  <div class=\"oops\">\n    <p><b>忍住了，但脸色没忍住。<\/b>孩子读的是表情，不是话。事后补一句「我刚才有点急，不是怪你」，比装作没事更管用。<\/p>\n    <p><b>后果太大，收不住。<\/b>说明这一条本该归在「必须介入」。别怪孩子，把清单改了就好，下一周换一件更小的。<\/p>\n    <p><b>孩子反复忘同一件。<\/b>那可能不是「不上心」，而是流程本身没搭好。退回第 4 课用可视化的方式固定下来（比如门口放一个固定的收纳筐），别一直用「让他承担后果」去试。<\/p>\n    <p>还有一句要写清楚：允许试错不等于冷眼旁观。孩子受挫时，陪伴和安慰照给，只是不替他把事情抹平。<\/p>\n  <\/div>\n\n  <div class=\"rec\">这周我不提醒的一件小事：<span class=\"line\"><\/span><\/div>\n<div class=\"notes\"><\/div>"},"part4":{"id":"part4","kind":"part","no":0,"title":"四个高频场景","lead":"","hint":"","sections":[],"say":[],"plain":"PART 04 四个高频场景 前面的动作搭好之后，真正考验人的是这几个每天都来的场面。 这四课可以直接跳着读——今晚遇到哪一件，就翻哪一课。 第 11 课 作业拖延与坐不住 第 12 课 电子产品：约定，而不是没收 第 13 课 孩子说「我不想做」和受挫的时候 第 14 课 家里几个人管法不一致","html":"<div class=\"part-inner\">\n    <div class=\"no\">PART 04<\/div>\n    <div class=\"bar\"><\/div>\n    <h2>四个高频场景<\/h2>\n    <div class=\"desc\">前面的动作搭好之后，真正考验人的是这几个每天都来的场面。\n    这四课可以直接跳着读——今晚遇到哪一件，就翻哪一课。<\/div>\n    <div class=\"list\">第 11 课　作业拖延与坐不住<br>\n    第 12 课　电子产品：约定，而不是没收<br>\n    第 13 课　孩子说「我不想做」和受挫的时候<br>\n    第 14 课　家里几个人管法不一致<\/div>\n  <\/div>"},"l11":{"id":"l11","kind":"lesson","no":11,"title":"第 11 课 作业拖延与坐不住","lead":"这一课解决：每晚重复「快一点、别磨了」，越催越慢。先把环境改掉，再改说法。","hint":"","sections":["先看懂","今天做什么（15 分钟）","照着说","分龄调整","没搞定怎么办"],"say":["「今天只先做这一科，做完这一段就停一下。」","「水我给你倒好，等这一小段结束我们一起喝。」","「卡住的先跳过，把能做的做完再回头。」","「我坐在这儿，但我不看你写，需要帮忙叫我。」","「到点了，剩下的明天再说。」 （说了就真的停）"],"plain":"第 11 课 作业拖延与坐不住 这一课解决：每晚重复「快一点、别磨了」，越催越慢。先把环境改掉，再改说法。 先看懂 拖延很少是单纯的「不想做」。把一个晚上拆开看，常见的是三件事叠在一起： 开始太难 （面前是一整堆，不知道从哪下手）、 周围太好玩 （电视、平板、大人刷手机的身影）、 看不见终点 （不知道做到哪儿算完）。 素材里给的做法都不花哨： 固定一个专门做事的位置 ，桌上只留当下要用的东西；家里那个时段尽量不开电视； 先做后玩 ，中途要水、要零食，等这一小段结束再给； 起步阶段陪着写 ，习惯稳了再逐步退开，而不是一上来丢一句「你自己去写」。 还有一条容易被忽略：作业初期要有「抽查确认」的环节，但不是逐题盯着改。素材里把它比作抽检——做好了才算这一段完成，然后才轮到玩。配合第 4 课的分段时长和「先易后难」，一晚上就有了清楚的格子。 今天做什么（15 分钟） ① 清桌面：把与今晚无关的东西全挪走，只留一科。② 跟孩子一起把今晚的事拆成 2–3 段，每段写清「做完什么算完」。③ 定一个「开始前的固定小动作」，比如灌好水、上完厕所、把计时器摆好，每天一样。④ 家长自己也把手机放到另一个房间。 今晚只做这四步，不追求写得快、写得全。坐不住的按第 4 课的起点时长来，到点就停。 照着说 「今天只先做这一科，做完这一段就停一下。」 「水我给你倒好，等这一小段结束我们一起喝。」 「卡住的先跳过，把能做的做完再回头。」 「我坐在这儿，但我不看你写，需要帮忙叫我。」 「到点了，剩下的明天再说。」 （说了就真的停） 分龄调整 3–6 岁 这一课改成「收拾玩具／睡前流程」：一次只一件、配图片、家长全程在旁边但不代做。 7–9 岁 陪写为主，重点是固定位置和固定顺序。分段 15–20 分钟，做完打勾，不额外加量。 10–12 岁 把拆段、估时间交给他，家长只守「开始前的小动作」和睡觉时间。别再坐旁边。 没搞定怎么办 清了桌面，孩子还是每隔两分钟起来。 先看是不是段太长。退回起点时长，甚至退到 10 分钟；先把「能坐满一段」这件事稳住，比做完多少重要。 陪写陪成了盯写。 判断标准：你开口的次数比他多，就是在盯了。改成只在开头和结尾各说一句，中间不发言。 先做后玩一执行就谈条件。 孩子讲条件其实是好事，说明他在参与设计。可以让他在「先做哪一段」「休息多久」里选，但「做完才玩」这条不拿来谈。 偶尔一晚全崩。 不补、不追、不翻旧账，第二天照原样重来。第 15 课会解释为什么「不补」反而更快。 今晚拆成的段数： 开始前的固定小动作：","html":"<h2>第 11 课　作业拖延与坐不住<\/h2>\n  <div class=\"lead\">这一课解决：每晚重复「快一点、别磨了」，越催越慢。先把环境改掉，再改说法。<\/div>\n\n  <div class=\"sec-t\">先看懂<\/div>\n  <p>拖延很少是单纯的「不想做」。把一个晚上拆开看，常见的是三件事叠在一起：<strong>开始太难<\/strong>（面前是一整堆，不知道从哪下手）、<strong>周围太好玩<\/strong>（电视、平板、大人刷手机的身影）、<strong>看不见终点<\/strong>（不知道做到哪儿算完）。<\/p>\n  <p>素材里给的做法都不花哨：<strong>固定一个专门做事的位置<\/strong>，桌上只留当下要用的东西；家里那个时段尽量不开电视；<strong>先做后玩<\/strong>，中途要水、要零食，等这一小段结束再给；<strong>起步阶段陪着写<\/strong>，习惯稳了再逐步退开，而不是一上来丢一句「你自己去写」。<\/p>\n  <p>还有一条容易被忽略：作业初期要有「抽查确认」的环节，但不是逐题盯着改。素材里把它比作抽检——做好了才算这一段完成，然后才轮到玩。配合第 4 课的分段时长和「先易后难」，一晚上就有了清楚的格子。<\/p>\n\n  <div class=\"sec-t\">今天做什么（15 分钟）<\/div>\n  <p>① 清桌面：把与今晚无关的东西全挪走，只留一科。② 跟孩子一起把今晚的事拆成 2–3 段，每段写清「做完什么算完」。③ 定一个「开始前的固定小动作」，比如灌好水、上完厕所、把计时器摆好，每天一样。④ 家长自己也把手机放到另一个房间。<\/p>\n  <p>今晚只做这四步，不追求写得快、写得全。坐不住的按第 4 课的起点时长来，到点就停。<\/p>\n\n  <div class=\"sec-t\">照着说<\/div>\n  <div class=\"say\">\n    <p class=\"q\">「今天只先做这一科，做完这一段就停一下。」<\/p>\n    <p class=\"q\">「水我给你倒好，等这一小段结束我们一起喝。」<\/p>\n    <p class=\"q\">「卡住的先跳过，把能做的做完再回头。」<\/p>\n    <p class=\"q\">「我坐在这儿，但我不看你写，需要帮忙叫我。」<\/p>\n    <p class=\"q\">「到点了，剩下的明天再说。」<span class=\"tiny\">（说了就真的停）<\/span><\/p>\n  <\/div>\n\n  <div class=\"sec-t\">分龄调整<\/div>\n  <table class=\"ages\">\n    <tr><td class=\"a\">3–6 岁<\/td><td>这一课改成「收拾玩具／睡前流程」：一次只一件、配图片、家长全程在旁边但不代做。<\/td><\/tr>\n    <tr><td class=\"a\">7–9 岁<\/td><td>陪写为主，重点是固定位置和固定顺序。分段 15–20 分钟，做完打勾，不额外加量。<\/td><\/tr>\n    <tr><td class=\"a\">10–12 岁<\/td><td>把拆段、估时间交给他，家长只守「开始前的小动作」和睡觉时间。别再坐旁边。<\/td><\/tr>\n  <\/table>\n\n  <div class=\"sec-t\">没搞定怎么办<\/div>\n  <div class=\"oops\">\n    <p><b>清了桌面，孩子还是每隔两分钟起来。<\/b>先看是不是段太长。退回起点时长，甚至退到 10 分钟；先把「能坐满一段」这件事稳住，比做完多少重要。<\/p>\n    <p><b>陪写陪成了盯写。<\/b>判断标准：你开口的次数比他多，就是在盯了。改成只在开头和结尾各说一句，中间不发言。<\/p>\n    <p><b>先做后玩一执行就谈条件。<\/b>孩子讲条件其实是好事，说明他在参与设计。可以让他在「先做哪一段」「休息多久」里选，但「做完才玩」这条不拿来谈。<\/p>\n    <p><b>偶尔一晚全崩。<\/b>不补、不追、不翻旧账，第二天照原样重来。第 15 课会解释为什么「不补」反而更快。<\/p>\n  <\/div>\n\n  <div class=\"rec\">今晚拆成的段数：<span class=\"line\"><\/span>　开始前的固定小动作：<span class=\"line\"><\/span><\/div>\n<div class=\"notes\"><\/div>"},"l12":{"id":"l12","kind":"lesson","no":12,"title":"第 12 课 电子产品：约定，而不是没收","lead":"这一课解决：一收就炸、一放就没完。把「管设备」改成「一起签一份能执行的约定」。","hint":"","sections":["先看懂","今天做什么（15 分钟）","照着说","分龄调整","没搞定怎么办"],"say":["「我不打算一下全停，我们商量一个能长期做下去的办法。」","「你想放在哪个时段？我记下来。」","「计时器响了自己停；没停的话，按我们写好的那条来。」","「这条对我也算数：这段时间我也不看手机。」"],"plain":"第 12 课 电子产品：约定，而不是没收 这一课解决：一收就炸、一放就没完。把「管设备」改成「一起签一份能执行的约定」。 先看懂 突然断掉最容易引发硬碰硬，素材里也不主张硬来：先接纳孩子确实想玩，再一起把时间、条件和违约怎么办写清楚，像签一份小合同——事先说好，事后不追加、不临时收回。 约定的四要素： 什么时候 （固定时段，而不是「有空就玩」）、 多久 （用计时器，到点由设备提醒，不由家长吼）、 前提 （当天该做的那段已完成）、 到点没停怎么办 （事先写明的、温和且确定的后果，比如次日时段缩短）。 如果现在使用时间偏长， 渐进降频 比一刀切稳：这周先固定时段，下周再缩短一点，或把「每天」改成「隔天／固定几天」。素材里也提到，孩子真想玩的时候，家长可以陪着一起玩一次——先站到他那一边，规则才听得进去。 最后一条最容易被忽略、却很管用： 约定的前提也包括家长 。孩子做事的那段时间，大人别在旁边刷短视频。 今天做什么（15 分钟） 不要在你正生气的时候开这个会。挑一个平静的时间，先问孩子：「你觉得一天里放在哪个时段最合适？」把他的答案原样写进约定第一条。 一起写完四要素，念一遍，双方签名，贴出来。设备上的计时由孩子自己按。第一周只执行「固定时段」这一条，时长先不动。 照着说 「我不打算一下全停，我们商量一个能长期做下去的办法。」 「你想放在哪个时段？我记下来。」 「计时器响了自己停；没停的话，按我们写好的那条来。」 「这条对我也算数：这段时间我也不看手机。」 分龄调整 3–6 岁 由家长定时段与时长，用看得见的沙漏或一首歌作结束信号。选项只给「现在看还是饭后看」。 7–9 岁 四要素一起写、一起签，时长以 15–20 分钟一段为宜。到点提醒交给设备，不交给大人。 10–12 岁 让孩子起草约定，家长只谈边界（睡眠、作业前提）。允许他提出自己的违约条款，通常会比大人定的更较真。 没搞定怎么办 到点不停，家长临时加码。 「今天起一周都不许玩」——这类临时加罚会让整份约定失效。只执行事先写好的那一条，不加、不追、不翻旧账。 约定写了，大人先破例。 忙的时候用设备换安静，之后又要求孩子守约，孩子会学到一个更真实的规则：约定看大人心情。破例了就明说「今天是我们这边没做到，明天照原样」。 孩子完全不肯谈。 说明过去几次「商量」最后都变成了单方面收紧。这一周先什么都别改，只按现有节奏陪他玩一次，把谈话的位置先修回来。 这周只执行的一条： 下周再谈的是：","html":"<h2>第 12 课　电子产品：约定，而不是没收<\/h2>\n  <div class=\"lead\">这一课解决：一收就炸、一放就没完。把「管设备」改成「一起签一份能执行的约定」。<\/div>\n\n  <div class=\"sec-t\">先看懂<\/div>\n  <p>突然断掉最容易引发硬碰硬，素材里也不主张硬来：先接纳孩子确实想玩，再一起把时间、条件和违约怎么办写清楚，像签一份小合同——事先说好，事后不追加、不临时收回。<\/p>\n  <p>约定的四要素：<strong>什么时候<\/strong>（固定时段，而不是「有空就玩」）、<strong>多久<\/strong>（用计时器，到点由设备提醒，不由家长吼）、<strong>前提<\/strong>（当天该做的那段已完成）、<strong>到点没停怎么办<\/strong>（事先写明的、温和且确定的后果，比如次日时段缩短）。<\/p>\n  <p>如果现在使用时间偏长，<strong>渐进降频<\/strong>比一刀切稳：这周先固定时段，下周再缩短一点，或把「每天」改成「隔天／固定几天」。素材里也提到，孩子真想玩的时候，家长可以陪着一起玩一次——先站到他那一边，规则才听得进去。<\/p>\n  <p>最后一条最容易被忽略、却很管用：<strong>约定的前提也包括家长<\/strong>。孩子做事的那段时间，大人别在旁边刷短视频。<\/p>\n\n  <div class=\"sec-t\">今天做什么（15 分钟）<\/div>\n  <p>不要在你正生气的时候开这个会。挑一个平静的时间，先问孩子：「你觉得一天里放在哪个时段最合适？」把他的答案原样写进约定第一条。<\/p>\n  <p>一起写完四要素，念一遍，双方签名，贴出来。设备上的计时由孩子自己按。第一周只执行「固定时段」这一条，时长先不动。<\/p>\n\n  <div class=\"sec-t\">照着说<\/div>\n  <div class=\"say\">\n    <p class=\"q\">「我不打算一下全停，我们商量一个能长期做下去的办法。」<\/p>\n    <p class=\"q\">「你想放在哪个时段？我记下来。」<\/p>\n    <p class=\"q\">「计时器响了自己停；没停的话，按我们写好的那条来。」<\/p>\n    <p class=\"q\">「这条对我也算数：这段时间我也不看手机。」<\/p>\n  <\/div>\n\n  <div class=\"sec-t\">分龄调整<\/div>\n  <table class=\"ages\">\n    <tr><td class=\"a\">3–6 岁<\/td><td>由家长定时段与时长，用看得见的沙漏或一首歌作结束信号。选项只给「现在看还是饭后看」。<\/td><\/tr>\n    <tr><td class=\"a\">7–9 岁<\/td><td>四要素一起写、一起签，时长以 15–20 分钟一段为宜。到点提醒交给设备，不交给大人。<\/td><\/tr>\n    <tr><td class=\"a\">10–12 岁<\/td><td>让孩子起草约定，家长只谈边界（睡眠、作业前提）。允许他提出自己的违约条款，通常会比大人定的更较真。<\/td><\/tr>\n  <\/table>\n\n  <div class=\"sec-t\">没搞定怎么办<\/div>\n  <div class=\"oops\">\n    <p><b>到点不停，家长临时加码。<\/b>「今天起一周都不许玩」——这类临时加罚会让整份约定失效。只执行事先写好的那一条，不加、不追、不翻旧账。<\/p>\n    <p><b>约定写了，大人先破例。<\/b>忙的时候用设备换安静，之后又要求孩子守约，孩子会学到一个更真实的规则：约定看大人心情。破例了就明说「今天是我们这边没做到，明天照原样」。<\/p>\n    <p><b>孩子完全不肯谈。<\/b>说明过去几次「商量」最后都变成了单方面收紧。这一周先什么都别改，只按现有节奏陪他玩一次，把谈话的位置先修回来。<\/p>\n  <\/div>\n\n  <div class=\"rec\">这周只执行的一条：<span class=\"line\"><\/span>　下周再谈的是：<span class=\"line\"><\/span><\/div>\n<div class=\"notes\"><\/div>"},"l13":{"id":"l13","kind":"lesson","no":13,"title":"第 13 课 孩子说「我不想做」和受挫的时候","lead":"这一课解决：明明只是累了，却被听成偷懒；一讲道理，情绪更大。先接住，再说理。","hint":"","sections":["先看懂","今天做什么（下一次遇到时用，约 3 分钟）","照着说","分龄调整","没搞定怎么办"],"say":["「嗯，今天是不太想开始，我听明白了。」","「先歇一会儿，不够再延长，等下我们再看。」","「有点难受就先难受一会儿，我在这儿。」","「这次没成，跟你好不好没关系，我们看看卡在哪一步。」","「我是第一次做父母，刚才那句我说急了。」"],"plain":"第 13 课 孩子说「我不想做」和受挫的时候 这一课解决：明明只是累了，却被听成偷懒；一讲道理，情绪更大。先接住，再说理。 先看懂 孩子说「不想做」，多数时候是在说「我现在做不动」，不是在宣布以后都不做了。家长如果立刻接「怎么能不想做呢」，对话就从情绪转成了辩论，后面说什么都会顶回来。 素材里有一句很好用的话： 「先哭五分钟，不够再延长。」 它的价值不在幽默，在于明确给了情绪一段时间，也明确告诉孩子这段时间里没人来劝、没人来考他。同一份材料反复强调：先共情、表示站在一起，再找时机提要求；情绪没平复之前不讲道理；不当众摆家长威风；不用反复说教。 受挫时也一样。素材里有个做法值得留：孩子名次回落、被别人超过，家长做的是「疏通」而不是加压——把它放回一个更长的时间里看，不追加「下次一定要稳住」。孩子考得不好回来难过时，反而先肯定他这段时间做过的具体的事。 还有一句家长可以对自己说的： 「我是第一次做父母，请多担待。」 允许自己接不住，比硬撑着接得漂亮更真实。 今天做什么（下一次遇到时用，约 3 分钟） 三步，顺序不要换： ① 停 ——先不谈那件事，蹲下或坐下，与他平视。 ② 接 ——把他刚说的复述一遍，「你是说今天一点都不想开始，对吗」。 ③ 给时间 ——问「要不要先歇一会儿，等下我们再看」，然后真的走开一会儿。 这一课不要求「把孩子劝回去」。目标只是让这句话能被说出来，而不是被顶回去。等情绪过了，再用第 9 课的四问去找卡在哪一步。 照着说 「嗯，今天是不太想开始，我听明白了。」 「先歇一会儿，不够再延长，等下我们再看。」 「有点难受就先难受一会儿，我在这儿。」 「这次没成，跟你好不好没关系，我们看看卡在哪一步。」 「我是第一次做父母，刚才那句我说急了。」 分龄调整 3–6 岁 少说话，多靠近：抱一下、蹲下来、陪坐两分钟。这个年龄讲道理基本用不上。 7–9 岁 复述他的话特别管用。给一个明确的短时段（「先歇到计时器响」），比「等你想好了」清楚。 10–12 岁 别当众安抚，也别追着问。给空间，留一句「想聊的时候叫我」，然后真的退出房间。 没搞定怎么办 接住了，但事情还是没做。 这一课本来就不管「做完」。别在当天补一句「那现在可以开始了吧」，那会让他觉得刚才的接纳是手段。放到第二天，用第 8 课重新排序。 家长自己先爆了。 很正常。事后补一句道歉、说明是自己急了，不解释成「都是为你好」。修复比一次都没崩更重要。 「不想做」变成了每天固定一句。 那就不是情绪，是流程或难度出了问题。退回第 4 课看时长、第 11 课看拆段，别一直停在共情上。 如果孩子长时间情绪低落、明显回避上学、睡眠或食欲持续变化，或说出伤害自己的话，请立刻停止在这套课里找方法，联系学校老师或寻求专业支持。第 16 课会完整列出这条边界。 下一次我先说的那一句：","html":"<h2>第 13 课　孩子说「我不想做」和受挫的时候<\/h2>\n  <div class=\"lead\">这一课解决：明明只是累了，却被听成偷懒；一讲道理，情绪更大。先接住，再说理。<\/div>\n\n  <div class=\"sec-t\">先看懂<\/div>\n  <p>孩子说「不想做」，多数时候是在说「我现在做不动」，不是在宣布以后都不做了。家长如果立刻接「怎么能不想做呢」，对话就从情绪转成了辩论，后面说什么都会顶回来。<\/p>\n  <p>素材里有一句很好用的话：<strong>「先哭五分钟，不够再延长。」<\/strong>它的价值不在幽默，在于明确给了情绪一段时间，也明确告诉孩子这段时间里没人来劝、没人来考他。同一份材料反复强调：先共情、表示站在一起，再找时机提要求；情绪没平复之前不讲道理；不当众摆家长威风；不用反复说教。<\/p>\n  <p>受挫时也一样。素材里有个做法值得留：孩子名次回落、被别人超过，家长做的是「疏通」而不是加压——把它放回一个更长的时间里看，不追加「下次一定要稳住」。孩子考得不好回来难过时，反而先肯定他这段时间做过的具体的事。<\/p>\n  <p>还有一句家长可以对自己说的：<strong>「我是第一次做父母，请多担待。」<\/strong>允许自己接不住，比硬撑着接得漂亮更真实。<\/p>\n\n  <div class=\"sec-t\">今天做什么（下一次遇到时用，约 3 分钟）<\/div>\n  <p>三步，顺序不要换：<strong>① 停<\/strong>——先不谈那件事，蹲下或坐下，与他平视。<strong>② 接<\/strong>——把他刚说的复述一遍，「你是说今天一点都不想开始，对吗」。<strong>③ 给时间<\/strong>——问「要不要先歇一会儿，等下我们再看」，然后真的走开一会儿。<\/p>\n  <p>这一课不要求「把孩子劝回去」。目标只是让这句话能被说出来，而不是被顶回去。等情绪过了，再用第 9 课的四问去找卡在哪一步。<\/p>\n\n  <div class=\"sec-t\">照着说<\/div>\n  <div class=\"say\">\n    <p class=\"q\">「嗯，今天是不太想开始，我听明白了。」<\/p>\n    <p class=\"q\">「先歇一会儿，不够再延长，等下我们再看。」<\/p>\n    <p class=\"q\">「有点难受就先难受一会儿，我在这儿。」<\/p>\n    <p class=\"q\">「这次没成，跟你好不好没关系，我们看看卡在哪一步。」<\/p>\n    <p class=\"q\">「我是第一次做父母，刚才那句我说急了。」<\/p>\n  <\/div>\n\n  <div class=\"sec-t\">分龄调整<\/div>\n  <table class=\"ages\">\n    <tr><td class=\"a\">3–6 岁<\/td><td>少说话，多靠近：抱一下、蹲下来、陪坐两分钟。这个年龄讲道理基本用不上。<\/td><\/tr>\n    <tr><td class=\"a\">7–9 岁<\/td><td>复述他的话特别管用。给一个明确的短时段（「先歇到计时器响」），比「等你想好了」清楚。<\/td><\/tr>\n    <tr><td class=\"a\">10–12 岁<\/td><td>别当众安抚，也别追着问。给空间，留一句「想聊的时候叫我」，然后真的退出房间。<\/td><\/tr>\n  <\/table>\n\n  <div class=\"sec-t\">没搞定怎么办<\/div>\n  <div class=\"oops\">\n    <p><b>接住了，但事情还是没做。<\/b>这一课本来就不管「做完」。别在当天补一句「那现在可以开始了吧」，那会让他觉得刚才的接纳是手段。放到第二天，用第 8 课重新排序。<\/p>\n    <p><b>家长自己先爆了。<\/b>很正常。事后补一句道歉、说明是自己急了，不解释成「都是为你好」。修复比一次都没崩更重要。<\/p>\n    <p><b>「不想做」变成了每天固定一句。<\/b>那就不是情绪，是流程或难度出了问题。退回第 4 课看时长、第 11 课看拆段，别一直停在共情上。<\/p>\n    <p>如果孩子长时间情绪低落、明显回避上学、睡眠或食欲持续变化，或说出伤害自己的话，请立刻停止在这套课里找方法，联系学校老师或寻求专业支持。第 16 课会完整列出这条边界。<\/p>\n  <\/div>\n\n  <div class=\"rec\">下一次我先说的那一句：<span class=\"line\"><\/span><\/div>\n<div class=\"notes\"><\/div>"},"l14":{"id":"l14","kind":"lesson","no":14,"title":"第 14 课 家里几个人管法不一致","lead":"这一课解决：妈妈定了规则，奶奶当场放行；孩子很快学会找最松的那个人。不靠说服全家，靠先定「谁来负责」。","hint":"","sections":["先看懂","今天做什么（大人之间，15 分钟）","照着说","分龄调整","没搞定怎么办"],"say":["对孩子：「这件事问妈妈就行，我们说好的。」","对孩子当场搬出另一位大人时：「等下我们几个商量，先按刚才说的来。」","对老人：「这段我来负责，您歇着；吃饭那块还是听您的。」","对配偶：「我不是说你不对，是这周先只留一种说法，周末我们再调。」"],"plain":"第 14 课 家里几个人管法不一致 这一课解决：妈妈定了规则，奶奶当场放行；孩子很快学会找最松的那个人。不靠说服全家，靠先定「谁来负责」。 先看懂 素材里给出过一条很干脆的组织办法： 一件事只设一位总负责人 ，其余大人当副手或后勤；谁主带谁负责；不在孩子面前出现两种声音。原因不是「谁更对」，而是孩子一旦听到两套说法，就会失去判断，挑对自己最轻松的那套走。 注意这跟「全家必须想法一致」不是一回事。想法不一致很正常，需要一致的是 当着孩子的那一套做法 。分歧放到孩子不在的时候谈，谈的时候多讲具体事实，少讲「你就是太宠了」。 祖辈参与照料时，最容易卡在「当场拆台」。可行的做法不是要求老人改观念，而是把分工写清楚：谁负责哪一段（接送、晚饭、作业、睡前），那一段由谁说了算；涉及观念差异，由自家子女出面沟通，别让配偶去正面碰。 今天做什么（大人之间，15 分钟） 列一张两列的表：左边写本周高频的 4–6 件事项（起床、作业、电子设备、睡前、周末安排、吃饭），右边每件只填 一个名字 。填不出唯一名字的，先划掉，本周不纳入约定。 再加一行共同底线：不在孩子面前否定另一位大人的决定。有不同意见，统一说「这件事等下我们商量一下，先按刚才说的来」。 这张表不需要所有人签字，也不需要全家开会通过。先由最常执行的那位写出来，发给大家看一眼就够了。 照着说 对孩子：「这件事问妈妈就行，我们说好的。」 对孩子当场搬出另一位大人时：「等下我们几个商量，先按刚才说的来。」 对老人：「这段我来负责，您歇着；吃饭那块还是听您的。」 对配偶：「我不是说你不对，是这周先只留一种说法，周末我们再调。」 分龄调整 3–6 岁 分工要更细：谁哄睡、谁喂饭、谁管出门穿衣，各归各。低龄孩子对「换人就换规矩」最敏感。 7–9 岁 把分工表也让孩子看见，他知道该找谁，就不用来回试探了。 10–12 岁 可以让他参与定「哪一块归自己」，大人那一栏只留边界与安全。 没搞定怎么办 老人当面放行，拦不住。 别在孩子面前纠正。事后由自家子女单独说，而且只谈下一次怎么做，不评判这一次。当场那一遍「破例」，就让它过去，不补罚孩子。 夫妻谁也不服谁。 别试图先统一思想，先统一「这一周归谁」。一周之后拿具体发生的事再谈，比讲理念容易得多。 分工表写完没人看。 把范围缩到一件（比如只管睡前那一段），一件事上稳住了，比六件都写在纸上更管用。 这周先只统一的一件事： 负责人：","html":"<h2>第 14 课　家里几个人管法不一致<\/h2>\n  <div class=\"lead\">这一课解决：妈妈定了规则，奶奶当场放行；孩子很快学会找最松的那个人。不靠说服全家，靠先定「谁来负责」。<\/div>\n\n  <div class=\"sec-t\">先看懂<\/div>\n  <p>素材里给出过一条很干脆的组织办法：<strong>一件事只设一位总负责人<\/strong>，其余大人当副手或后勤；谁主带谁负责；不在孩子面前出现两种声音。原因不是「谁更对」，而是孩子一旦听到两套说法，就会失去判断，挑对自己最轻松的那套走。<\/p>\n  <p>注意这跟「全家必须想法一致」不是一回事。想法不一致很正常，需要一致的是<strong>当着孩子的那一套做法<\/strong>。分歧放到孩子不在的时候谈，谈的时候多讲具体事实，少讲「你就是太宠了」。<\/p>\n  <p>祖辈参与照料时，最容易卡在「当场拆台」。可行的做法不是要求老人改观念，而是把分工写清楚：谁负责哪一段（接送、晚饭、作业、睡前），那一段由谁说了算；涉及观念差异，由自家子女出面沟通，别让配偶去正面碰。<\/p>\n\n  <div class=\"sec-t\">今天做什么（大人之间，15 分钟）<\/div>\n  <p>列一张两列的表：左边写本周高频的 4–6 件事项（起床、作业、电子设备、睡前、周末安排、吃饭），右边每件只填<strong>一个名字<\/strong>。填不出唯一名字的，先划掉，本周不纳入约定。<\/p>\n  <p>再加一行共同底线：不在孩子面前否定另一位大人的决定。有不同意见，统一说「这件事等下我们商量一下，先按刚才说的来」。<\/p>\n  <p>这张表不需要所有人签字，也不需要全家开会通过。先由最常执行的那位写出来，发给大家看一眼就够了。<\/p>\n\n  <div class=\"sec-t\">照着说<\/div>\n  <div class=\"say\">\n    <p class=\"q\">对孩子：「这件事问妈妈就行，我们说好的。」<\/p>\n    <p class=\"q\">对孩子当场搬出另一位大人时：「等下我们几个商量，先按刚才说的来。」<\/p>\n    <p class=\"q\">对老人：「这段我来负责，您歇着；吃饭那块还是听您的。」<\/p>\n    <p class=\"q\">对配偶：「我不是说你不对，是这周先只留一种说法，周末我们再调。」<\/p>\n  <\/div>\n\n  <div class=\"sec-t\">分龄调整<\/div>\n  <table class=\"ages\">\n    <tr><td class=\"a\">3–6 岁<\/td><td>分工要更细：谁哄睡、谁喂饭、谁管出门穿衣，各归各。低龄孩子对「换人就换规矩」最敏感。<\/td><\/tr>\n    <tr><td class=\"a\">7–9 岁<\/td><td>把分工表也让孩子看见，他知道该找谁，就不用来回试探了。<\/td><\/tr>\n    <tr><td class=\"a\">10–12 岁<\/td><td>可以让他参与定「哪一块归自己」，大人那一栏只留边界与安全。<\/td><\/tr>\n  <\/table>\n\n  <div class=\"sec-t\">没搞定怎么办<\/div>\n  <div class=\"oops\">\n    <p><b>老人当面放行，拦不住。<\/b>别在孩子面前纠正。事后由自家子女单独说，而且只谈下一次怎么做，不评判这一次。当场那一遍「破例」，就让它过去，不补罚孩子。<\/p>\n    <p><b>夫妻谁也不服谁。<\/b>别试图先统一思想，先统一「这一周归谁」。一周之后拿具体发生的事再谈，比讲理念容易得多。<\/p>\n    <p><b>分工表写完没人看。<\/b>把范围缩到一件（比如只管睡前那一段），一件事上稳住了，比六件都写在纸上更管用。<\/p>\n  <\/div>\n\n  <div class=\"rec\">这周先只统一的一件事：<span class=\"line\"><\/span>　负责人：<span class=\"line\"><\/span><\/div>\n<div class=\"notes\"><\/div>"},"part5":{"id":"part5","kind":"part","no":0,"title":"家长自己的功课","lead":"","hint":"","sections":[],"say":[],"plain":"PART 05 家长自己的功课 最后两课不谈孩子。 一套方法能不能留下来，多半取决于大人那一边能不能持续，以及什么时候该停手。 第 15 课 断断续续，比做不到更消耗 第 16 课 什么时候该停，什么时候该找人帮忙","html":"<div class=\"part-inner\">\n    <div class=\"no\">PART 05<\/div>\n    <div class=\"bar\"><\/div>\n    <h2>家长自己的功课<\/h2>\n    <div class=\"desc\">最后两课不谈孩子。\n    一套方法能不能留下来，多半取决于大人那一边能不能持续，以及什么时候该停手。<\/div>\n    <div class=\"list\">第 15 课　断断续续，比做不到更消耗<br>\n    第 16 课　什么时候该停，什么时候该找人帮忙<\/div>\n  <\/div>"},"l15":{"id":"l15","kind":"lesson","no":15,"title":"第 15 课 断断续续，比做不到更消耗","lead":"这一课解决：方法都懂，做了三天停四天，然后从头再来。问题不在意志力，在起步时铺得太多。","hint":"","sections":["先看懂","今天做什么（5 分钟，每周日重复）","照着说（对自己，也对孩子）","给家长的三条自查","没搞定怎么办"],"say":["「这周就这一件，别的先不动。」","「今天有点累，我们做缩小版，做完就结束。」","「上周断了，这周照原样来，不用补。」","「大方向没变，换个走法就行。」"],"plain":"第 15 课 断断续续，比做不到更消耗 这一课解决：方法都懂，做了三天停四天，然后从头再来。问题不在意志力，在起步时铺得太多。 先看懂 素材里有一句很硬的判断： 规划不难，难的是执行 。同一份材料把常见的失败写得挺准——不是没在做，是断断续续在做：今天下班累了就跳过，明天心情不好推到后天，等下次重新捡起来，前面攒的那点顺手劲儿已经散了，又得从最开始来一遍。 所以这套课从第一页起就只在说一件事： 一次只改一件，做满 7 天再加下一件 。不是保守，是让「持续」这件事有机会发生。一周推进 1–2 课，16 节课大约走 12 周，比一周读完、第二周全忘要快得多。 还有两个容易漏的： 复盘 ——每次做的时候其实都在解决一个小问题，回头看一眼才攒得下来； 计划 B ——大方向没错，但环境变了、身体累了、家里有事，就及时换成那个小一点的版本，不要在走不通的路上硬扛。素材里把这种坚持形容成「每天落地一点点」，累了也做、忙也做，但做的是那个缩小版。 这一点对家长尤其真实：你不需要每天都有耐心。只需要在没耐心的那天，把动作缩到最小，而不是整个取消。 今天做什么（5 分钟，每周日重复） 打开 T6，只填一行：本周推进哪一课、这一周只做哪一个动作。填完把其余 15 课全部盖住。 再写一行「忙/累/情绪不好的那天，缩小版是什么」。比如原本是周日 15 分钟家庭小会，缩小版就是「只问一句：这周最顺的是哪件」。 断了不补、不顺延、不加倍。下个周日按原样继续，那一行空着就空着，T7 专门用来记它。 照着说（对自己，也对孩子） 「这周就这一件，别的先不动。」 「今天有点累，我们做缩小版，做完就结束。」 「上周断了，这周照原样来，不用补。」 「大方向没变，换个走法就行。」 给家长的三条自查 这周我新增了几个动作？超过 1 个，就先收回来。 孩子没做到的那天，我说的是「卡在哪一步」，还是「你怎么又」？ 我自己那一条（第 9 课写的）执行了几天？家长那一边也是这套课的一部分。 没搞定怎么办 连着两三周都没动。 通常不是懒，是选的那一件对现在的家庭来说太大。翻回 T5，挑一个 5 分钟能做完的动作重新开始，别从第 1 课重读一遍。 一断就全盘推翻，想换个全新的方法。 换方法带来的新鲜感只能撑几天。先只改「缩小版」那一行，其余照旧，再稳一周看看。 家里只有你一个人在做。 那也没关系，这套课不要求全员参与。第 14 课的分工表可以先只写你一个人的名字，一块稳住就够了。 这周唯一的一个动作： 忙的那天改成：","html":"<h2>第 15 课　断断续续，比做不到更消耗<\/h2>\n  <div class=\"lead\">这一课解决：方法都懂，做了三天停四天，然后从头再来。问题不在意志力，在起步时铺得太多。<\/div>\n\n  <div class=\"sec-t\">先看懂<\/div>\n  <p>素材里有一句很硬的判断：<strong>规划不难，难的是执行<\/strong>。同一份材料把常见的失败写得挺准——不是没在做，是断断续续在做：今天下班累了就跳过，明天心情不好推到后天，等下次重新捡起来，前面攒的那点顺手劲儿已经散了，又得从最开始来一遍。<\/p>\n  <p>所以这套课从第一页起就只在说一件事：<strong>一次只改一件，做满 7 天再加下一件<\/strong>。不是保守，是让「持续」这件事有机会发生。一周推进 1–2 课，16 节课大约走 12 周，比一周读完、第二周全忘要快得多。<\/p>\n  <p>还有两个容易漏的：<strong>复盘<\/strong>——每次做的时候其实都在解决一个小问题，回头看一眼才攒得下来；<strong>计划 B<\/strong>——大方向没错，但环境变了、身体累了、家里有事，就及时换成那个小一点的版本，不要在走不通的路上硬扛。素材里把这种坚持形容成「每天落地一点点」，累了也做、忙也做，但做的是那个缩小版。<\/p>\n  <p>这一点对家长尤其真实：你不需要每天都有耐心。只需要在没耐心的那天，把动作缩到最小，而不是整个取消。<\/p>\n\n  <div class=\"sec-t\">今天做什么（5 分钟，每周日重复）<\/div>\n  <p>打开 T6，只填一行：本周推进哪一课、这一周只做哪一个动作。填完把其余 15 课全部盖住。<\/p>\n  <p>再写一行「忙/累/情绪不好的那天，缩小版是什么」。比如原本是周日 15 分钟家庭小会，缩小版就是「只问一句：这周最顺的是哪件」。<\/p>\n  <p>断了不补、不顺延、不加倍。下个周日按原样继续，那一行空着就空着，T7 专门用来记它。<\/p>\n\n  <div class=\"sec-t\">照着说（对自己，也对孩子）<\/div>\n  <div class=\"say\">\n    <p class=\"q\">「这周就这一件，别的先不动。」<\/p>\n    <p class=\"q\">「今天有点累，我们做缩小版，做完就结束。」<\/p>\n    <p class=\"q\">「上周断了，这周照原样来，不用补。」<\/p>\n    <p class=\"q\">「大方向没变，换个走法就行。」<\/p>\n  <\/div>\n\n  <div class=\"sec-t\">给家长的三条自查<\/div>\n  <ul>\n    <li>这周我新增了几个动作？超过 1 个，就先收回来。<\/li>\n    <li>孩子没做到的那天，我说的是「卡在哪一步」，还是「你怎么又」？<\/li>\n    <li>我自己那一条（第 9 课写的）执行了几天？家长那一边也是这套课的一部分。<\/li>\n  <\/ul>\n\n  <div class=\"sec-t\">没搞定怎么办<\/div>\n  <div class=\"oops\">\n    <p><b>连着两三周都没动。<\/b>通常不是懒，是选的那一件对现在的家庭来说太大。翻回 T5，挑一个 5 分钟能做完的动作重新开始，别从第 1 课重读一遍。<\/p>\n    <p><b>一断就全盘推翻，想换个全新的方法。<\/b>换方法带来的新鲜感只能撑几天。先只改「缩小版」那一行，其余照旧，再稳一周看看。<\/p>\n    <p><b>家里只有你一个人在做。<\/b>那也没关系，这套课不要求全员参与。第 14 课的分工表可以先只写你一个人的名字，一块稳住就够了。<\/p>\n  <\/div>\n\n  <div class=\"rec\">这周唯一的一个动作：<span class=\"line\"><\/span>　忙的那天改成：<span class=\"line\"><\/span><\/div>\n<div class=\"notes\"><\/div>"},"l16":{"id":"l16","kind":"lesson","no":16,"title":"第 16 课 什么时候该停，什么时候该找人帮忙","lead":"最后一课不教新动作。它讲这套课的边界——哪些事不该由一本手册来处理。","hint":"","sections":["先看懂","这套课不做什么","如果只记住三件事","收尾"],"say":[],"plain":"第 16 课 什么时候该停，什么时候该找人帮忙 最后一课不教新动作。它讲这套课的边界——哪些事不该由一本手册来处理。 先看懂 一套家庭做法能处理的，是日常秩序：谁定规则、谁排顺序、怎么开始、怎么收尾、大人怎么少催一点。它处理不了所有事，也不该被当成万能钥匙。 把下面这几类情况单独留给专业的人，是这套课里最该被执行的一条。 请暂停这套课、先联系学校老师或寻求专业支持的情况： 孩子持续两周以上情绪低落、明显失去兴趣、容易哭或易怒且难以缓解；长期回避上学、一提学校就有强烈反应；睡眠、食欲出现明显且持续的变化；出现伤害自己的言语或行为；亲子冲突升级到动手、或家里有人因此长期处于高压状态。 这些都不是「自驱力不够」，也不该靠加规则、加记录表去解决。先照顾人，再谈方法。 还有一类该停：这套课已经开始让家里更紧了——每天盯表格、每次没做到都要复盘、孩子一看见那张纸就绷着脸。这时把工具页全部收起来，只留第 5 课那一句「今天我说了哪一句」，过两周再看要不要重新拿出来。 这套课不做什么 不评估孩子的能力、性格或发育情况，也不给出任何标签。 不涉及择校、升学、竞赛、提分，也不对任何学校或课程作评价。 不承诺效果，不设「达标线」，完成七八成即可，一条都没做也可以随时重来。 不要求全家统一思想，不要求家长随时保持耐心。 如果只记住三件事 一、 孩子愿意自己动起来，靠的是「我说了算一点、我够得着、我知道先做哪个」。 二、 家长最重要的动作，是及时退出那些孩子已经能自己做的事。 三、 一次只改一件，做满 7 天。断了就照原样继续，不补、不追、不翻旧账。 收尾 回到第 2 课写的那两句话：「我现在的默认动作」和「三个月后希望是」。不用对照打分，也不用判断有没有达成。它们只是让你看见，这几个月里，家里那句最常出现的话，是不是稍微变了一点。 变慢一点也没关系。孩子不是被一次谈话说服的，是被很多个普通的傍晚慢慢带出来的。 三个月后，我希望家里少说的一句是：","html":"<h2>第 16 课　什么时候该停，什么时候该找人帮忙<\/h2>\n  <div class=\"lead\">最后一课不教新动作。它讲这套课的边界——哪些事不该由一本手册来处理。<\/div>\n\n  <div class=\"sec-t\">先看懂<\/div>\n  <p>一套家庭做法能处理的，是日常秩序：谁定规则、谁排顺序、怎么开始、怎么收尾、大人怎么少催一点。它处理不了所有事，也不该被当成万能钥匙。<\/p>\n  <p>把下面这几类情况单独留给专业的人，是这套课里最该被执行的一条。<\/p>\n  <div class=\"box warn\">\n    <p><strong>请暂停这套课、先联系学校老师或寻求专业支持的情况：<\/strong><\/p>\n    <p>孩子持续两周以上情绪低落、明显失去兴趣、容易哭或易怒且难以缓解；长期回避上学、一提学校就有强烈反应；睡眠、食欲出现明显且持续的变化；出现伤害自己的言语或行为；亲子冲突升级到动手、或家里有人因此长期处于高压状态。<\/p>\n    <p>这些都不是「自驱力不够」，也不该靠加规则、加记录表去解决。先照顾人，再谈方法。<\/p>\n  <\/div>\n  <p>还有一类该停：这套课已经开始让家里更紧了——每天盯表格、每次没做到都要复盘、孩子一看见那张纸就绷着脸。这时把工具页全部收起来，只留第 5 课那一句「今天我说了哪一句」，过两周再看要不要重新拿出来。<\/p>\n\n  <div class=\"sec-t\">这套课不做什么<\/div>\n  <ul>\n    <li>不评估孩子的能力、性格或发育情况，也不给出任何标签。<\/li>\n    <li>不涉及择校、升学、竞赛、提分，也不对任何学校或课程作评价。<\/li>\n    <li>不承诺效果，不设「达标线」，完成七八成即可，一条都没做也可以随时重来。<\/li>\n    <li>不要求全家统一思想，不要求家长随时保持耐心。<\/li>\n  <\/ul>\n\n  <div class=\"sec-t\">如果只记住三件事<\/div>\n  <div class=\"box\">\n    <p><strong>一、<\/strong>孩子愿意自己动起来，靠的是「我说了算一点、我够得着、我知道先做哪个」。<\/p>\n    <p><strong>二、<\/strong>家长最重要的动作，是及时退出那些孩子已经能自己做的事。<\/p>\n    <p><strong>三、<\/strong>一次只改一件，做满 7 天。断了就照原样继续，不补、不追、不翻旧账。<\/p>\n  <\/div>\n\n  <div class=\"sec-t\">收尾<\/div>\n  <p>回到第 2 课写的那两句话：「我现在的默认动作」和「三个月后希望是」。不用对照打分，也不用判断有没有达成。它们只是让你看见，这几个月里，家里那句最常出现的话，是不是稍微变了一点。<\/p>\n  <p>变慢一点也没关系。孩子不是被一次谈话说服的，是被很多个普通的傍晚慢慢带出来的。<\/p>\n\n  <div class=\"rec\">三个月后，我希望家里少说的一句是：<span class=\"line\"><\/span><\/div>\n<div class=\"notes\"><\/div>"},"part6":{"id":"part6","kind":"part","no":0,"title":"可打印工具页","lead":"","hint":"","sections":[],"say":[],"plain":"PART 06 可打印工具页 七张表，建议打印出来手写。贴在孩子每天会经过的地方，比存在手机里管用。 表格只是提醒，不是考卷——空着、涂改、只填一半，都可以。 T1 家庭底线约定表 T2 每日小记录 T3 周计划与复盘四问 T4 话术卡 T5 分龄动作速查 T6 12 周推进表 T7「没做到」记录页","html":"<div class=\"part-inner\">\n    <div class=\"no\">PART 06<\/div>\n    <div class=\"bar\"><\/div>\n    <h2>可打印工具页<\/h2>\n    <div class=\"desc\">七张表，建议打印出来手写。贴在孩子每天会经过的地方，比存在手机里管用。<br>\n    表格只是提醒，不是考卷——空着、涂改、只填一半，都可以。<\/div>\n    <div class=\"list\">T1 家庭底线约定表　　T2 每日小记录　　T3 周计划与复盘四问<br>\n    T4 话术卡　　T5 分龄动作速查　　T6 12 周推进表　　T7「没做到」记录页<\/div>\n  <\/div>"},"t1":{"id":"t1","kind":"tool","no":1,"title":"T1 家庭底线约定表","lead":"","hint":"配合第 3 课。建议 3–5 条，孩子参与写、家长守住边界、双方签名。写清「做到什么算完成」和「这版用到哪天」。","sections":[],"say":[],"plain":"T1 家庭底线约定表 配合第 3 课。建议 3–5 条，孩子参与写、家长守住边界、双方签名。写清「做到什么算完成」和「这版用到哪天」。 序号 我们约定的事（做到什么样算完成） 谁负责 这版用到 每天打勾 1 □□□□□□□ 2 □□□□□□□ 3 □□□□□□□ 4 □□□□□□□ 5 □□□□□□□ 大人守住的那几条 做到了，我们一起做 没做到，按约定来 孩子签名（或画个记号）： 家长签名： 日期： 小提醒：奖励优先用「一起做的事」，不必用钱；不把分数、名次写进来；后果事先写、当场兑现、不追加、不翻旧账。贴出来三天没人看，就擦到只剩 2 条，重新签一次。","html":"<h2>T1　家庭底线约定表<\/h2>\n  <div class=\"hint\">配合第 3 课。建议 3–5 条，孩子参与写、家长守住边界、双方签名。写清「做到什么算完成」和「这版用到哪天」。<\/div>\n  <table class=\"grid\">\n    <tr><th style=\"width:10mm\">序号<\/th><th>我们约定的事（做到什么样算完成）<\/th><th style=\"width:24mm\">谁负责<\/th><th style=\"width:26mm\">这版用到<\/th><th style=\"width:30mm\">每天打勾<\/th><\/tr>\n    <tr><td class=\"c\">1<\/td><td class=\"fill\"><\/td><td><\/td><td><\/td><td>□□□□□□□<\/td><\/tr>\n    <tr><td class=\"c\">2<\/td><td class=\"fill\"><\/td><td><\/td><td><\/td><td>□□□□□□□<\/td><\/tr>\n    <tr><td class=\"c\">3<\/td><td class=\"fill\"><\/td><td><\/td><td><\/td><td>□□□□□□□<\/td><\/tr>\n    <tr><td class=\"c\">4<\/td><td class=\"fill\"><\/td><td><\/td><td><\/td><td>□□□□□□□<\/td><\/tr>\n    <tr><td class=\"c\">5<\/td><td class=\"fill\"><\/td><td><\/td><td><\/td><td>□□□□□□□<\/td><\/tr>\n  <\/table>\n  <table class=\"grid\">\n    <tr><th style=\"width:34mm\">大人守住的那几条<\/th><td class=\"fill\"><\/td><\/tr>\n    <tr><th>做到了，我们一起做<\/th><td class=\"fill\"><\/td><\/tr>\n    <tr><th>没做到，按约定来<\/th><td class=\"fill\"><\/td><\/tr>\n  <\/table>\n  <div class=\"sig\">孩子签名（或画个记号）：<span><\/span>　　家长签名：<span><\/span>　　日期：<span><\/span><\/div>\n  <p class=\"tiny\" style=\"margin-top:6mm\">小提醒：奖励优先用「一起做的事」，不必用钱；不把分数、名次写进来；后果事先写、当场兑现、不追加、不翻旧账。贴出来三天没人看，就擦到只剩 2 条，重新签一次。<\/p>"},"t2":{"id":"t2","kind":"tool","no":2,"title":"T2 每日小记录","lead":"","hint":"配合第 4、5、11 课。每天一行，只记两件事：那一件做到了没有，以及我说的那一句。手写，别打成电子表格。","sections":[],"say":[],"plain":"T2 每日小记录 配合第 4、5、11 课。每天一行，只记两件事：那一件做到了没有，以及我说的那一句。手写，别打成电子表格。 日期 今天唯一的一件事 做到了吗 我今天说的那一句 孩子的反应 □ 是 □ 否 □ 是 □ 否 □ 是 □ 否 □ 是 □ 否 □ 是 □ 否 □ 是 □ 否 □ 是 □ 否 这周最顺的一件 卡住的是哪一步 下周只改一个什么 找不到可写的那一句时，把标准降到「今天有没有哪一刻，他比昨天少磨蹭了一点点」。真找不到，就写「今天挺不容易的」，不用硬编。","html":"<h2>T2　每日小记录<\/h2>\n  <div class=\"hint\">配合第 4、5、11 课。每天一行，只记两件事：那一件做到了没有，以及我说的那一句。手写，别打成电子表格。<\/div>\n  <table class=\"grid\">\n    <tr><th style=\"width:20mm\">日期<\/th><th style=\"width:44mm\">今天唯一的一件事<\/th><th style=\"width:20mm\">做到了吗<\/th><th>我今天说的那一句<\/th><th style=\"width:30mm\">孩子的反应<\/th><\/tr>\n    <tr><td><\/td><td><\/td><td class=\"c\">□ 是　□ 否<\/td><td><\/td><td><\/td><\/tr>\n    <tr><td><\/td><td><\/td><td class=\"c\">□ 是　□ 否<\/td><td><\/td><td><\/td><\/tr>\n    <tr><td><\/td><td><\/td><td class=\"c\">□ 是　□ 否<\/td><td><\/td><td><\/td><\/tr>\n    <tr><td><\/td><td><\/td><td class=\"c\">□ 是　□ 否<\/td><td><\/td><td><\/td><\/tr>\n    <tr><td><\/td><td><\/td><td class=\"c\">□ 是　□ 否<\/td><td><\/td><td><\/td><\/tr>\n    <tr><td><\/td><td><\/td><td class=\"c\">□ 是　□ 否<\/td><td><\/td><td><\/td><\/tr>\n    <tr><td><\/td><td><\/td><td class=\"c\">□ 是　□ 否<\/td><td><\/td><td><\/td><\/tr>\n  <\/table>\n  <table class=\"grid\">\n    <tr><th style=\"width:44mm\">这周最顺的一件<\/th><td class=\"fill\"><\/td><\/tr>\n    <tr><th>卡住的是哪一步<\/th><td class=\"fill\"><\/td><\/tr>\n    <tr><th>下周只改一个什么<\/th><td class=\"fill\"><\/td><\/tr>\n  <\/table>\n  <p class=\"tiny\" style=\"margin-top:6mm\">找不到可写的那一句时，把标准降到「今天有没有哪一刻，他比昨天少磨蹭了一点点」。真找不到，就写「今天挺不容易的」，不用硬编。<\/p>"},"t3":{"id":"t3","kind":"tool","no":3,"title":"T3 周计划与复盘四问","lead":"","hint":"配合第 9 课。周日 15 分钟：前 5 分钟写计划，中间 5 分钟家长也写一条，后 5 分钟照着四问念一遍。念完就停。","sections":[],"say":[],"plain":"T3 周计划与复盘四问 配合第 9 课。周日 15 分钟：前 5 分钟写计划，中间 5 分钟家长也写一条，后 5 分钟照着四问念一遍。念完就停。 本周想做成的 2–3 件（写成能打勾的样子） 1 2 3 这周不做什么 计划 B（很累那天） 家长自己那一条 周日复盘 · 四问（顺序不变，家长只记录） ① 这周你原本想做哪几件？ ② 做成了几件？ ③ 没做成的是卡在哪一步？ ④ 做得最顺的是哪一件？下周还这么来吗？ 一个信号：如果复盘时家长说话超过一半，就是又在数落了。把四问照着念，念完停。没做成的事写进 T7，不在当场解决。","html":"<h2>T3　周计划与复盘四问<\/h2>\n  <div class=\"hint\">配合第 9 课。周日 15 分钟：前 5 分钟写计划，中间 5 分钟家长也写一条，后 5 分钟照着四问念一遍。念完就停。<\/div>\n  <table class=\"grid\">\n    <tr><th colspan=\"3\">本周想做成的 2–3 件（写成能打勾的样子）<\/th><\/tr>\n    <tr><td class=\"c\" style=\"width:12mm\">1<\/td><td colspan=\"2\" class=\"fill\"><\/td><\/tr>\n    <tr><td class=\"c\">2<\/td><td colspan=\"2\" class=\"fill\"><\/td><\/tr>\n    <tr><td class=\"c\">3<\/td><td colspan=\"2\" class=\"fill\"><\/td><\/tr>\n    <tr><th style=\"width:34mm\">这周不做什么<\/th><td colspan=\"2\" class=\"fill\"><\/td><\/tr>\n    <tr><th>计划 B（很累那天）<\/th><td colspan=\"2\" class=\"fill\"><\/td><\/tr>\n    <tr><th>家长自己那一条<\/th><td colspan=\"2\" class=\"fill\"><\/td><\/tr>\n  <\/table>\n  <table class=\"grid\">\n    <tr><th colspan=\"2\">周日复盘 · 四问（顺序不变，家长只记录）<\/th><\/tr>\n    <tr><td class=\"c\" style=\"width:12mm\">①<\/td><td>这周你原本想做哪几件？<div class=\"blank\"><\/div><\/td><\/tr>\n    <tr><td class=\"c\">②<\/td><td>做成了几件？<div class=\"blank\"><\/div><\/td><\/tr>\n    <tr><td class=\"c\">③<\/td><td>没做成的是卡在哪一步？<div class=\"blank\"><\/div><\/td><\/tr>\n    <tr><td class=\"c\">④<\/td><td>做得最顺的是哪一件？下周还这么来吗？<div class=\"blank\"><\/div><\/td><\/tr>\n  <\/table>\n  <p class=\"tiny\" style=\"margin-top:5mm\">一个信号：如果复盘时家长说话超过一半，就是又在数落了。把四问照着念，念完停。没做成的事写进 T7，不在当场解决。<\/p>"},"t4":{"id":"t4","kind":"tool","no":4,"title":"T4 话术卡","lead":"","hint":"配合全书。可以沿虚线剪开，挑 3–4 张贴冰箱或书桌边。话术不是咒语，说的时候要真的按那句话做。","sections":[],"say":[],"plain":"T4 话术卡 配合全书。可以沿虚线剪开，挑 3–4 张贴冰箱或书桌边。话术不是咒语，说的时候要真的按那句话做。 给选择的时候 忍住不插手的时候 「今天这两件事，你想先做哪一件？」 给两个选项，不是「你看着办」 「你定，我按你定的来。」 选完别当场改回去 开始一件事的时候 想催的时候 「今天只先做这一科，做完这一段就停一下。」 拆小，比催快有用 「需要我帮忙就说一声，我在旁边。」 把提醒咽回去一次 看见进步的时候 孩子不想做的时候 「昨天玩了 30 分钟，今天 15 分钟你就自己停了。」 只说动作，不接「但是」 「嗯，今天是不太想开始，我听明白了。」 先复述，不辩论 给情绪一点时间 卡住的时候 「先歇一会儿，不够再延长，等下我们再看。」 给完时间真的走开 「卡住的先跳过，把能做的做完再回头。」 顺序比速度重要 没做成的时候 排名次、被比较的时候 「这次没成，跟你好不好没关系，看看卡在哪一步。」 问步骤，不问态度 「这次没顺，我们先歇一会儿，等下再看。」 疏通，不加压 家长自己急了 一周只改一件 「我是第一次做父母，刚才那句我说急了。」 修复比一次都没崩更重要 「这周就这一件，别的先不动。」 做满 7 天再加下一件","html":"<h2>T4　话术卡<\/h2>\n  <div class=\"hint\">配合全书。可以沿虚线剪开，挑 3–4 张贴冰箱或书桌边。话术不是咒语，说的时候要真的按那句话做。<\/div>\n  <table class=\"grid\" style=\"font-size:9pt\">\n    <tr><th style=\"width:50%\">给选择的时候<\/th><th>忍住不插手的时候<\/th><\/tr>\n    <tr><td class=\"fill\">「今天这两件事，你想先做哪一件？」<br><span class=\"tiny\">给两个选项，不是「你看着办」<\/span><\/td><td class=\"fill\">「你定，我按你定的来。」<br><span class=\"tiny\">选完别当场改回去<\/span><\/td><\/tr>\n    <tr><th>开始一件事的时候<\/th><th>想催的时候<\/th><\/tr>\n    <tr><td class=\"fill\">「今天只先做这一科，做完这一段就停一下。」<br><span class=\"tiny\">拆小，比催快有用<\/span><\/td><td class=\"fill\">「需要我帮忙就说一声，我在旁边。」<br><span class=\"tiny\">把提醒咽回去一次<\/span><\/td><\/tr>\n    <tr><th>看见进步的时候<\/th><th>孩子不想做的时候<\/th><\/tr>\n    <tr><td class=\"fill\">「昨天玩了 30 分钟，今天 15 分钟你就自己停了。」<br><span class=\"tiny\">只说动作，不接「但是」<\/span><\/td><td class=\"fill\">「嗯，今天是不太想开始，我听明白了。」<br><span class=\"tiny\">先复述，不辩论<\/span><\/td><\/tr>\n    <tr><th>给情绪一点时间<\/th><th>卡住的时候<\/th><\/tr>\n    <tr><td class=\"fill\">「先歇一会儿，不够再延长，等下我们再看。」<br><span class=\"tiny\">给完时间真的走开<\/span><\/td><td class=\"fill\">「卡住的先跳过，把能做的做完再回头。」<br><span class=\"tiny\">顺序比速度重要<\/span><\/td><\/tr>\n    <tr><th>没做成的时候<\/th><th>排名次、被比较的时候<\/th><\/tr>\n    <tr><td class=\"fill\">「这次没成，跟你好不好没关系，看看卡在哪一步。」<br><span class=\"tiny\">问步骤，不问态度<\/span><\/td><td class=\"fill\">「这次没顺，我们先歇一会儿，等下再看。」<br><span class=\"tiny\">疏通，不加压<\/span><\/td><\/tr>\n    <tr><th>家长自己急了<\/th><th>一周只改一件<\/th><\/tr>\n    <tr><td class=\"fill\">「我是第一次做父母，刚才那句我说急了。」<br><span class=\"tiny\">修复比一次都没崩更重要<\/span><\/td><td class=\"fill\">「这周就这一件，别的先不动。」<br><span class=\"tiny\">做满 7 天再加下一件<\/span><\/td><\/tr>\n  <\/table>"},"t5":{"id":"t5","kind":"tool","no":5,"title":"T5 分龄动作速查","lead":"","hint":"一页看全：同一件事，三段年龄做法不同。看孩子实际能承担多少，比看生日更准。","sections":[],"say":[],"plain":"T5 分龄动作速查 一页看全：同一件事，三段年龄做法不同。看孩子实际能承担多少，比看生日更准。 动作 3–6 岁 · 种子期 7–9 岁 · 搭架子 10–12 岁 · 坐副驾 有限选择 2 个选项，只放顺序与样式 放「先做哪件」「做多久」，守住结束时间 把「什么时候开始」也交出去，只留截止时间 家庭约定 最多 3 条，配图，贴圈代替写字 3–5 条，孩子自己抄一遍，当天兑现 孩子主持，加一条「家长不做什么」，双方签 时间看得见 图片作息条，沙漏或一首歌 课程表 → 周末上午／下午两格 整段晚上自己排，共同守住睡觉时间 专注时长 5–10 分钟起步就很好 15 分钟起步，稳 7 天再加 5 分钟 自己估时长，估错不纠正，周日再说 正反馈 当场、蹲下、短句、配拥抱 把「比昨天少一点」说成看得见的数 私下、简短、就事论事，说完不加要求 见世面 只问「看到了什么」，十几分钟就收 三个追问，答不上来不追 加一层「代价」：时间、钱、放弃了什么 掌控感 本课基本不适用，别硬放 只放一件小事，边界写下来贴桌上 放一整段，家长这周不主动问 次序感 两格「先做／后做」，2–3 件 三格，每格不超过 2 件 周五排下周一，自己估哪件更久 周计划复盘 不做。改成睡前一句话，家长代笔 1–2 件，画图打勾，四问只问三句 四问全用，孩子主持，家长当记录员 允许试错 范围极小，安全作息全由大人兜住 忘带水杯、忘了装本子这类小事 自己排的时间没留住、周末安排冲突 作业／流程 换成收拾玩具、睡前流程，家长不代做 陪写为主，固定位置与顺序，不额外加量 拆段、估时间交给他，家长别坐旁边 电子产品 大人定时段与时长，用看得见的结束信号 四要素一起写一起签，计时交给设备 孩子起草约定，家长只谈睡眠与前提 情绪接住 少说话，抱一下、陪坐两分钟 复述他的话，给一个明确的短时段 别当众安抚，留一句话后退出房间 家庭分工 分工更细：哄睡／喂饭／出门各归各 把分工表让孩子看见 让他参与定「哪一块归自己」 孩子 10 岁但从没自己排过事，请先按 7–9 岁那一列补两周；7 岁已经很会安排，也不必硬按回第一列。","html":"<h2>T5　分龄动作速查<\/h2>\n  <div class=\"hint\">一页看全：同一件事，三段年龄做法不同。看孩子实际能承担多少，比看生日更准。<\/div>\n  <table class=\"grid\" style=\"font-size:8.6pt; line-height:1.55\">\n    <tr><th style=\"width:30mm\">动作<\/th><th>3–6 岁 · 种子期<\/th><th>7–9 岁 · 搭架子<\/th><th>10–12 岁 · 坐副驾<\/th><\/tr>\n    <tr><td><b>有限选择<\/b><\/td><td>2 个选项，只放顺序与样式<\/td><td>放「先做哪件」「做多久」，守住结束时间<\/td><td>把「什么时候开始」也交出去，只留截止时间<\/td><\/tr>\n    <tr><td><b>家庭约定<\/b><\/td><td>最多 3 条，配图，贴圈代替写字<\/td><td>3–5 条，孩子自己抄一遍，当天兑现<\/td><td>孩子主持，加一条「家长不做什么」，双方签<\/td><\/tr>\n    <tr><td><b>时间看得见<\/b><\/td><td>图片作息条，沙漏或一首歌<\/td><td>课程表 → 周末上午／下午两格<\/td><td>整段晚上自己排，共同守住睡觉时间<\/td><\/tr>\n    <tr><td><b>专注时长<\/b><\/td><td>5–10 分钟起步就很好<\/td><td>15 分钟起步，稳 7 天再加 5 分钟<\/td><td>自己估时长，估错不纠正，周日再说<\/td><\/tr>\n    <tr><td><b>正反馈<\/b><\/td><td>当场、蹲下、短句、配拥抱<\/td><td>把「比昨天少一点」说成看得见的数<\/td><td>私下、简短、就事论事，说完不加要求<\/td><\/tr>\n    <tr><td><b>见世面<\/b><\/td><td>只问「看到了什么」，十几分钟就收<\/td><td>三个追问，答不上来不追<\/td><td>加一层「代价」：时间、钱、放弃了什么<\/td><\/tr>\n    <tr><td><b>掌控感<\/b><\/td><td>本课基本不适用，别硬放<\/td><td>只放一件小事，边界写下来贴桌上<\/td><td>放一整段，家长这周不主动问<\/td><\/tr>\n    <tr><td><b>次序感<\/b><\/td><td>两格「先做／后做」，2–3 件<\/td><td>三格，每格不超过 2 件<\/td><td>周五排下周一，自己估哪件更久<\/td><\/tr>\n    <tr><td><b>周计划复盘<\/b><\/td><td>不做。改成睡前一句话，家长代笔<\/td><td>1–2 件，画图打勾，四问只问三句<\/td><td>四问全用，孩子主持，家长当记录员<\/td><\/tr>\n    <tr><td><b>允许试错<\/b><\/td><td>范围极小，安全作息全由大人兜住<\/td><td>忘带水杯、忘了装本子这类小事<\/td><td>自己排的时间没留住、周末安排冲突<\/td><\/tr>\n    <tr><td><b>作业／流程<\/b><\/td><td>换成收拾玩具、睡前流程，家长不代做<\/td><td>陪写为主，固定位置与顺序，不额外加量<\/td><td>拆段、估时间交给他，家长别坐旁边<\/td><\/tr>\n    <tr><td><b>电子产品<\/b><\/td><td>大人定时段与时长，用看得见的结束信号<\/td><td>四要素一起写一起签，计时交给设备<\/td><td>孩子起草约定，家长只谈睡眠与前提<\/td><\/tr>\n    <tr><td><b>情绪接住<\/b><\/td><td>少说话，抱一下、陪坐两分钟<\/td><td>复述他的话，给一个明确的短时段<\/td><td>别当众安抚，留一句话后退出房间<\/td><\/tr>\n    <tr><td><b>家庭分工<\/b><\/td><td>分工更细：哄睡／喂饭／出门各归各<\/td><td>把分工表让孩子看见<\/td><td>让他参与定「哪一块归自己」<\/td><\/tr>\n  <\/table>\n  <p class=\"tiny\" style=\"margin-top:4mm\">孩子 10 岁但从没自己排过事，请先按 7–9 岁那一列补两周；7 岁已经很会安排，也不必硬按回第一列。<\/p>"},"t6":{"id":"t6","kind":"tool","no":6,"title":"T6 12 周推进表","lead":"","hint":"配合第 15 课。每周只填一行，填完把其余的盖住。断了不补、不顺延、不加倍，下周照原样继续。","sections":[],"say":[],"plain":"T6 12 周推进表 配合第 15 课。每周只填一行，填完把其余的盖住。断了不补、不顺延、不加倍，下周照原样继续。 周次 推进哪一课 这周唯一的一个动作 忙/累那天的缩小版 稳住了吗 1 □ 2 □ 3 □ 4 □ 5 □ 6 □ 7 □ 8 □ 9 □ 10 □ 11 □ 12 □ 三个月后，家里少说的一句 现在最常替孩子做的决定 自查：这周我新增了几个动作？超过 1 个就先收回来。孩子没做到那天，我说的是「卡在哪一步」还是「你怎么又」？我自己那一条执行了几天？","html":"<h2>T6　12 周推进表<\/h2>\n  <div class=\"hint\">配合第 15 课。每周只填一行，填完把其余的盖住。断了不补、不顺延、不加倍，下周照原样继续。<\/div>\n  <table class=\"grid compact\" style=\"font-size:9pt\">\n    <tr><th style=\"width:14mm\">周次<\/th><th style=\"width:30mm\">推进哪一课<\/th><th>这周唯一的一个动作<\/th><th style=\"width:28mm\">忙/累那天的缩小版<\/th><th style=\"width:18mm\">稳住了吗<\/th><\/tr>\n    <tr><td class=\"c\">1<\/td><td><\/td><td><\/td><td><\/td><td class=\"c\">□<\/td><\/tr>\n    <tr><td class=\"c\">2<\/td><td><\/td><td><\/td><td><\/td><td class=\"c\">□<\/td><\/tr>\n    <tr><td class=\"c\">3<\/td><td><\/td><td><\/td><td><\/td><td class=\"c\">□<\/td><\/tr>\n    <tr><td class=\"c\">4<\/td><td><\/td><td><\/td><td><\/td><td class=\"c\">□<\/td><\/tr>\n    <tr><td class=\"c\">5<\/td><td><\/td><td><\/td><td><\/td><td class=\"c\">□<\/td><\/tr>\n    <tr><td class=\"c\">6<\/td><td><\/td><td><\/td><td><\/td><td class=\"c\">□<\/td><\/tr>\n    <tr><td class=\"c\">7<\/td><td><\/td><td><\/td><td><\/td><td class=\"c\">□<\/td><\/tr>\n    <tr><td class=\"c\">8<\/td><td><\/td><td><\/td><td><\/td><td class=\"c\">□<\/td><\/tr>\n    <tr><td class=\"c\">9<\/td><td><\/td><td><\/td><td><\/td><td class=\"c\">□<\/td><\/tr>\n    <tr><td class=\"c\">10<\/td><td><\/td><td><\/td><td><\/td><td class=\"c\">□<\/td><\/tr>\n    <tr><td class=\"c\">11<\/td><td><\/td><td><\/td><td><\/td><td class=\"c\">□<\/td><\/tr>\n    <tr><td class=\"c\">12<\/td><td><\/td><td><\/td><td><\/td><td class=\"c\">□<\/td><\/tr>\n  <\/table>\n  <table class=\"grid compact\">\n    <tr><th style=\"width:44mm\">三个月后，家里少说的一句<\/th><td class=\"fill\"><\/td><\/tr>\n    <tr><th>现在最常替孩子做的决定<\/th><td class=\"fill\"><\/td><\/tr>\n  <\/table>\n  <p class=\"tiny\" style=\"margin-top:5mm\">自查：这周我新增了几个动作？超过 1 个就先收回来。孩子没做到那天，我说的是「卡在哪一步」还是「你怎么又」？我自己那一条执行了几天？<\/p>"},"t7":{"id":"t7","kind":"tool","no":7,"title":"T7 「没做到」记录页","lead":"","hint":"配合第 10、15 课。上半页用来划红线，下半页记录没做到的那些天。 这一页不用来追责。","sections":[],"say":[],"plain":"T7 「没做到」记录页 配合第 10、15 课。上半页用来划红线，下半页记录没做到的那些天。 这一页不用来追责。 最近三次「差点冲上去」的场景，先分类再谈忍住 序号 当时发生了什么 可承担 / 必须介入 1 □ 可承担 □ 介入 2 □ 可承担 □ 介入 3 □ 可承担 □ 介入 必须立刻介入：人身安全、交通与用火用电、健康与用药、明显超出承受能力的情绪、涉及他人财物或规则、无法挽回的安排。拿不准时一律按「介入」。 日期 原计划 实际 卡在哪一步 / 下次改一个什么 断了不补、不顺延、不加倍。空着的那一行就让它空着——记录是为了看清卡在哪一步，不是为了算这个月少做了几天。","html":"<h2>T7　「没做到」记录页<\/h2>\n  <div class=\"hint\">配合第 10、15 课。上半页用来划红线，下半页记录没做到的那些天。<strong>这一页不用来追责。<\/strong><\/div>\n  <table class=\"grid\">\n    <tr><th colspan=\"3\">最近三次「差点冲上去」的场景，先分类再谈忍住<\/th><\/tr>\n    <tr><th style=\"width:12mm\">序号<\/th><th>当时发生了什么<\/th><th style=\"width:34mm\">可承担 / 必须介入<\/th><\/tr>\n    <tr><td class=\"c\">1<\/td><td class=\"fill\"><\/td><td class=\"c\">□ 可承担　□ 介入<\/td><\/tr>\n    <tr><td class=\"c\">2<\/td><td class=\"fill\"><\/td><td class=\"c\">□ 可承担　□ 介入<\/td><\/tr>\n    <tr><td class=\"c\">3<\/td><td class=\"fill\"><\/td><td class=\"c\">□ 可承担　□ 介入<\/td><\/tr>\n  <\/table>\n  <p class=\"tiny\">必须立刻介入：人身安全、交通与用火用电、健康与用药、明显超出承受能力的情绪、涉及他人财物或规则、无法挽回的安排。拿不准时一律按「介入」。<\/p>\n  <table class=\"grid\" style=\"margin-top:5mm\">\n    <tr><th style=\"width:20mm\">日期<\/th><th style=\"width:38mm\">原计划<\/th><th style=\"width:38mm\">实际<\/th><th>卡在哪一步 / 下次改一个什么<\/th><\/tr>\n    <tr><td><\/td><td><\/td><td><\/td><td><\/td><\/tr>\n    <tr><td><\/td><td><\/td><td><\/td><td><\/td><\/tr>\n    <tr><td><\/td><td><\/td><td><\/td><td><\/td><\/tr>\n    <tr><td><\/td><td><\/td><td><\/td><td><\/td><\/tr>\n    <tr><td><\/td><td><\/td><td><\/td><td><\/td><\/tr>\n  <\/table>\n  <p class=\"tiny\" style=\"margin-top:5mm\">断了不补、不顺延、不加倍。空着的那一行就让它空着——记录是为了看清卡在哪一步，不是为了算这个月少做了几天。<\/p>"},"end":{"id":"end","kind":"reading","no":0,"title":"写在使用之后","lead":"","hint":"","sections":[],"say":[],"plain":"写在使用之后 这套课从头到尾只做了一件事：把「催孩子」换成「搭环境」。三根柱子、四个基础动作、四步交还掌控感、几个每天都来的场景，加上家长自己那一点持续。 它不会让哪一个傍晚突然变轻松。更常见的是，某天你发现自己那句「快点」到了嘴边又咽回去了，孩子自己把书包挪到了门口——就这一点点，是很多个普通日子攒出来的。 按自家情况取用就好。孩子各不相同，表里的内容随便改，完成七八成足够，一条都没做也可以随时重来。 关于本册 本册依据一套育儿分享材料重新编写，编写时已整体剔除其中的升学排名导向、成绩指标、效果比较、无出处的数据与医疗化表述，并做了匿名化处理。材料中的场景仅用于说明做法，不代表普遍效果，也不是编写者的亲身经历。 本册为家庭教育做法的整理，不是心理评估、发育诊断或医疗建议，不替代学校教育与专业支持，也不承诺任何学习结果、成绩变化或行为改变。 使用许可： 仅限购买者本人家庭使用。请勿转发、公开传播、上传至公共平台、二次销售，或用于任何形式的商业培训与转授。工具页可自行打印，供本家庭反复填写。 如遇内容或文件问题，请通过购买渠道反馈；本册不设站外联系方式，也不在册内引导任何站外交易。 把「要我做」变成「我要做」 · 3–12 岁家庭自驱力实操课 · 家长版 / 12 周行动手册 16 节课 · 7 张可打印工具表 · 第一版","html":"<h2>写在使用之后<\/h2>\n  <p>这套课从头到尾只做了一件事：把「催孩子」换成「搭环境」。三根柱子、四个基础动作、四步交还掌控感、几个每天都来的场景，加上家长自己那一点持续。<\/p>\n  <p>它不会让哪一个傍晚突然变轻松。更常见的是，某天你发现自己那句「快点」到了嘴边又咽回去了，孩子自己把书包挪到了门口——就这一点点，是很多个普通日子攒出来的。<\/p>\n  <p>按自家情况取用就好。孩子各不相同，表里的内容随便改，完成七八成足够，一条都没做也可以随时重来。<\/p>\n\n  <div class=\"box\" style=\"margin-top:9mm\">\n    <p><strong>关于本册<\/strong><\/p>\n    <p>本册依据一套育儿分享材料重新编写，编写时已整体剔除其中的升学排名导向、成绩指标、效果比较、无出处的数据与医疗化表述，并做了匿名化处理。材料中的场景仅用于说明做法，不代表普遍效果，也不是编写者的亲身经历。<\/p>\n    <p>本册为家庭教育做法的整理，不是心理评估、发育诊断或医疗建议，不替代学校教育与专业支持，也不承诺任何学习结果、成绩变化或行为改变。<\/p>\n    <p><strong>使用许可：<\/strong>仅限购买者本人家庭使用。请勿转发、公开传播、上传至公共平台、二次销售，或用于任何形式的商业培训与转授。工具页可自行打印，供本家庭反复填写。<\/p>\n    <p>如遇内容或文件问题，请通过购买渠道反馈；本册不设站外联系方式，也不在册内引导任何站外交易。<\/p>\n  <\/div>\n\n  <div style=\"margin-top:14mm; border-top:1px solid var(--line); padding-top:5mm\" class=\"tiny\">\n    把「要我做」变成「我要做」　·　3–12 岁家庭自驱力实操课　·　家长版 / 12 周行动手册<br>\n    16 节课 · 7 张可打印工具表 · 第一版\n  <\/div>"}},"order":["intro","notice","part1","l1","l2","part2","l3","l4","l5","l6","part3","l7","l8","l9","l10","part4","l11","l12","l13","l14","part5","l15","l16","part6","t1","t2","t3","t4","t5","t6","t7","end"],"groups":[{"name":"先把地基弄清楚","id":"part1","items":["l1","l2"]},{"name":"四个基础动作","id":"part2","items":["l3","l4","l5","l6"]},{"name":"把掌控感一点点交回去","id":"part3","items":["l7","l8","l9","l10"]},{"name":"四个高频场景","id":"part4","items":["l11","l12","l13","l14"]},{"name":"家长自己的功课","id":"part5","items":["l15","l16"]},{"name":"可打印工具页","id":"part6","items":["t1","t2","t3","t4","t5","t6","t7"]}],"lessons":["l1","l2","l3","l4","l5","l6","l7","l8","l9","l10","l11","l12","l13","l14","l15","l16"],"tools":["t1","t2","t3","t4","t5","t6","t7"],"parts":["part1","part2","part3","part4","part5","part6"],"searchIndex":[{"id":"intro","title":"开始之前","kind":"reading","plain":"开始之前 先花 5 分钟确认这套课适不适合你家，比直接翻到第一课更省时间。 这份课是给谁的 家里有 3–12 岁的孩子，早上要催起床、晚上要催作业、出门要催收拾，一天说很多遍「快点」。 试过奖励贴纸、打卡表、积分兑换，头两周有用，之后就悄悄回到原样。 想让孩子自己安排，又担心一放手就彻底散架；家里几个人管法不一致，孩子会挑最松的那一个。 你愿意用几周时间，慢慢把「催」换成「搭」，而不是找一个更快的催促办法。 这份课不是给谁的 想要几天内让孩子变自觉的速效方案。 这套课给不了。习惯的改动以周为单位，第 15 课专门讲「断断续续」这件事。 孩子已经出现持续的情绪低落、长期回避上学、睡眠或食欲明显变化、伤害自己的言语。 请先联系学校老师或寻求专业支持，本册不替代评估与帮助，也不处理这类情况。 想找择校、升学路径、竞赛、提分、学区信息。 本册完全不涉及，也不评价任何学校与课程。 你会拿到什么 16 节课 ：每节读 15–20 分钟，配一个 10 分钟内能做完的家庭动作。 三段分龄调整 ：同一件事，3–6 岁、7–9 岁、10–12 岁做法不一样，逐课写明。 「照着说」话术 ：可直接念出口的句子，不用自己临场组织语言。 7 张可打印工具表 ：约定表、周计划、复盘表、话术卡、分龄速查、12 周推进表、没做到记录页。 每课一处「没搞定怎么办」 ：孩子不配合、家长忍不住、老人插手，都比顺利的那一版更常见。 怎么用 一周推进 1–2 课，不要一口气读完。读完一节，只挑一个动作，做满 7 天，再加下一个。 工具表建议打印出来贴在冰箱或书桌边，手写比存在手机里更容易坚持。 三个原则： 一次只改一件事 ； 先稳 7 天再谈升级 ； 记录「没做到」比记录「做到了」更有用 。 孩子各不相同，表里的内容按自家情况改。完成七八成就够了，不必逐条达标。"},{"id":"notice","title":"使用前请读完","kind":"reading","plain":"使用前请读完 三句话，说清楚这套课能做什么、不能做什么。 01 不是评估 不做能力、性格或发育方面的判断，也不给任何孩子贴标签。 02 不承诺结果 不设达标线，完成七八成即可，随时可以停下来重来。 03 不替代专业支持 遇到持续的情绪或上学困难，先找学校老师或专业人士。 细则 本册是家庭教育做法的整理与改写，不是心理评估、发育诊断或医疗建议，也不替代学校教育与专业支持，不承诺任何学习结果、成绩变化或行为改变。 书中的场景与案例来自编写时所依据的一套育儿分享材料，已做匿名化处理，仅用于说明做法；它们不代表普遍效果，也不是编写者的亲身经历。 素材中原有的升学排名、成绩指标、效果比较等内容，在编写本册时已整体剔除。 版权：仅限购买者本人家庭使用。请勿转发、公开传播、二次销售，或用于任何形式的商业培训与转授。工具页可自行打印，供本家庭反复填写。 写这几条不是为了让谁紧张。恰恰相反——先把边界说清楚，后面 16 节课才能轻一点：不用跟别人家比，不用每天打卡，也不用担心某一天没做到。 如果孩子出现持续的情绪低落、长期回避上学、睡眠或食欲明显变化，或说出伤害自己的话，请立刻把这套课放到一边，先联系学校老师或寻求专业支持。第 16 课会完整列出这条边界。"},{"id":"part1","title":"先把地基弄清楚","kind":"part","plain":"PART 01 先把地基弄清楚 很多「孩子不自觉」的问题，其实不是孩子的问题，是家里少了一根柱子。 这两课不要求你做任何改变，只请你把现在的做法看清楚。 第 1 课 自驱不是性格，是三样东西叠出来的 第 2 课 3–12 岁三段地图，和家长的位置变化"},{"id":"l1","title":"第 1 课 自驱不是性格，是三样东西叠出来的","kind":"lesson","plain":"第 1 课 自驱不是性格，是三样东西叠出来的 这一课解决：为什么有的孩子不用推，有的人推一下动一下。以及，从哪里下手才不会白使劲。 先看懂 家长很容易把「自觉」当成性格：有的孩子天生省心，有的天生要催。但把日常拆开看，一个孩子愿意自己动起来，通常是因为三件事同时成立。 他说了算一点 （掌控感）：这件事里，有他能自己决定的部分。 他够得着 （成就感）：难度刚好，做完看得见结果。 他知道先做哪个 （次序感）：面前摆着几件事，他自己能排出顺序。 三根柱子缺一根，孩子就会退回到「等大人安排」。家长最常补错的是第三根：一直在替孩子排顺序、报进度、提醒下一步，孩子始终没有机会练「自己排」这一步。催得越细，练得越少。 一个判断方法：回想最近一次孩子主动开始做某件事——不一定是学习，搭积木、收拾书包、给花浇水都算。问自己三个问题：那件事里，哪部分是他自己定的？他怎么知道自己做好了？先后顺序是谁排的？ 今天做什么（10 分钟） 拿一张纸，写下最近一周你替孩子做的 5 个决定。比如「先写哪一科」「几点开始」「书包放哪」「玩多久」「水杯带不带」。在每条后面标一个字： 放 ＝这周可以交给他； 缓 ＝再等一两个月； 守 ＝涉及安全、作息或健康，暂时由大人守住。 只标，不改。今晚不新增任何动作，也不跟孩子宣布「以后你自己来」。这张纸是给家长看的，第 7 课会再用一次。 照着说 「今天这两件事，你想先做哪一件？」 （给两个选项，不是「你看着办」） 「你定，我按你定的来。」 孩子选完、你忍不住想改口时：「先按你说的试一次，做完我们再一起看。」 分龄调整 3–6 岁 只放「顺序」和「样式」：先穿袜子还是先穿鞋、用哪个杯子、绘本读哪本。选项不超过 2 个，说完就照做。 7–9 岁 可以放「先做哪一项」「做多久」，但结束时间仍由大人守住。放出去的是顺序，不是边界。 10–12 岁 试着把「什么时候开始」也交出去，只保留一个双方一起定下来的截止时间。 没搞定怎么办 最常见的翻车： 家长给了选择，孩子选了，家长又觉得选得不好，当场改回去。一次就够让孩子下次回答「随便吧」。 如果这周出现这种反复，不要追加新动作，只把这一条重新放一次，连做三天。孩子试探的是「这次是不是真的」，不是哪个选项更好。 另一种情况是全家人都在替他决定，你放出去的一件，转头被别人收回去——这属于第 14 课的问题，先记下来，不用现在处理。 本周我准备放出去的一件事： 孩子的选择："},{"id":"l2","title":"第 2 课 3–12 岁三段地图，和家长的位置变化","kind":"lesson","plain":"第 2 课 3–12 岁三段地图，和家长的位置变化 这一课解决：同一句话，对 4 岁和 11 岁说，效果完全不同。先弄清你手里现在该拿什么角色。 先看懂 这套课把 3–12 岁分成三段。分段不是按知识量，是按「孩子能自己承担多少」来分的。同一件事——比如自己收拾书包——在三段里的做法和话说得完全不一样。 3–6 岁 种子期 重点是把关系和自理打底：能不能自己穿、自己收、自己选、自己表达「我不想」。这个阶段最忌一上来就灌要求；先让孩子觉得「我说了有人听」，后面才谈得上配合。规则要少、要具体、要天天一样。 7–9 岁 搭架子 重点是把日常变成稳定流程：固定时间、固定位置、固定顺序，规则由孩子参与定下来。家长仍坐在主驾，但开始邀请孩子看图、自己打勾。这个阶段先练习惯，不必盯结果。 10–12 岁 坐副驾 重点是把「自己排、自己记、自己复盘」交出去。家长退到观察和引导的位置，允许安排得不好、允许漏一项。素材里反复出现的一个判断是：习惯打底之后，大约十岁前后可以开始逐步交还掌控感——不是某天突然放手，是一年一年往外挪。 家长的位置跟着变： 搭架子的人 → 坐副驾的人 → 管后勤的人 。最难的不是学会新做法，是及时退出旧做法。孩子已经能自己排了，家长还在每天报进度，他会干脆不排。 材料里的一个做法 有人把「交还」比作陪人学开车：初学的时候副驾有副刹车，该踩就踩；等他开稳了，该加速就让他加速，副驾别再碰踏板。同一份材料里也提到，孩子自己坐车坐反了方向、一路坐到终点再折回来，家长从定位上看得见，但没提醒，等他自己发现、自己走回来。 这里说的不是「不提醒」，而是先分清：哪些后果孩子承担得起，哪些必须大人兜住。第 10 课专门划这条线。 今天做什么（10 分钟） 在第 1 课那张纸的背面，写一句你现在的默认动作。三选一，凭直觉，不用美化： 催 （反复提醒、报进度）／ 替 （嫌慢干脆自己上手）／ 陪 （在旁边，但不插手）。 再写一句你希望三个月后的默认动作。两句话之间的差距，就是这套课要陪你走的距离。别急着改，第 15 课会回来看这一页。 照着说 「这件事我陪你，但我不替你做。」 「你先试试，卡住了叫我。」 「我今天只提醒一次，剩下你自己记着。」 （对 9 岁以上，且要真的做到只提醒一次） 没搞定怎么办 年龄对不上是常态。 孩子 10 岁但从没自己排过事，别直接按第三段的做法放手，会从「一直被安排」跳到「完全没人管」。从第二段的固定流程开始补两周，再往外挪。 反过来，7 岁的孩子已经很会自己安排，也别硬把他按回第一段的全程陪伴。看孩子实际能承担多少，比看生日更准。 还有一类常见情况：家长觉得自己是「陪」，孩子感受到的是「盯」。判断标准很简单——你坐在旁边时，手里是不是还拿着那张进度表。 我现在的默认动作： 三个月后希望是："},{"id":"part2","title":"四个基础动作","kind":"part","plain":"PART 02 四个基础动作 这四件事不炫，但后面所有「孩子自己来」都靠它们托着。 顺序别颠倒：先有清楚的边界，才有可以交还的自由。 第 3 课 先立规矩，再谈自主 第 4 课 把时间变成看得见的东西 第 5 课 正反馈怎么给才有用 第 6 课 见世面不是花钱，是讲底层"},{"id":"l3","title":"第 3 课 先立规矩，再谈自主","kind":"lesson","plain":"第 3 课 先立规矩，再谈自主 这一课解决：规则总也立不住，一说就变成拉锯。做一张孩子自己参与写下来的约定表。 先看懂 很多家庭的规则是「家长宣布、孩子执行、家长反复提醒」。这种规则靠家长的记忆力维持，家长一忙就断，孩子一闹就松，最后双方都累。 能自己转起来的规则，通常有三个共同点： 条数少 （3–5 条，贴得出来才记得住）； 孩子参与写 （他自己说出来的，比听来的更认）； 写清终点 （做到什么程度算完成、这一阶段到哪天结束）。 素材里那份家庭约定表有个细节值得留下：表格是孩子亲笔签名确认的，而且不是一年半载不变，随阶段目标调整。签名不是形式，是让「这是我们一起定的」变成一件看得见的事。 今天做什么（约 20 分钟，分两次） 第一次，家长自己先写。 在纸上划出 3–5 条真正不能松的底线，只写「守」的那类：作息、安全、固定的作业位置、基本自理。其余先不写。条数一旦超过 5 条，就等于没有重点。 第二次，跟孩子一起补。 不要念你的清单，先问：「你觉得咱们家哪几件事，做到了应该记一笔？哪几件没做到会有点麻烦？」把他说的原话逐条记下来，哪怕很幼稚。再把你那 3–5 条底线拿出来，说明为什么这几条不能改。 每条后面写清「做到什么样算完成」和「这一版用到哪天」。比如「每天睡前把书包收到门口」比「自己收拾好」清楚得多。最后各自签名，贴到冰箱或书桌边。工具页 T1 可以直接打印。 关于奖励与后果 可以用小奖励，也可以不用钱：多讲一个睡前故事、周末多半小时一起玩、自己挑晚饭吃什么，都比现金更不容易滑成「做一件事换一样东西」。后果要事先约定、当场兑现、不追加、不翻旧账。 本册不涉及体罚、罚站、当众批评，也不建议把分数、名次写进约定表。 原因很直接：这些会让孩子的注意力从「我把事做好了」移到「我别被抓到」。 照着说 「咱们一起定三条，你先说，我来记。」 「这条我不同意改，但不是因为你不好，是因为睡太晚第二天会很难受。」 「这版先用到下周日，到时候我们一起看要不要改。」 「今天这条没做到，按之前说好的来。明天重新算。」 分龄调整 3–6 岁 最多 3 条，配图画或照片，用「做到了贴一个圈」代替写字。签名改成按手印或画个小记号。 7–9 岁 3–5 条，可以让孩子自己抄一遍。奖励以「一起做的事」为主，当天兑现。 10–12 岁 让孩子主持这次小会，家长只保留否决安全类条款的权利。约定里加一条「家长不做的部分」——比如不反复催、不翻旧账，双方都签。 没搞定怎么办 表贴出来三天就没人看了。 多半是条数太多，或者大人自己先没照着做。别加新规则，把表擦到只剩 2 条，重新签一次。 孩子把奖励谈成交易。 「我收书包你给我什么？」——这时把「一起做的事」类奖励往下压，直接说：「这本来就是家里每个人都要做的一份，我们记一笔是为了看得见，不是为了换东西。」 有人不认这张表。 先别急着统一全家，第 14 课会处理。这一周只要一位家长照着执行就够了。 我们家这版约定共 条，用到 （日期）。"},{"id":"l4","title":"第 4 课 把时间变成看得见的东西","kind":"lesson","plain":"第 4 课 把时间变成看得见的东西 这一课解决：孩子不是不想做，是「再玩一会儿」「马上就好」对他来说没有长度。 先看懂 时间对小孩是抽象的。你说「二十分钟」，他脑子里没有二十分钟。所以第一步不是买计时器，是把时间画出来、切开来、跟每天的事绑在一起。 素材里给过一条很朴素的路径： 先看学校课程表 ，让孩子明白一天是由一段段时间组成的； 再迁移到周末 ，由他自己排上午做什么、下午做什么； 再迁移到假期 。同一份材料里也明确提到，时间管理可以从幼儿园中大班起步，做法是把玩的时间集中到固定几天，先保住睡眠。 第二步是 专注时长分段练 ：从孩子现在坐得住的时长起步，稳满 7 天再加 5 分钟，15 → 20 → 25 → 30，别一次跳到 45。十分钟全神贯注，比五十分钟边做边磨更值。这里说的是「坐得住」这件事，不是任何评估或诊断。 第三步是 先易后难 ：遇到卡住的先跳过，把能做的都做完再回头；简单的部分要求先读完整再下笔。这个顺序本身就是在练第 8 课要讲的次序感。 今天做什么（15 分钟） 和孩子一起画一张「一天的样子」：横着画一条线，把起床、出门、放学、晚饭、睡觉标上去，中间空着的地方让他自己涂。不用精确到分钟，能看出先后就够。 然后挑一段固定任务（不一定是作业，拼图、练琴、整理书桌都行），用计时器量一次：他现在能 uninterrupted 做多久？记下这个数，作为起点。今天不加量，只测。 把「先读完整再下笔」「卡住先跳过」写在小纸条上，放在他做那件事的位置旁边。工具页 T2 用来记这一周。 照着说 「我们先不催快，先看看你现在能专心多久。」 「计时器响了就停，剩下没做完的明天再说。」 （说到做到，别拖堂） 「这一题先放一放，把后面能做的做完，回头再看它。」 「这一周都是 20 分钟，做满 7 天舒服了，下周我们再加一点点。」 分龄调整 3–6 岁 用图片作息条（起床／吃饭／玩／洗澡／睡觉），每段配沙漏或一首歌的长度。分段起步可能是 5–10 分钟，完全正常。 7–9 岁 从 15 分钟起步，7 天稳了再升 5 分钟。周末让他自己排上午／下午两格，不排具体分钟。 10–12 岁 把整段 evening 交给他排，只共同守住睡觉时间。允许他自己决定先做哪一科、中间休不休息。 没搞定怎么办 加了 5 分钟就崩。 退回到上一个稳住的时长，再稳 7 天。加量不是升级，是试探；崩了说明试探得太早，退回不丢人。 计时器一响孩子非要继续。 这其实是好信号，但别顺势拖堂，否则「到点就停」这条规则会失效。可以说：「记下来，明天这一格我们调长一点。」 作息图画完就扔了。 说明它挂在墙上而不是用在当下。把它挪到他每天真正会经过的地方，或者只留「放学后那一格」，其余全删。 孩子坐不住的原因有很多种，节奏快慢也因人而异。如果长期完全无法进行，并且明显影响到日常生活，先把这件事交给专业人士看一看，不必在这套课里硬找方法。 今天的起点时长： 分钟 这周保持不变，下周再评估。"},{"id":"l5","title":"第 5 课 正反馈怎么给才有用","kind":"lesson","plain":"第 5 课 正反馈怎么给才有用 这一课解决：「你真棒」说多了没反应，一指出问题孩子就塌了。把夸奖换成三件具体的事。 先看懂 「你真棒」「你真聪明」听着舒服，但孩子听不出自己到底做对了什么，下次不知道该重复哪一步。有效的反馈要落到 他刚刚做的那个动作 上。 素材里反复出现的做法，是把表扬收窄到三件事： 专注 （刚才那 20 分钟你没起来）、 主动 （你没等我叫就开始了）、 克服惰性 （昨天玩了半小时，今天自己停在第 15 分钟）。第三件最容易被忽略——家长往往只盯「还差多少」，看不见「比昨天少了一点」。 另外两个常见误区： 过度谦虚 （别人夸孩子，家长抢着说「哪有哪有，他毛病多着呢」）； 只纠错不确认 （一整天里孩子听到的全是哪里没做好）。素材里有人提到，幼儿园发一张纸让写优点和缺点，她两面都写满了优点——理由不是孩子没缺点，是「这么小，谈不上什么缺点」。 今天做什么（5 分钟，连做 7 天） 今天只做一件事：找一次「比昨天少一点」或「没等提醒就做了」的瞬间，把那个动作原样说出来。不加评价、不接「但是」、不顺势提下一个要求。说完就停。 晚上在 T2 的记录页写一行：我说了哪句、孩子什么反应。连写 7 天，第 9 课复盘时会用到。 照着说 「刚才你一直在弄那个，中间没起来。」 「今天我没叫你，你自己就开始了。」 「昨天玩了 30 分钟，今天 15 分钟你就自己停了。」 别人夸孩子时：「是的，他这点确实挺稳的。」 （不补「但是他……」） 孩子没做好时：「这次没成，我们先歇一会儿，等下再看。」 分龄调整 3–6 岁 当场说、蹲下说、配一个拥抱。句子越短越好，说清动作就行，不用讲道理。 7–9 岁 把「比昨天少一点」说成看得见的数字或次数，孩子会自己开始记。 10–12 岁 别当着别人夸，容易尴尬。私下、简短、就事论事，说完不加要求。 没搞定怎么办 一整天找不到可说的。 多半是标准定太高了。把标准降到「今天有没有哪一刻，他比昨天少磨蹭了一点点」，通常找得到；真找不到，就只说一句「今天挺不容易的」，不硬编。 夸完忍不住接「但是」。 「今天很主动，但是字写得还是潦草」——前面那句就作废了。把「但是」放到另一次对话里，隔一顿饭再说。 孩子对夸奖没反应，甚至烦。 可能之前夸得太密、太笼统，也可能是他正处在受挫里。先停下所有评价，只做陪伴，等他主动提起再接话。第 13 课会讲这时候怎么说。 今天我说的那一句："},{"id":"l6","title":"第 6 课 见世面不是花钱，是讲底层","kind":"lesson","plain":"第 6 课 见世面不是花钱，是讲底层 这一课解决：想让孩子「有点想头」，又不想变成报班和打卡。真正起作用的是见完之后的那几句对话。 先看懂 素材里最一致的一条主张是：孩子得先见过真实世界怎么运转，才谈得上自己想往哪走。带孩子去上班、去展会、去工厂、见不同的人、看一件事怎么从头做到尾——重点不在地方有多高级，在家长有没有把背后的道理讲给他听。 同一份材料里，家长每次带孩子经历一件事，习惯追问「对方为什么这样说」「我们为什么这样做」，让孩子先讲自己的看法，最后家长再补上自己的原因。 先让孩子说，家长后补 ，顺序反了就又变成一堂课。 这里说的「见世面」不等于消费：菜市场怎么定价、快递站怎么分拣、修车师傅怎么判断毛病、家里这个月的钱花在哪儿，都是现成的素材。3–12 岁孩子需要的不是远方，是有人愿意把身边的事拆开给他看。 材料里的一个场景 有个孩子十来岁时被带到包装线上做了一天纸盒，一个人一个岗，一天拿到 50 元。家里平时吃饭多由大人请客，他对钱没什么概念，后来让他拿这一周的收入请一次客，发现不够买单。回家路上他自己总结：靠力气挣钱很辛苦，得靠脑子。家长没有趁机讲一番大道理，只是顺着聊了聊不同工作到底差在哪儿。 这个做法不适合照搬到小龄孩子身上，也不必刻意制造「吃苦」。可借鉴的只有一点：让孩子接触真实的分工与代价，然后让他自己说结论。 今天做什么（本周找一次，约 15 分钟） 挑一件本周本来就要做的事，带上孩子：取快递、买菜、修东西、去银行、去你工作单位门口转一圈都行。过程中只做三个追问，别多： 「你觉得他刚才为什么这么做？」 → 等他说完，不纠正。 「换你会怎么做？」 → 让他讲一个不同版本。 「那我们家这件事，跟它哪里一样、哪里不一样？」 → 把话头拉回他自己的生活。 最后你才补一句自己的看法，一句话就够。不总结中心思想，不落到「所以你要好好读书」。 照着说 「你先说，我听听你怎么看。」 「我原来的想法跟你不太一样，我说说我的，你听听哪个更说得通。」 「这个我不太懂，我们一起问问。」 「今天不用得出结论，看到什么记着就行。」 分龄调整 3–6 岁 只问「你看到了什么」「他在做什么」，不追问原因。时间控制在十几分钟，孩子跑神就结束。 7–9 岁 三个追问都能用，但别要求回答得有条理。可以让孩子画下来或回家讲给另一个人听。 10–12 岁 可以加一层「代价」：这件事要花多少时间、多少钱、放弃了什么。允许他的结论跟你完全不同。 没搞定怎么办 追问变成拷问。 孩子一答不上来，家长就补讲解、再追一句，两轮之后他就不说话了。答不上来时直接说「我也不知道，我们看看」，比追问更有效。 忍不住收尾到学习上。 「所以你看，不好好读书以后就只能……」——这一句会把前面十几分钟全抵消。孩子记的是被比较的难受，不是见到的东西。 没条件出门。 家里就有：一起看一张水电账单、拆一个坏掉的小家电、把一周的菜钱摆出来算一算。见世面的核心是「把真实运转讲开」，不是地点。 这周带他看的一件事： 他自己说的结论："},{"id":"part3","title":"把掌控感一点点交回去","kind":"part","plain":"PART 03 把掌控感一点点交回去 这四课是整套课的中段，也是最容易做反的一段。 交还不是撒手，是把「自己排、自己记、自己承担」一件件挪过去，同时把边界说清楚。 第 7 课 「这件事你自己定」到底放到什么程度 第 8 课 次序感：让孩子自己排先做哪个 第 9 课 周日 15 分钟：周计划与复盘四问 第 10 课 允许试错：忍住不提醒的那条线"},{"id":"l7","title":"第 7 课 「这件事你自己定」到底放到什么程度","kind":"lesson","plain":"第 7 课 「这件事你自己定」到底放到什么程度 这一课解决：一说放手就散架，一收回来又回到天天催。中间其实有一段可以走得比较稳的路。 先看懂 把第 1 课那张标了「放 / 缓 / 守」的纸拿出来。这一课只处理标了「放」的那几条。 交还掌控感，交的从来不是「随便你」，而是三样一起交： 权利 （这部分你定）、 责任 （结果你自己看）、 边界 （哪几条不能碰、什么时候一起复盘）。少交一样都会出问题：只给权利不给责任，会变成想怎样就怎样；只给责任不给权利，会变成「出了事都怪你」。 素材里有一句很直白的判断：孩子对一件事没有掌控感，就很难从这件事里长出自己的动力。同一份材料也反复提醒，家长要从「随时盯着、随时纠正」退到「旁边看着、事后引导」，而且 孩子能完成七八成就够了 ，不必样样到位。追求 100 分的结果，通常是家长把事又接回来。 今天做什么（10 分钟） 从「放」的清单里只挑 一件 ，写清楚三行： ① 哪一部分由他定（越具体越好，比如「放学后先做哪一科、中间休不休息」）；② 哪几条仍然由大人守（比如「睡觉时间」「必须完成」）；③ 什么时候一起看结果（比如「周日晚上」）。 把这三行念给孩子听，然后就真的不做这一件了。本周家长的动作只有一个： 把已经说出口的提醒咽回去 。可以在手机备忘录记一笔「今天忍住几次」，不用告诉孩子。 照着说 「这一块从今天起你自己定，我不再一遍遍问了。」 「睡觉时间还是我们一起守，别的你安排。」 「做七八成就行，剩下的周日我们一起看。」 想插手时改用：「需要我帮忙就说一声，我在旁边。」 分龄调整 3–6 岁 这一课基本不适用，别硬放。对应做法是「有限选择」：两个选项、当天有效、不涉及作息与安全。 7–9 岁 只放一件小事，比如「先做哪一科」或「书包放哪」。边界要写在纸上、贴在桌上，每周复盘一次。 10–12 岁 可以放一整段（放学后到睡前），并加一句「家长这周不主动问」。出现漏项也先等他自己发现。 没搞定怎么办 放了三天，家长忍不住全收回来。 这几乎一定会出现。收回来之后别自我批评，也别宣布「再试一次」，只把范围缩小一半重来：原来放一整段，改成只放「先做哪一科」。 孩子直接躺平，什么都不做。 先分清是「不会排」还是「不想做」。不会排就退回第 8 课，先教排序；不想做往往是因为前面长期没有过掌控感，突然交过去他也不信，需要更小的步子。 老人或其他家人照旧催。 别在这一课里解决全家一致的问题，先把你负责的那一块稳住，第 14 课会专门处理。 这周交出去的一件事： 我守住的边界："},{"id":"l8","title":"第 8 课 次序感：让孩子自己排先做哪个","kind":"lesson","plain":"第 8 课 次序感：让孩子自己排先做哪个 这一课解决：一放手孩子就卡住，不是懒，是从来没练过「几件事摆在一起，怎么排」。 先看懂 家长常常替孩子把顺序排好：先写数学、再背单词、最后收书包。孩子照做，看起来很顺，但「排序」这一步始终没练过。等到你说「你自己安排吧」，他面前是一团没分过类的事，自然就僵在那儿。 次序感是可以单练的，练法很朴素：每次把面前的几件事，让 孩子自己分难易、分主次 ，然后按他排的做一次，做完只回看「这么排顺不顺」，不评价排得好不好。素材里把这件事叫「建立他自己的次序感」，还提到一个细节：先做最容易的、难的放后面，是孩子自己试出来的顺序，不是大人规定的。 材料里的小例子 有个孩子从小不午睡，自己决定午休那段时间去学校练字，一两年下来没另外报班，后来在写字比赛里拿了名次；再后来为了看懂一部动画自己去学另一门语言，多年后读专业书时反过来用上了。 这里值得看的不是结果，是「那段时间我自己安排」这件事本身。别把例子当成可复制的路径，每个孩子能抓住的空档都不一样。 今天做什么：三格排序法（10 分钟） 拿一张纸画三格： 现在就做 ／ 等一会儿做 ／ 今天可以不做 。把今晚摆在他面前的 4–6 件事，一张张写成小纸条或短句，让孩子自己放进三格。家长不挪、不提示。 放完让他按第一格的顺序开始做。做完只问一句：「这么排，下次还这么排吗？」他说不改就不改。 一周做 2–3 次就够，不用天天练。周五晚上可以顺带排一下下周一上学要带什么、先做哪件。 照着说 「这几件事，你觉得哪件最好做？先放这儿试试。」 「你排完我不改，做完我们再看顺不顺。」 「今天玩的时间想放在哪一格？你自己挪。」 「卡住的先跳过，把能做完的做完，回头再看它。」 分龄调整 3–6 岁 只用两格：「先做」「后做」，用实物卡片或图片，一次 2–3 件事。比如先洗手还是先拿水果。 7–9 岁 三格都能用，但每格不超过 2 件。允许他全塞进「今天可以不做」，然后一起看看明天会怎样。 10–12 岁 加上「周五排下周一」和「哪件要花更久」，让他自己估时间，估错不纠正，周日复盘时再说。 没搞定怎么办 他把所有事都放进「今天可以不做」。 别急着改他的格子，先照着做一次——把后果留到明天，比当场讲道理有用。若涉及必须完成的事，事先就把它列为「边界」，不进格子。 排序排了十分钟还在排。 排序本身变成了拖延。给一个沙漏或一首歌的时间，时间到就按当前的摆法开始，不追求最优解。 家长看着那顺序实在别扭。 忍住。这一课练的是「排」这个动作，不是排得对不对。真要调整，放到周日复盘时以提问的方式说。 今晚他排的第一格第一件： 下次他说要改的是："},{"id":"l9","title":"第 9 课 周日 15 分钟：周计划与复盘四问","kind":"lesson","plain":"第 9 课 周日 15 分钟：周计划与复盘四问 这一课解决：计划写了就忘、复盘变成批斗会。把一周的收口做短、做轻、留得住。 先看懂 素材里把「自己定周目标、定期回看」放在进阶阶段，不是起步就做。原因很实在：孩子还没体验过「我安排了、也做成了」，复盘就只是又被检查一遍。 两个最容易写坏的计划：一是 目标太空 ——「这周要更自觉」「下次考好一点」，孩子看完不知道今晚该干什么；二是 排得太满 ，一格不漏、没有休息、没有意外，一旦某天断了，整张表就作废，索性全放弃。所以计划里必须留出空白格，也允许有「这周不做什么」。 复盘只问四句，顺序别变： 这周你原本想做哪几件？做成了几件？没做成的是卡在哪儿？做得最顺的是哪一件？ 先问做成了的、再问卡住的，最后一定落在「最顺的那件」上收尾。 今天做什么（周日 15 分钟，用 T3） 前 5 分钟：孩子自己写这周 2–3 件想做的事，每件写成能打勾的样子（「睡前收书包，做 5 天」而不是「养成好习惯」）。再留两行空白，专门写「这周不做什么」和「如果周三很累，改成什么」——这就是计划 B。 中间 5 分钟：家长也写自己的一条，比如「这周不重复提醒同一件事」。放在同一张纸上，孩子看得见。 后 5 分钟：四问复盘上周。家长只记录、不评价、不追问「为什么又没做到」。没做成的事写进 T7，不在当场解决。 照着说 「这周你想做成哪两三件？写成能打勾的那种。」 「哪一天要是特别累，我们改成什么？」 「没做成的那件，是卡在哪一步？」 （问步骤，不问态度） 「这周最顺的是哪一件？下周还这么来吗？」 分龄调整 3–6 岁 不做周计划。改成「今天睡前一句话」：今天最开心的一件、明天想做的一件，家长代笔。 7–9 岁 1–2 件就够，用画图或贴纸打勾。四问只问前两句和最后一句。 10–12 岁 四问全用，由孩子主持、家长只当记录员。允许他决定「这周不做什么」，那也是计划的一部分。 没搞定怎么办 周日那 15 分钟总是被挤掉。 别补、别顺延到周三，就等下个周日。一次中断不代表体系崩了，第 15 课会专门讲这个。 复盘又变成数落。 一个信号：家长说话超过一半。把四问写在纸上照着念，念完就停，能明显压住发挥。 孩子每周都写同一句「这周好好写作业」。 说明还没到能自己拆目标的阶段，退回第 4 课，先练把时间切块。空目标不是态度问题，是技能没到。 这周我们家只推进的一件事："},{"id":"l10","title":"第 10 课 允许试错：忍住不提醒的那条线","kind":"lesson","plain":"第 10 课 允许试错：忍住不提醒的那条线 这一课解决：知道该放手，但一看见孩子要吃亏就冲上去。先划清哪些后果可以让他自己承担。 先看懂 「让孩子承担自然后果」听着简单，难的是当场那几秒：书包忘带、水杯没装、作业拖到很晚、出门磨蹭。家长一提醒，孩子这一次顺了，但「自己记着」这一步又没练到。 素材里那个「坐反方向、一路坐到终点再折回来」的例子，讲的正是这个：家长看得见位置，但没有出声提醒，等他自己发现、自己想办法回来。这个做法能成立，前提是 路线是熟的、时间是宽的、后果是能承受的 。 所以先划红线，再谈忍住： 大人必须立刻介入的： 人身安全、交通与用火用电、健康与用药、明显超出孩子承受能力的情绪崩溃、涉及他人财物或规则的事、会连带影响全家且无法挽回的安排。 可以让孩子自己承担的： 忘带非必需物品、顺序排得不好导致多花时间、玩的时间没留住、自己定的计划漏了一项、衣服选得不合适、零花钱提前花完。 拿不准的时候，一律按「介入」处理。少放一次不会有害，多放一次可能要花很久补回来。 今天做什么（10 分钟） 在 T7 上半页写下你家最近三次「差点冲上去」的场景，逐条标「可承担 / 必须介入」。只标，不演练。 本周挑一件「可承担」的小事，事先跟孩子说一句「这个我不提醒了，你自己记着」，然后真的不提醒。发生了就只做一件事：事后问「下次你想怎么记」，不追问「我早说过吧」。 照着说 「这个我不提醒了，你自己记着；真忘了也没关系。」 出事之后：「有点麻烦，那下次你想怎么记？」 （不接「我早就说过」） 「需要我帮什么，你说；我不主动插手。」 涉及安全时直接、简短：「这个不行，我来。」 （不解释太多，事后再说理由） 分龄调整 3–6 岁 这一课的范围极小：只放「玩具没收、外套选错」这类。安全与作息全部由大人兜住，不设「自然后果」。 7–9 岁 可放「忘带水杯、忘了把本子装进书包」，但事先确认学校那边不会因此产生大麻烦。 10–12 岁 可放「自己排的时间没留住」「周末安排冲突」。允许他自己跟老师或同学解释，家长不代劳。 没搞定怎么办 忍住了，但脸色没忍住。 孩子读的是表情，不是话。事后补一句「我刚才有点急，不是怪你」，比装作没事更管用。 后果太大，收不住。 说明这一条本该归在「必须介入」。别怪孩子，把清单改了就好，下一周换一件更小的。 孩子反复忘同一件。 那可能不是「不上心」，而是流程本身没搭好。退回第 4 课用可视化的方式固定下来（比如门口放一个固定的收纳筐），别一直用「让他承担后果」去试。 还有一句要写清楚：允许试错不等于冷眼旁观。孩子受挫时，陪伴和安慰照给，只是不替他把事情抹平。 这周我不提醒的一件小事："},{"id":"part4","title":"四个高频场景","kind":"part","plain":"PART 04 四个高频场景 前面的动作搭好之后，真正考验人的是这几个每天都来的场面。 这四课可以直接跳着读——今晚遇到哪一件，就翻哪一课。 第 11 课 作业拖延与坐不住 第 12 课 电子产品：约定，而不是没收 第 13 课 孩子说「我不想做」和受挫的时候 第 14 课 家里几个人管法不一致"},{"id":"l11","title":"第 11 课 作业拖延与坐不住","kind":"lesson","plain":"第 11 课 作业拖延与坐不住 这一课解决：每晚重复「快一点、别磨了」，越催越慢。先把环境改掉，再改说法。 先看懂 拖延很少是单纯的「不想做」。把一个晚上拆开看，常见的是三件事叠在一起： 开始太难 （面前是一整堆，不知道从哪下手）、 周围太好玩 （电视、平板、大人刷手机的身影）、 看不见终点 （不知道做到哪儿算完）。 素材里给的做法都不花哨： 固定一个专门做事的位置 ，桌上只留当下要用的东西；家里那个时段尽量不开电视； 先做后玩 ，中途要水、要零食，等这一小段结束再给； 起步阶段陪着写 ，习惯稳了再逐步退开，而不是一上来丢一句「你自己去写」。 还有一条容易被忽略：作业初期要有「抽查确认」的环节，但不是逐题盯着改。素材里把它比作抽检——做好了才算这一段完成，然后才轮到玩。配合第 4 课的分段时长和「先易后难」，一晚上就有了清楚的格子。 今天做什么（15 分钟） ① 清桌面：把与今晚无关的东西全挪走，只留一科。② 跟孩子一起把今晚的事拆成 2–3 段，每段写清「做完什么算完」。③ 定一个「开始前的固定小动作」，比如灌好水、上完厕所、把计时器摆好，每天一样。④ 家长自己也把手机放到另一个房间。 今晚只做这四步，不追求写得快、写得全。坐不住的按第 4 课的起点时长来，到点就停。 照着说 「今天只先做这一科，做完这一段就停一下。」 「水我给你倒好，等这一小段结束我们一起喝。」 「卡住的先跳过，把能做的做完再回头。」 「我坐在这儿，但我不看你写，需要帮忙叫我。」 「到点了，剩下的明天再说。」 （说了就真的停） 分龄调整 3–6 岁 这一课改成「收拾玩具／睡前流程」：一次只一件、配图片、家长全程在旁边但不代做。 7–9 岁 陪写为主，重点是固定位置和固定顺序。分段 15–20 分钟，做完打勾，不额外加量。 10–12 岁 把拆段、估时间交给他，家长只守「开始前的小动作」和睡觉时间。别再坐旁边。 没搞定怎么办 清了桌面，孩子还是每隔两分钟起来。 先看是不是段太长。退回起点时长，甚至退到 10 分钟；先把「能坐满一段」这件事稳住，比做完多少重要。 陪写陪成了盯写。 判断标准：你开口的次数比他多，就是在盯了。改成只在开头和结尾各说一句，中间不发言。 先做后玩一执行就谈条件。 孩子讲条件其实是好事，说明他在参与设计。可以让他在「先做哪一段」「休息多久」里选，但「做完才玩」这条不拿来谈。 偶尔一晚全崩。 不补、不追、不翻旧账，第二天照原样重来。第 15 课会解释为什么「不补」反而更快。 今晚拆成的段数： 开始前的固定小动作："},{"id":"l12","title":"第 12 课 电子产品：约定，而不是没收","kind":"lesson","plain":"第 12 课 电子产品：约定，而不是没收 这一课解决：一收就炸、一放就没完。把「管设备」改成「一起签一份能执行的约定」。 先看懂 突然断掉最容易引发硬碰硬，素材里也不主张硬来：先接纳孩子确实想玩，再一起把时间、条件和违约怎么办写清楚，像签一份小合同——事先说好，事后不追加、不临时收回。 约定的四要素： 什么时候 （固定时段，而不是「有空就玩」）、 多久 （用计时器，到点由设备提醒，不由家长吼）、 前提 （当天该做的那段已完成）、 到点没停怎么办 （事先写明的、温和且确定的后果，比如次日时段缩短）。 如果现在使用时间偏长， 渐进降频 比一刀切稳：这周先固定时段，下周再缩短一点，或把「每天」改成「隔天／固定几天」。素材里也提到，孩子真想玩的时候，家长可以陪着一起玩一次——先站到他那一边，规则才听得进去。 最后一条最容易被忽略、却很管用： 约定的前提也包括家长 。孩子做事的那段时间，大人别在旁边刷短视频。 今天做什么（15 分钟） 不要在你正生气的时候开这个会。挑一个平静的时间，先问孩子：「你觉得一天里放在哪个时段最合适？」把他的答案原样写进约定第一条。 一起写完四要素，念一遍，双方签名，贴出来。设备上的计时由孩子自己按。第一周只执行「固定时段」这一条，时长先不动。 照着说 「我不打算一下全停，我们商量一个能长期做下去的办法。」 「你想放在哪个时段？我记下来。」 「计时器响了自己停；没停的话，按我们写好的那条来。」 「这条对我也算数：这段时间我也不看手机。」 分龄调整 3–6 岁 由家长定时段与时长，用看得见的沙漏或一首歌作结束信号。选项只给「现在看还是饭后看」。 7–9 岁 四要素一起写、一起签，时长以 15–20 分钟一段为宜。到点提醒交给设备，不交给大人。 10–12 岁 让孩子起草约定，家长只谈边界（睡眠、作业前提）。允许他提出自己的违约条款，通常会比大人定的更较真。 没搞定怎么办 到点不停，家长临时加码。 「今天起一周都不许玩」——这类临时加罚会让整份约定失效。只执行事先写好的那一条，不加、不追、不翻旧账。 约定写了，大人先破例。 忙的时候用设备换安静，之后又要求孩子守约，孩子会学到一个更真实的规则：约定看大人心情。破例了就明说「今天是我们这边没做到，明天照原样」。 孩子完全不肯谈。 说明过去几次「商量」最后都变成了单方面收紧。这一周先什么都别改，只按现有节奏陪他玩一次，把谈话的位置先修回来。 这周只执行的一条： 下周再谈的是："},{"id":"l13","title":"第 13 课 孩子说「我不想做」和受挫的时候","kind":"lesson","plain":"第 13 课 孩子说「我不想做」和受挫的时候 这一课解决：明明只是累了，却被听成偷懒；一讲道理，情绪更大。先接住，再说理。 先看懂 孩子说「不想做」，多数时候是在说「我现在做不动」，不是在宣布以后都不做了。家长如果立刻接「怎么能不想做呢」，对话就从情绪转成了辩论，后面说什么都会顶回来。 素材里有一句很好用的话： 「先哭五分钟，不够再延长。」 它的价值不在幽默，在于明确给了情绪一段时间，也明确告诉孩子这段时间里没人来劝、没人来考他。同一份材料反复强调：先共情、表示站在一起，再找时机提要求；情绪没平复之前不讲道理；不当众摆家长威风；不用反复说教。 受挫时也一样。素材里有个做法值得留：孩子名次回落、被别人超过，家长做的是「疏通」而不是加压——把它放回一个更长的时间里看，不追加「下次一定要稳住」。孩子考得不好回来难过时，反而先肯定他这段时间做过的具体的事。 还有一句家长可以对自己说的： 「我是第一次做父母，请多担待。」 允许自己接不住，比硬撑着接得漂亮更真实。 今天做什么（下一次遇到时用，约 3 分钟） 三步，顺序不要换： ① 停 ——先不谈那件事，蹲下或坐下，与他平视。 ② 接 ——把他刚说的复述一遍，「你是说今天一点都不想开始，对吗」。 ③ 给时间 ——问「要不要先歇一会儿，等下我们再看」，然后真的走开一会儿。 这一课不要求「把孩子劝回去」。目标只是让这句话能被说出来，而不是被顶回去。等情绪过了，再用第 9 课的四问去找卡在哪一步。 照着说 「嗯，今天是不太想开始，我听明白了。」 「先歇一会儿，不够再延长，等下我们再看。」 「有点难受就先难受一会儿，我在这儿。」 「这次没成，跟你好不好没关系，我们看看卡在哪一步。」 「我是第一次做父母，刚才那句我说急了。」 分龄调整 3–6 岁 少说话，多靠近：抱一下、蹲下来、陪坐两分钟。这个年龄讲道理基本用不上。 7–9 岁 复述他的话特别管用。给一个明确的短时段（「先歇到计时器响」），比「等你想好了」清楚。 10–12 岁 别当众安抚，也别追着问。给空间，留一句「想聊的时候叫我」，然后真的退出房间。 没搞定怎么办 接住了，但事情还是没做。 这一课本来就不管「做完」。别在当天补一句「那现在可以开始了吧」，那会让他觉得刚才的接纳是手段。放到第二天，用第 8 课重新排序。 家长自己先爆了。 很正常。事后补一句道歉、说明是自己急了，不解释成「都是为你好」。修复比一次都没崩更重要。 「不想做」变成了每天固定一句。 那就不是情绪，是流程或难度出了问题。退回第 4 课看时长、第 11 课看拆段，别一直停在共情上。 如果孩子长时间情绪低落、明显回避上学、睡眠或食欲持续变化，或说出伤害自己的话，请立刻停止在这套课里找方法，联系学校老师或寻求专业支持。第 16 课会完整列出这条边界。 下一次我先说的那一句："},{"id":"l14","title":"第 14 课 家里几个人管法不一致","kind":"lesson","plain":"第 14 课 家里几个人管法不一致 这一课解决：妈妈定了规则，奶奶当场放行；孩子很快学会找最松的那个人。不靠说服全家，靠先定「谁来负责」。 先看懂 素材里给出过一条很干脆的组织办法： 一件事只设一位总负责人 ，其余大人当副手或后勤；谁主带谁负责；不在孩子面前出现两种声音。原因不是「谁更对」，而是孩子一旦听到两套说法，就会失去判断，挑对自己最轻松的那套走。 注意这跟「全家必须想法一致」不是一回事。想法不一致很正常，需要一致的是 当着孩子的那一套做法 。分歧放到孩子不在的时候谈，谈的时候多讲具体事实，少讲「你就是太宠了」。 祖辈参与照料时，最容易卡在「当场拆台」。可行的做法不是要求老人改观念，而是把分工写清楚：谁负责哪一段（接送、晚饭、作业、睡前），那一段由谁说了算；涉及观念差异，由自家子女出面沟通，别让配偶去正面碰。 今天做什么（大人之间，15 分钟） 列一张两列的表：左边写本周高频的 4–6 件事项（起床、作业、电子设备、睡前、周末安排、吃饭），右边每件只填 一个名字 。填不出唯一名字的，先划掉，本周不纳入约定。 再加一行共同底线：不在孩子面前否定另一位大人的决定。有不同意见，统一说「这件事等下我们商量一下，先按刚才说的来」。 这张表不需要所有人签字，也不需要全家开会通过。先由最常执行的那位写出来，发给大家看一眼就够了。 照着说 对孩子：「这件事问妈妈就行，我们说好的。」 对孩子当场搬出另一位大人时：「等下我们几个商量，先按刚才说的来。」 对老人：「这段我来负责，您歇着；吃饭那块还是听您的。」 对配偶：「我不是说你不对，是这周先只留一种说法，周末我们再调。」 分龄调整 3–6 岁 分工要更细：谁哄睡、谁喂饭、谁管出门穿衣，各归各。低龄孩子对「换人就换规矩」最敏感。 7–9 岁 把分工表也让孩子看见，他知道该找谁，就不用来回试探了。 10–12 岁 可以让他参与定「哪一块归自己」，大人那一栏只留边界与安全。 没搞定怎么办 老人当面放行，拦不住。 别在孩子面前纠正。事后由自家子女单独说，而且只谈下一次怎么做，不评判这一次。当场那一遍「破例」，就让它过去，不补罚孩子。 夫妻谁也不服谁。 别试图先统一思想，先统一「这一周归谁」。一周之后拿具体发生的事再谈，比讲理念容易得多。 分工表写完没人看。 把范围缩到一件（比如只管睡前那一段），一件事上稳住了，比六件都写在纸上更管用。 这周先只统一的一件事： 负责人："},{"id":"part5","title":"家长自己的功课","kind":"part","plain":"PART 05 家长自己的功课 最后两课不谈孩子。 一套方法能不能留下来，多半取决于大人那一边能不能持续，以及什么时候该停手。 第 15 课 断断续续，比做不到更消耗 第 16 课 什么时候该停，什么时候该找人帮忙"},{"id":"l15","title":"第 15 课 断断续续，比做不到更消耗","kind":"lesson","plain":"第 15 课 断断续续，比做不到更消耗 这一课解决：方法都懂，做了三天停四天，然后从头再来。问题不在意志力，在起步时铺得太多。 先看懂 素材里有一句很硬的判断： 规划不难，难的是执行 。同一份材料把常见的失败写得挺准——不是没在做，是断断续续在做：今天下班累了就跳过，明天心情不好推到后天，等下次重新捡起来，前面攒的那点顺手劲儿已经散了，又得从最开始来一遍。 所以这套课从第一页起就只在说一件事： 一次只改一件，做满 7 天再加下一件 。不是保守，是让「持续」这件事有机会发生。一周推进 1–2 课，16 节课大约走 12 周，比一周读完、第二周全忘要快得多。 还有两个容易漏的： 复盘 ——每次做的时候其实都在解决一个小问题，回头看一眼才攒得下来； 计划 B ——大方向没错，但环境变了、身体累了、家里有事，就及时换成那个小一点的版本，不要在走不通的路上硬扛。素材里把这种坚持形容成「每天落地一点点」，累了也做、忙也做，但做的是那个缩小版。 这一点对家长尤其真实：你不需要每天都有耐心。只需要在没耐心的那天，把动作缩到最小，而不是整个取消。 今天做什么（5 分钟，每周日重复） 打开 T6，只填一行：本周推进哪一课、这一周只做哪一个动作。填完把其余 15 课全部盖住。 再写一行「忙/累/情绪不好的那天，缩小版是什么」。比如原本是周日 15 分钟家庭小会，缩小版就是「只问一句：这周最顺的是哪件」。 断了不补、不顺延、不加倍。下个周日按原样继续，那一行空着就空着，T7 专门用来记它。 照着说（对自己，也对孩子） 「这周就这一件，别的先不动。」 「今天有点累，我们做缩小版，做完就结束。」 「上周断了，这周照原样来，不用补。」 「大方向没变，换个走法就行。」 给家长的三条自查 这周我新增了几个动作？超过 1 个，就先收回来。 孩子没做到的那天，我说的是「卡在哪一步」，还是「你怎么又」？ 我自己那一条（第 9 课写的）执行了几天？家长那一边也是这套课的一部分。 没搞定怎么办 连着两三周都没动。 通常不是懒，是选的那一件对现在的家庭来说太大。翻回 T5，挑一个 5 分钟能做完的动作重新开始，别从第 1 课重读一遍。 一断就全盘推翻，想换个全新的方法。 换方法带来的新鲜感只能撑几天。先只改「缩小版」那一行，其余照旧，再稳一周看看。 家里只有你一个人在做。 那也没关系，这套课不要求全员参与。第 14 课的分工表可以先只写你一个人的名字，一块稳住就够了。 这周唯一的一个动作： 忙的那天改成："},{"id":"l16","title":"第 16 课 什么时候该停，什么时候该找人帮忙","kind":"lesson","plain":"第 16 课 什么时候该停，什么时候该找人帮忙 最后一课不教新动作。它讲这套课的边界——哪些事不该由一本手册来处理。 先看懂 一套家庭做法能处理的，是日常秩序：谁定规则、谁排顺序、怎么开始、怎么收尾、大人怎么少催一点。它处理不了所有事，也不该被当成万能钥匙。 把下面这几类情况单独留给专业的人，是这套课里最该被执行的一条。 请暂停这套课、先联系学校老师或寻求专业支持的情况： 孩子持续两周以上情绪低落、明显失去兴趣、容易哭或易怒且难以缓解；长期回避上学、一提学校就有强烈反应；睡眠、食欲出现明显且持续的变化；出现伤害自己的言语或行为；亲子冲突升级到动手、或家里有人因此长期处于高压状态。 这些都不是「自驱力不够」，也不该靠加规则、加记录表去解决。先照顾人，再谈方法。 还有一类该停：这套课已经开始让家里更紧了——每天盯表格、每次没做到都要复盘、孩子一看见那张纸就绷着脸。这时把工具页全部收起来，只留第 5 课那一句「今天我说了哪一句」，过两周再看要不要重新拿出来。 这套课不做什么 不评估孩子的能力、性格或发育情况，也不给出任何标签。 不涉及择校、升学、竞赛、提分，也不对任何学校或课程作评价。 不承诺效果，不设「达标线」，完成七八成即可，一条都没做也可以随时重来。 不要求全家统一思想，不要求家长随时保持耐心。 如果只记住三件事 一、 孩子愿意自己动起来，靠的是「我说了算一点、我够得着、我知道先做哪个」。 二、 家长最重要的动作，是及时退出那些孩子已经能自己做的事。 三、 一次只改一件，做满 7 天。断了就照原样继续，不补、不追、不翻旧账。 收尾 回到第 2 课写的那两句话：「我现在的默认动作」和「三个月后希望是」。不用对照打分，也不用判断有没有达成。它们只是让你看见，这几个月里，家里那句最常出现的话，是不是稍微变了一点。 变慢一点也没关系。孩子不是被一次谈话说服的，是被很多个普通的傍晚慢慢带出来的。 三个月后，我希望家里少说的一句是："},{"id":"part6","title":"可打印工具页","kind":"part","plain":"PART 06 可打印工具页 七张表，建议打印出来手写。贴在孩子每天会经过的地方，比存在手机里管用。 表格只是提醒，不是考卷——空着、涂改、只填一半，都可以。 T1 家庭底线约定表 T2 每日小记录 T3 周计划与复盘四问 T4 话术卡 T5 分龄动作速查 T6 12 周推进表 T7「没做到」记录页"},{"id":"t1","title":"T1 家庭底线约定表","kind":"tool","plain":"T1 家庭底线约定表 配合第 3 课。建议 3–5 条，孩子参与写、家长守住边界、双方签名。写清「做到什么算完成」和「这版用到哪天」。 序号 我们约定的事（做到什么样算完成） 谁负责 这版用到 每天打勾 1 □□□□□□□ 2 □□□□□□□ 3 □□□□□□□ 4 □□□□□□□ 5 □□□□□□□ 大人守住的那几条 做到了，我们一起做 没做到，按约定来 孩子签名（或画个记号）： 家长签名： 日期： 小提醒：奖励优先用「一起做的事」，不必用钱；不把分数、名次写进来；后果事先写、当场兑现、不追加、不翻旧账。贴出来三天没人看，就擦到只剩 2 条，重新签一次。"},{"id":"t2","title":"T2 每日小记录","kind":"tool","plain":"T2 每日小记录 配合第 4、5、11 课。每天一行，只记两件事：那一件做到了没有，以及我说的那一句。手写，别打成电子表格。 日期 今天唯一的一件事 做到了吗 我今天说的那一句 孩子的反应 □ 是 □ 否 □ 是 □ 否 □ 是 □ 否 □ 是 □ 否 □ 是 □ 否 □ 是 □ 否 □ 是 □ 否 这周最顺的一件 卡住的是哪一步 下周只改一个什么 找不到可写的那一句时，把标准降到「今天有没有哪一刻，他比昨天少磨蹭了一点点」。真找不到，就写「今天挺不容易的」，不用硬编。"},{"id":"t3","title":"T3 周计划与复盘四问","kind":"tool","plain":"T3 周计划与复盘四问 配合第 9 课。周日 15 分钟：前 5 分钟写计划，中间 5 分钟家长也写一条，后 5 分钟照着四问念一遍。念完就停。 本周想做成的 2–3 件（写成能打勾的样子） 1 2 3 这周不做什么 计划 B（很累那天） 家长自己那一条 周日复盘 · 四问（顺序不变，家长只记录） ① 这周你原本想做哪几件？ ② 做成了几件？ ③ 没做成的是卡在哪一步？ ④ 做得最顺的是哪一件？下周还这么来吗？ 一个信号：如果复盘时家长说话超过一半，就是又在数落了。把四问照着念，念完停。没做成的事写进 T7，不在当场解决。"},{"id":"t4","title":"T4 话术卡","kind":"tool","plain":"T4 话术卡 配合全书。可以沿虚线剪开，挑 3–4 张贴冰箱或书桌边。话术不是咒语，说的时候要真的按那句话做。 给选择的时候 忍住不插手的时候 「今天这两件事，你想先做哪一件？」 给两个选项，不是「你看着办」 「你定，我按你定的来。」 选完别当场改回去 开始一件事的时候 想催的时候 「今天只先做这一科，做完这一段就停一下。」 拆小，比催快有用 「需要我帮忙就说一声，我在旁边。」 把提醒咽回去一次 看见进步的时候 孩子不想做的时候 「昨天玩了 30 分钟，今天 15 分钟你就自己停了。」 只说动作，不接「但是」 「嗯，今天是不太想开始，我听明白了。」 先复述，不辩论 给情绪一点时间 卡住的时候 「先歇一会儿，不够再延长，等下我们再看。」 给完时间真的走开 「卡住的先跳过，把能做的做完再回头。」 顺序比速度重要 没做成的时候 排名次、被比较的时候 「这次没成，跟你好不好没关系，看看卡在哪一步。」 问步骤，不问态度 「这次没顺，我们先歇一会儿，等下再看。」 疏通，不加压 家长自己急了 一周只改一件 「我是第一次做父母，刚才那句我说急了。」 修复比一次都没崩更重要 「这周就这一件，别的先不动。」 做满 7 天再加下一件"},{"id":"t5","title":"T5 分龄动作速查","kind":"tool","plain":"T5 分龄动作速查 一页看全：同一件事，三段年龄做法不同。看孩子实际能承担多少，比看生日更准。 动作 3–6 岁 · 种子期 7–9 岁 · 搭架子 10–12 岁 · 坐副驾 有限选择 2 个选项，只放顺序与样式 放「先做哪件」「做多久」，守住结束时间 把「什么时候开始」也交出去，只留截止时间 家庭约定 最多 3 条，配图，贴圈代替写字 3–5 条，孩子自己抄一遍，当天兑现 孩子主持，加一条「家长不做什么」，双方签 时间看得见 图片作息条，沙漏或一首歌 课程表 → 周末上午／下午两格 整段晚上自己排，共同守住睡觉时间 专注时长 5–10 分钟起步就很好 15 分钟起步，稳 7 天再加 5 分钟 自己估时长，估错不纠正，周日再说 正反馈 当场、蹲下、短句、配拥抱 把「比昨天少一点」说成看得见的数 私下、简短、就事论事，说完不加要求 见世面 只问「看到了什么」，十几分钟就收 三个追问，答不上来不追 加一层「代价」：时间、钱、放弃了什么 掌控感 本课基本不适用，别硬放 只放一件小事，边界写下来贴桌上 放一整段，家长这周不主动问 次序感 两格「先做／后做」，2–3 件 三格，每格不超过 2 件 周五排下周一，自己估哪件更久 周计划复盘 不做。改成睡前一句话，家长代笔 1–2 件，画图打勾，四问只问三句 四问全用，孩子主持，家长当记录员 允许试错 范围极小，安全作息全由大人兜住 忘带水杯、忘了装本子这类小事 自己排的时间没留住、周末安排冲突 作业／流程 换成收拾玩具、睡前流程，家长不代做 陪写为主，固定位置与顺序，不额外加量 拆段、估时间交给他，家长别坐旁边 电子产品 大人定时段与时长，用看得见的结束信号 四要素一起写一起签，计时交给设备 孩子起草约定，家长只谈睡眠与前提 情绪接住 少说话，抱一下、陪坐两分钟 复述他的话，给一个明确的短时段 别当众安抚，留一句话后退出房间 家庭分工 分工更细：哄睡／喂饭／出门各归各 把分工表让孩子看见 让他参与定「哪一块归自己」 孩子 10 岁但从没自己排过事，请先按 7–9 岁那一列补两周；7 岁已经很会安排，也不必硬按回第一列。"},{"id":"t6","title":"T6 12 周推进表","kind":"tool","plain":"T6 12 周推进表 配合第 15 课。每周只填一行，填完把其余的盖住。断了不补、不顺延、不加倍，下周照原样继续。 周次 推进哪一课 这周唯一的一个动作 忙/累那天的缩小版 稳住了吗 1 □ 2 □ 3 □ 4 □ 5 □ 6 □ 7 □ 8 □ 9 □ 10 □ 11 □ 12 □ 三个月后，家里少说的一句 现在最常替孩子做的决定 自查：这周我新增了几个动作？超过 1 个就先收回来。孩子没做到那天，我说的是「卡在哪一步」还是「你怎么又」？我自己那一条执行了几天？"},{"id":"t7","title":"T7 「没做到」记录页","kind":"tool","plain":"T7 「没做到」记录页 配合第 10、15 课。上半页用来划红线，下半页记录没做到的那些天。 这一页不用来追责。 最近三次「差点冲上去」的场景，先分类再谈忍住 序号 当时发生了什么 可承担 / 必须介入 1 □ 可承担 □ 介入 2 □ 可承担 □ 介入 3 □ 可承担 □ 介入 必须立刻介入：人身安全、交通与用火用电、健康与用药、明显超出承受能力的情绪、涉及他人财物或规则、无法挽回的安排。拿不准时一律按「介入」。 日期 原计划 实际 卡在哪一步 / 下次改一个什么 断了不补、不顺延、不加倍。空着的那一行就让它空着——记录是为了看清卡在哪一步，不是为了算这个月少做了几天。"},{"id":"end","title":"写在使用之后","kind":"reading","plain":"写在使用之后 这套课从头到尾只做了一件事：把「催孩子」换成「搭环境」。三根柱子、四个基础动作、四步交还掌控感、几个每天都来的场景，加上家长自己那一点持续。 它不会让哪一个傍晚突然变轻松。更常见的是，某天你发现自己那句「快点」到了嘴边又咽回去了，孩子自己把书包挪到了门口——就这一点点，是很多个普通日子攒出来的。 按自家情况取用就好。孩子各不相同，表里的内容随便改，完成七八成足够，一条都没做也可以随时重来。 关于本册 本册依据一套育儿分享材料重新编写，编写时已整体剔除其中的升学排名导向、成绩指标、效果比较、无出处的数据与医疗化表述，并做了匿名化处理。材料中的场景仅用于说明做法，不代表普遍效果，也不是编写者的亲身经历。 本册为家庭教育做法的整理，不是心理评估、发育诊断或医疗建议，不替代学校教育与专业支持，也不承诺任何学习结果、成绩变化或行为改变。 使用许可： 仅限购买者本人家庭使用。请勿转发、公开传播、上传至公共平台、二次销售，或用于任何形式的商业培训与转授。工具页可自行打印，供本家庭反复填写。 如遇内容或文件问题，请通过购买渠道反馈；本册不设站外联系方式，也不在册内引导任何站外交易。 把「要我做」变成「我要做」 · 3–12 岁家庭自驱力实操课 · 家长版 / 12 周行动手册 16 节课 · 7 张可打印工具表 · 第一版"}]};</script>
+<script>
+(function(){
+"use strict";
+var C = window.COURSE, D = C.docs;
+var KEY = "ziqu.course.v1";
+var $ = function(s,r){ return (r||document).querySelector(s); };
+var $$ = function(s,r){ return Array.prototype.slice.call((r||document).querySelectorAll(s)); };
+var esc = function(s){ return String(s).replace(/[&<>"']/g,function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); };
+
+/* ---------- 状态 ---------- */
+var defState = { done:{}, notes:{}, fields:{}, week:{}, age:"all", theme:"light", font:1, last:"", lock:null, tipSeen:false };
+var S;
+try { S = Object.assign({}, defState, JSON.parse(localStorage.getItem(KEY) || "{}")); }
+catch(e){ S = Object.assign({}, defState); }
+["done","notes","fields","week"].forEach(function(k){ if(!S[k] || typeof S[k]!=="object") S[k]={}; });
+var saveT = null;
+function flush(){
+  clearTimeout(saveT); saveT=null;
+  try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){ toast("本机存储不可用，本次修改不会保留"); }
+}
+function save(){ clearTimeout(saveT); saveT=setTimeout(flush,220); }
+window.addEventListener("pagehide",flush);
+window.addEventListener("beforeunload",flush);
+/* 手机切后台 / 锁屏时 beforeunload 常常不触发，这里补一道，避免丢最后几秒输入 */
+document.addEventListener("visibilitychange",function(){ if(document.visibilityState==="hidden") flush(); });
+
+function toast(msg){ var t=$("#toast"); t.textContent=msg; t.classList.add("show"); clearTimeout(t._t); t._t=setTimeout(function(){ t.classList.remove("show"); },1900); }
+
+/* ---------- 主题 / 字号 / 分龄 ---------- */
+function applyPrefs(){
+  document.body.dataset.theme = S.theme==="dark"?"dark":"light";
+  $("#themeBtn").textContent = S.theme==="dark"?"☀":"☾";
+  $("#themeBtn2").textContent = S.theme==="dark"?"☀ 切到浅色":"☾ 切到深色";
+  document.documentElement.style.setProperty("--fscale", S.font);
+  $$("#agebar button").forEach(function(b){ b.classList.toggle("on", b.dataset.age===S.age); });
+  document.body.classList.toggle("age-filtered", S.age!=="all");
+  updateAgeTip();
+}
+function cycleFont(){ S.font = S.font>=1.25 ? 0.9 : +(S.font+0.1).toFixed(2); applyPrefs(); save(); toast("字号 "+Math.round(S.font*100)+"%"); }
+
+/* 分龄状态是常驻的：不管在哪个页面切换，都能看见当前档、也能一键退出 */
+function updateAgeTip(){
+  var el=$("#ageTip");
+  if(S.age==="all"){ el.classList.add("hidden"); el.innerHTML=""; return; }
+  el.classList.remove("hidden");
+  el.innerHTML='<div class="nb-tx">当前只看 <b>'+esc(ageLabel(S.age))+'</b> 这一档：课程里的分龄表只显示这一档，T5 速查表只留这一列。<br>打印件始终包含全部年龄段。</div>'+
+    '<button type="button" id="ageAllBtn">恢复全龄</button>';
+  $("#ageAllBtn").onclick=function(){ setAge("all"); };
+}
+function setAge(a){
+  S.age=a; applyPrefs(); save();
+  if(currentView==="doc"||currentView==="about") applyAgeCols($("#view"));
+  /* 首页等页面内容不依赖分龄，不重绘，避免把家长从阅读位置弹回顶部 */
+  toast(a==="all"?"已显示全部年龄段":"已切到 "+ageLabel(a));
+}
+
+/* 第一次打开先把「记录只在本机」说清楚；内置浏览器额外给出用系统浏览器打开的提示 */
+function initBackupTip(){
+  var el=$("#backupTip");
+  if(S.tipSeen){ el.classList.add("hidden"); el.innerHTML=""; return; }
+  var inApp=/MicroMessenger|XHS|Weibo|QQ\/|Alipay/i.test(navigator.userAgent||"");
+  el.classList.remove("hidden");
+  el.innerHTML='<div class="nb-tx"><b>先把这句话看完：</b>打卡、随手记和表格内容只存在<b>当前这个浏览器</b>里，换手机、换浏览器或清理缓存都会丢失，请定期在「我的进度」里备份。'+
+    (inApp?'<br>你现在在 App 内置浏览器里，建议点右上角「···」→ 用系统浏览器打开，再收藏本页。':'<br>建议把本页加入收藏，换设备前先导出或复制记录。')+
+    '</div><button type="button" id="tipOk">知道了</button><a href="#/progress">去备份 →</a>';
+  $("#tipOk").onclick=function(){ S.tipSeen=true; save(); el.classList.add("hidden"); el.innerHTML=""; };
+}
+
+/* ---------- 导航 ---------- */
+var groupNames = ["第一部分","第二部分","第三部分","第四部分","第五部分","第六部分"];
+function buildNav(){
+  var html = "";
+  html += '<div class="navgroup"><button class="gt" data-g="intro"><span class="arw">▾</span>开始使用</button><div class="items">'+
+    navItem("intro","·","开始之前")+navItem("notice","·","使用前请读完")+
+    '<button class="navitem" data-go="#/progress"><span class="n">·</span><span class="tx">我的进度与记录</span></button>'+
+    '<button class="navitem" data-go="#/tools"><span class="n">·</span><span class="tx">工具表一览</span></button>'+
+    '</div></div>';
+  C.groups.forEach(function(g,i){
+    var idx = groupNames[i] || ("第"+(i+1)+"部分");
+    html += '<div class="navgroup" data-g="'+esc(g.id)+'"><button class="gt"><span class="arw">▾</span>'+esc(idx+"　"+g.name)+'</button><div class="items">';
+    g.items.forEach(function(id){
+      var d=D[id], n = d.kind==="tool" ? d.title.split("　")[0] : "第 "+d.no+" 课";
+      var label = d.kind==="tool" ? d.title.replace(/^T\d+　?/,"") : d.title.replace(/^第\s*\d+\s*课\s*/,"");
+      html += navItem(id,n,label);
+    });
+    html += '</div></div>';
+  });
+  $("#nav").innerHTML = html;
+  $$("#nav .gt").forEach(function(b){ b.onclick=function(){ b.parentNode.classList.toggle("closed"); }; });
+  $$("#nav [data-go],#nav .navitem[data-id]").forEach(function(b){
+    b.onclick=function(){ location.hash = b.dataset.go || ("#/doc/"+b.dataset.id); closeNav(); };
+  });
+  updateNav();
+}
+function navItem(id,n,label){
+  return '<button class="navitem'+(S.done[id]?" done":"")+'" data-id="'+id+'"><span class="n">'+esc(n)+'</span><span class="tx">'+esc(label)+'</span><span class="dot"></span></button>';
+}
+function updateNav(){
+  var n=C.lessons.filter(function(id){ return !!S.done[id]; }).length;
+  $("#pgDone").textContent=n; $("#pgBar").style.width=(n/C.lessons.length*100)+"%";
+  $$("#nav .navitem[data-id]").forEach(function(b){
+    b.classList.toggle("on", b.dataset.id===currentId);
+    b.classList.toggle("done", !!S.done[b.dataset.id]);
+  });
+  $$(".bottombar a").forEach(function(a){ a.classList.toggle("on", a.dataset.b===currentView); });
+}
+function closeNav(){ document.body.classList.remove("nav-open"); }
+
+/* ---------- 路由 ---------- */
+var currentId="", currentView="home", pendingHighlight="";
+function parse(){
+  var h=(location.hash||"#/home").slice(1);
+  var p=h.split("/").filter(Boolean);
+  if(p[0]==="doc" && D[p[1]]) return {view:"doc", id:p[1]};
+  if(p[0]==="progress") return {view:"progress"};
+  if(p[0]==="tools") return {view:"tools"};
+  if(p[0]==="about") return {view:"about"};
+  return {view:"home"};
+}
+function render(opts){
+  var r=parse(); currentView=r.view; currentId=r.id||"";
+  closeNav(); closeSearch(); $("#toast").classList.remove("show");
+  var v=$("#view");
+  if(r.view==="home") v.innerHTML=homeHTML();
+  else if(r.view==="progress") v.innerHTML=progressHTML();
+  else if(r.view==="tools") v.innerHTML=toolsHTML();
+  else if(r.view==="about") v.innerHTML=aboutHTML();
+  else v.innerHTML=docHTML(r.id);
+  bindCommon(v);
+  if(r.view==="doc"||r.view==="about") afterDoc(v,r.view==="about"?"about":r.id);
+  if(r.view==="progress") bindProgress(v);
+  if(r.view==="tools") bindTools(v);
+  if(pendingHighlight){ highlight(v,pendingHighlight); pendingHighlight=""; }
+  updateNav();
+  /* 只有真正换页才回到顶部；打卡、清空、导入等就地重绘要留住家长刚才的位置 */
+  if(!(opts && opts.keepScroll)) window.scrollTo(0,0);
+  /* 只记住最后一次读的课程，首页「继续上次」才不会被翻首页/进度页冲掉 */
+  if(r.view==="doc" && D[r.id] && D[r.id].kind==="lesson") S.last=location.hash;
+  save();
+  document.title = r.view==="home"
+    ? "把「要我做」变成「我要做」｜3–12 岁家庭自驱力实操课"
+    : ((D[r.id]?D[r.id].title:({progress:"我的进度",tools:"工具表一览",about:"关于这套课"}[r.view]||"课程")) + " · 自驱力实操课");
+}
+
+/* ---------- 首页 ---------- */
+function homeHTML(){
+  var lastDoc = (S.last||"").match(/^#\/doc\/(l\d+)$/);
+  var resume = lastDoc && D[lastDoc[1]] ? '<a class="resume" href="#/doc/'+lastDoc[1]+'">↳ 继续上次：'+esc(D[lastDoc[1]].title)+'</a>' : "";
+  var map = C.groups.map(function(g,i){
+    var items=g.items.map(function(id){
+      var d=D[id], n=d.kind==="tool"?d.title.split("　")[0]:("第 "+d.no+" 课");
+      var label=d.kind==="tool"?d.title.replace(/^T\d+　?/,""):d.title.replace(/^第\s*\d+\s*课\s*/,"");
+      return '<a class="maplink" href="#/doc/'+id+'"><span class="n">'+esc(n)+'</span><span>'+esc(label)+'</span></a>';
+    }).join("");
+    return '<div class="mapgroup"><div class="mh"><span class="idx">PART '+(i+1)+'</span>'+esc(g.name)+'</div><div class="mitems">'+items+'</div></div>';
+  }).join("");
+  var tools = C.tools.map(function(id,i){
+    var d=D[id], label=d.title.replace(/^T\d+　?/,"");
+    var sub=["含孩子签名栏","打勾 + 三行复盘","周日 15 分钟","12 句可剪贴","一页看全","12 周进度","复盘而非追责"][i]||"";
+    return '<a class="toolcard" href="#/doc/'+id+'"><b>'+esc(d.title.split("　")[0]+"　"+label)+'</b><span>'+esc(sub)+'</span></a>';
+  }).join("");
+  var done=C.lessons.filter(function(id){return !!S.done[id];}).length;
+  return ''+
+  '<div class="hero">'+
+    '<div class="kicker">家长版 · 12 周行动手册</div>'+
+    '<h1><span>把「要我做」</span><span>变成「我要做」</span></h1>'+
+    '<div class="sub">3–12 岁家庭自驱力实操课</div>'+
+    '<div class="sub2">这套课不教孩子，教家长怎么把家里的秩序搭对。16 节课，每节一个今晚就能试的动作。</div>'+
+    '<div class="chips"><b>家长阅读 · 对孩子执行</b><b>3–6 / 7–9 / 10–12 分龄</b><b>16 节实操课</b><b>7 张工具表可在线填</b><b>照着念的话术</b><b>每课都有「没搞定怎么办」</b></div>'+
+    '<div class="hero-cta"><a class="btn primary" href="#/doc/'+C.lessons[0]+'">从第 1 课开始 →</a>'+
+      '<a class="btn" href="#/doc/'+(lastDoc&&D[lastDoc[1]]?lastDoc[1]:C.lessons[0])+'">继续学习'+(done?"（已学 "+done+" 课）":"")+'</a>'+
+      '<a class="btn" href="#/tools">看看工具表</a></div>'+
+    (resume?'<div style="margin-top:12px">'+resume+'</div>':"")+
+    '<div class="hero-note">使用提醒　一周 1–2 课，一次只改一件事，做满 7 天再往下走。<br>本册为家庭教育经验整理，不替代学校教育与专业支持，不承诺任何结果。详见「使用前请读完」。</div>'+
+  '</div>'+
+  '<div class="section"><h2>先确认适不适合你家</h2><p class="sd">花 5 分钟看清楚，比直接翻到第一课更省时间。</p>'+
+    '<div class="two"><div class="card"><h3>这份课是给谁的</h3><ul>'+
+      '<li>家里有 3–12 岁的孩子，早上催起床、晚上催作业、出门催收拾，一天说很多遍「快点」。</li>'+
+      '<li>试过奖励贴纸、打卡表、积分兑换，头两周有用，之后悄悄回到原样。</li>'+
+      '<li>想让孩子自己安排，又担心一放手就散架；家里几个人管法不一致。</li>'+
+      '<li>愿意用几周时间，慢慢把「催」换成「搭」。</li></ul></div>'+
+    '<div class="card warn"><h3>这份课不是给谁的</h3><ul>'+
+      '<li>想要几天内让孩子变自觉的速效方案。</li>'+
+      '<li>孩子出现持续的情绪低落、长期回避上学、睡眠或食欲明显变化、伤害自己的言语——请先联系学校老师或寻求专业支持。</li>'+
+      '<li>想找择校、升学路径、竞赛、提分、学区信息——本册完全不涉及。</li></ul></div></div></div>'+
+  '<div class="section"><h2>你会拿到什么</h2><p class="sd">每一课都能直接照着做，不需要额外准备材料。</p>'+
+    '<div class="grid-cards">'+
+      '<div class="mini"><span class="num">01</span><b>16 节实操课</b><p>每节读 15–20 分钟，配一个 10 分钟内能做完的家庭动作。</p></div>'+
+      '<div class="mini"><span class="num">02</span><b>三段分龄调整</b><p>同一件事，3–6 / 7–9 / 10–12 岁做法不一样，逐课写明。</p></div>'+
+      '<div class="mini"><span class="num">03</span><b>照着说</b><p>可直接念出口的句子，点一下就能复制，不用临场组织语言。</p></div>'+
+      '<div class="mini"><span class="num">04</span><b>7 张工具表</b><p>网页里在线填、自动保存，也能打印出来手写。</p></div>'+
+      '<div class="mini"><span class="num">05</span><b>没搞定怎么办</b><p>孩子不配合、家长忍不住、老人插手，都比顺利那版更常见。</p></div>'+
+      '<div class="mini"><span class="num">06</span><b>进度与记录</b><p>学完打卡、随手记、12 周推进，进度只存在你自己的浏览器里。</p></div>'+
+    '</div></div>'+
+  '<div class="section"><h2>课程地图</h2><p class="sd">按课次排，建议顺着做；也可以从第 11 课某一个具体场景直接入手。</p>'+map+'</div>'+
+  '<div class="section"><h2>可填写 · 可打印的工具表</h2><p class="sd">点开直接填，内容自动存在本机；需要手写时用右上角「打印本页」。</p><div class="toolgrid">'+tools+'</div></div>'+
+  '<div class="section"><h2>使用前请读完</h2><p class="sd">三句话，说清楚这套课能做什么、不能做什么。</p>'+
+    '<div class="disclaimer"><b>01　不是评估</b>：不做能力、性格或发育方面的判断，也不给任何孩子贴标签。　<b>02　不承诺结果</b>：不设达标线，完成七八成即可，随时可以停下来重来。　<b>03　不替代专业支持</b>：遇到持续的情绪或上学困难，先找学校老师或专业人士。<br><br>'+
+    '本册是家庭教育做法的整理与改写，不是心理评估、发育诊断或医疗建议，不承诺任何学习结果、成绩变化或行为改变。册内场景与案例来自编写时所依据的一套育儿分享材料，已做匿名化处理，仅用于说明做法，不代表普遍效果，也不是编写者的亲身经历。<br><br>'+
+    '<b>使用许可</b>：仅限购买者本人家庭使用。请勿转发、公开传播、二次销售，或用于任何形式的商业培训与转授。工具页可自行打印，供本家庭反复填写。<br>'+
+    '<a href="#/doc/notice">阅读完整说明 →</a>　·　<a href="#/about">关于这套课 →</a></div></div>'+
+  '<div class="footer">把「要我做」变成「我要做」　·　3–12 岁家庭自驱力实操课　·　家长版 / 12 周行动手册<br>16 节课 · 7 张工具表 · 网页版　|　学习记录保存在本机浏览器，不上传、不收集任何信息。</div>';
+}
+
+/* ---------- 文档页 ---------- */
+function groupOf(id){
+  for(var i=0;i<C.groups.length;i++){
+    /* 部分扉页自己就是分组头，不在 items 里；不补这条会让「本部分包含」整块空白 */
+    if(C.groups[i].id===id || C.groups[i].items.indexOf(id)>=0) return C.groups[i];
+  }
+  return null;
+}
+function docHTML(id){
+  var d=D[id], g=groupOf(id);
+  var isTool=d.kind==="tool", isPart=d.kind==="part";
+  var kindTx = isTool?"可填写工具表":(isPart?"部分导语":(d.kind==="lesson"?"第 "+d.no+" 课 / 共 16 课":"阅读"));
+  var crumb = g ? '<a href="#/home">首页</a><span>›</span><span>'+esc(g.name)+'</span>'
+                 : '<a href="#/home">首页</a><span>›</span><span>'+esc(d.title)+'</span>';
+  var idx = isTool?C.tools.indexOf(id):(d.kind==="lesson"?C.lessons.indexOf(id):-1);
+  var seq = isTool?C.tools:C.lessons;
+  var prev = idx>0?'<a class="btn" href="#/doc/'+seq[idx-1]+'">← 上一'+(isTool?"张":"课")+'</a>':"";
+  var next = idx>=0&&idx<seq.length-1?'<a class="btn" href="#/doc/'+seq[idx+1]+'">下一'+(isTool?"张":"课")+' →</a>':"";
+  var doneOn = isTool?"✓ 这张表已用过，点击取消":"✓ 已学完，点击取消";
+  var doneOff = isTool?"标记这张表已用过":"标记这一课已学完";
+  var doneBtn = (d.kind==="lesson"||isTool)?
+    '<button class="btn'+(S.done[id]?" is-done":"")+'" id="doneBtn">'+(S.done[id]?doneOn:doneOff)+'</button>':"";
+  /* 页尾也放一个打卡，读完不必往回滚两屏；两处状态同步 */
+  var doneBtn2 = (d.kind==="lesson"||isTool)?
+    '<button class="btn'+(S.done[id]?" is-done":"")+'" id="doneBtn2">'+(S.done[id]?doneOn:doneOff)+'</button>':"";
+
+  /* 手册块内部自带 h2 / 导语，网页由页头统一呈现，这里剥掉避免重复 */
+  var body=d.html, hint="";
+  body = body.replace(/^\s*<h2[^>]*>[\s\S]*?<\/h2>/,"");
+  if(isPart) body = body.replace(/<h2[^>]*>[\s\S]*?<\/h2>/,"");
+  var lm = body.match(/^\s*<div class="lead">[\s\S]*?<\/div>/);
+  if(lm) body = body.replace(lm[0],"");
+  var hm = body.match(/<div class="hint">([\s\S]*?)<\/div>/);
+  if(isTool && hm){ hint=hm[1]; body=body.replace(hm[0],""); }
+  var head = isTool ? (hint?'<div class="lead">'+hint+'</div>':"")
+                    : (d.lead?'<div class="lead">'+esc(d.lead)+'</div>':"");
+  if(isPart) body = '<div class="part-hero"><div class="part-inner">'+body+'</div></div>'+
+    '<div class="section"><h2>本部分包含</h2>'+(g?g.items.map(function(x){
+      return '<a class="maplink" href="#/doc/'+x+'"><span class="n">'+(D[x].kind==="tool"?D[x].title.split("　")[0]:"第 "+D[x].no+" 课")+'</span><span>'+esc(D[x].title.replace(/^(第\s*\d+\s*课|T\d+)\s*/,""))+'</span></a>';
+    }).join(""):"")+'</div>';
+  return '<div class="crumb">'+crumb+'</div>'+
+    '<div class="doc-h"><div class="kicker">'+esc(kindTx)+'</div><h1>'+esc(d.title)+'</h1></div>'+
+    head+
+    '<div class="toolbar no-print">'+doneBtn+
+      '<button class="btn" id="printBtn">打印本页</button>'+
+      (isTool?'<button class="btn" id="clearTableBtn">清空这张表</button>':"")+
+      '<span class="spacer"></span>'+
+      '<span class="saved">'+(isTool?"填写后自动保存在本机":(d.kind==="lesson"?"读完可在页尾打卡":""))+'</span></div>'+
+    (isTool?'<div class="table-hint no-print"><span class="ar">→</span><span>这张表右边还有几列没显示出来，左右滑动查看。</span><button class="btn" type="button" id="jumpRight">直接滑到最右一列</button></div>':"")+
+    '<div class="doc-body'+(isTool?" tool-page":"")+'" id="docBody">'+body+'</div>'+
+    (prev||next||doneBtn2?'<div class="toolbar no-print" style="margin-top:26px;border-top:1px solid var(--line2);border-bottom:0;padding:18px 0 0">'+prev+doneBtn2+'<span class="spacer"></span>'+next+'</div>':"")+
+    '<div class="footer">仅供购买者本人家庭使用 · 不评估 · 不承诺结果 · 学习记录仅保存在本机</div>';
+}
+function ageLabel(a){ return {a1:"3–6 岁 · 种子期",a2:"7–9 岁 · 搭架子",a3:"10–12 岁 · 坐副驾"}[a]||"全龄"; }
+
+/* ---------- 文档后处理：表格包裹、分龄标记、话术复制、可填写控件 ---------- */
+function afterDoc(root,id){
+  var d=D[id]||{};
+  var isTool=d.kind==="tool";
+  $$("table",root).forEach(function(tb){
+    var first=tb.querySelector("tr"), cols=0;
+    if(first) $$("th,td",first).forEach(function(c){ cols += (parseInt(c.getAttribute("colspan")||"1",10)||1); });
+    if(cols>=3) tb.classList.add("cols"+Math.min(cols,6));
+    if(tb.parentNode.classList.contains("tw")) return;
+    var w=document.createElement("div"); w.className="tw"; tb.parentNode.insertBefore(w,tb); w.appendChild(tb);
+  });
+  /* 手机上右边还有列：边缘渐隐提醒，滑到底后自然消失；窄表不误报 */
+  $$(".tw",root).forEach(function(tw){
+    if(tw.scrollWidth<=tw.clientWidth+8) return;
+    tw.classList.add("has-more");
+    tw.addEventListener("scroll",function(){
+      tw.classList.toggle("has-more", tw.scrollLeft+tw.clientWidth < tw.scrollWidth-8);
+    },{passive:true});
+  });
+  var th=$(".table-hint",root);
+  if(th && !$(".tw.has-more",root)) th.style.display="none";
+  // T5 是 4 列分龄速查：给列打标
+  $$("#docBody table.grid",root).forEach(function(tb){
+    var first=tb.querySelector("tr"); if(!first) return;
+    var heads=$$("th",first).map(function(x){return x.textContent;});
+    if(heads.some(function(h){return /3–6 岁/.test(h);})){
+      tb.classList.add("t5");
+      $$("tr",tb).forEach(function(tr){ $$("td,th",tr).forEach(function(cell,j){
+        if(j>0) cell.dataset.col=["","a1","a2","a3"][j]||"";
+      }); });
+    }
+  });
+  markAgeRows(root);
+  // 话术复制
+  $$("#docBody .say .q",root).forEach(function(q){
+    var b=document.createElement("button"); b.className="copy no-print"; b.textContent="复制"; b.type="button";
+    b.onclick=function(){ copyText(q.textContent.replace(/复制$/,"").trim(),"话术已复制"); };
+    q.appendChild(b);
+  });
+  // 可填写
+  var counter=0;
+  function key(){ return id+":"+(counter++); }
+  if(isTool){
+    // T6「稳住了吗」列 → 12 周打卡联动
+    if(id==="t6"){
+      var t6=$$("#docBody table.grid",root)[0];
+      if(t6) $$("tr",t6).slice(1).forEach(function(tr,j){
+        var td=tr.cells[4]; if(!td) return;
+        td.dataset.skip="1"; td.innerHTML="";
+        var b=document.createElement("button"); b.type="button"; b.className="chk"+(S.week[j]?" on":"");
+        b.textContent=S.week[j]?"✓":""; b.title="第 "+(j+1)+" 周：稳住了就点一下";
+        b.onclick=function(){ S.week[j]=!S.week[j]; b.classList.toggle("on",S.week[j]); b.textContent=S.week[j]?"✓":""; save(); };
+        td.appendChild(b);
+      });
+    }
+    $$("#docBody td",root).forEach(function(td){
+      if(td.dataset.skip) return;
+      var k=key(), txt=td.textContent.trim();
+      var opt=txt.match(/□\s*([^\s□　]+)[\s　]*□\s*([^\s□　]+)/);
+      if(opt && td.children.length===0){
+        td.innerHTML="";
+        [opt[1],opt[2]].forEach(function(label,v){
+          var b=document.createElement("button"); b.type="button"; b.className="opt"+(S.fields[k]===String(v)?" on":""); b.textContent=label;
+          b.onclick=function(){ S.fields[k]=String(v); $$(".opt",td).forEach(function(x){x.classList.remove("on");}); b.classList.add("on"); save(); };
+          td.appendChild(b);
+        });
+        return;
+      }
+      if(txt==="□" && td.children.length===0){
+        td.innerHTML=""; var b=document.createElement("button"); b.type="button"; b.className="chk"+(S.fields[k]?" on":""); b.textContent=S.fields[k]?"✓":"";
+        b.onclick=function(){ S.fields[k]=S.fields[k]?0:1; b.classList.toggle("on",!!S.fields[k]); b.textContent=S.fields[k]?"✓":""; save(); };
+        td.appendChild(b); return;
+      }
+      if(/^□{3,}$/.test(txt)){
+        td.innerHTML=""; for(var j=0;j<txt.length;j++){ (function(j){
+          var kk=k+"."+j, b=document.createElement("button"); b.type="button"; b.className="chk"+(S.fields[kk]?" on":""); b.textContent=S.fields[kk]?"✓":"";
+          b.onclick=function(){ S.fields[kk]=S.fields[kk]?0:1; b.classList.toggle("on",!!S.fields[kk]); b.textContent=S.fields[kk]?"✓":""; save(); };
+          td.appendChild(b);
+        })(j); }
+        return;
+      }
+      if(txt==="" && td.children.length===0) fillCell(td,k,td.classList.contains("fill"));
+      else if(txt!=="" && td.classList.contains("fill") && td.querySelector(".blank")) { /* 保留话术内容 */ }
+    });
+    $$("#docBody .blank",root).forEach(function(el){ fillInline(el,key()); });
+    $$("#docBody .sig span",root).forEach(function(el){ var k=key(); var i=makeInput(k,""); i.style.width="120px"; el.replaceWith(i); });
+  }
+  // 每页的「随手记」与课程记录行
+  $$("#docBody .rec .line",root).forEach(function(el){ fillInline(el,key()); });
+  $$("#docBody .notes",root).forEach(function(el){
+    var k="note:"+id, ta=document.createElement("textarea");
+    ta.className="field notes-area"; ta.placeholder="随手记 · 这一周实际发生了什么"; ta.value=S.notes[id]||"";
+    ta.oninput=function(){ S.notes[id]=ta.value; save(); };
+    el.replaceWith(ta);
+  });
+  applyAgeCols(root);
+}
+function fillCell(td,k,multi){
+  td.innerHTML="";
+  var el=document.createElement(multi?"textarea":"input");
+  if(multi){ el.rows=2; } else { el.type="text"; }
+  el.className="field"; el.dataset.k=k; el.value=S.fields[k]||""; el.placeholder=" ";
+  el.oninput=function(){ S.fields[k]=el.value; save(); };
+  td.appendChild(el);
+}
+function fillInline(el,k){
+  var i=makeInput(k,""); i.style.width="150px"; el.replaceWith(i);
+}
+function makeInput(k,val){
+  var i=document.createElement("input"); i.type="text"; i.className="field"; i.dataset.k=k;
+  i.value=S.fields[k]||val||""; i.placeholder=" ";
+  i.oninput=function(){ S.fields[k]=i.value; save(); };
+  return i;
+}
+function markAgeRows(root){
+  $$("#docBody table.ages tr",root).forEach(function(tr){
+    var a=tr.querySelector("td.a"); if(!a) return;
+    var t=a.textContent;
+    tr.dataset.age = /3[–-]6/.test(t)?"a1" : (/7[–-]9/.test(t)?"a2" : (/10[–-]12/.test(t)?"a3":""));
+  });
+  applyAgeCols(root);
+}
+function applyAgeCols(root){
+  $$("#docBody table.ages tr",root).forEach(function(tr){
+    tr.classList.toggle("age-on", S.age!=="all" && tr.dataset.age===S.age);
+    tr.classList.toggle("age-off", S.age!=="all" && tr.dataset.age!==S.age);
+  });
+  $$("#docBody [data-col]",root).forEach(function(c){
+    var on = S.age!=="all" && c.dataset.col===S.age;
+    c.classList.toggle("col-on",on);
+    /* 和课程分龄表一致：不是只变色，而是真的把其他两档收起来 */
+    c.classList.toggle("col-off", S.age!=="all" && !!c.dataset.col && !on);
+  });
+}
+function copyText(t,msg){
+  msg=msg||"已复制";
+  if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(function(){toast(msg);},function(){legacyCopy(t,msg);}); }
+  else legacyCopy(t,msg);
+}
+function legacyCopy(t,msg){
+  var ta=document.createElement("textarea"); ta.value=t; ta.style.position="fixed"; ta.style.opacity="0";
+  document.body.appendChild(ta); ta.select();
+  try{ document.execCommand("copy"); toast(msg||"已复制"); }catch(e){ toast("复制失败，请长按选中文字"); }
+  document.body.removeChild(ta);
+}
+/* 不依赖下载、不依赖 JSON 的兜底备份：家长粘进备忘录或微信收藏就能留底 */
+function recordText(){
+  var L=["自驱力课程 · 我的记录","导出时间："+new Date().toLocaleString("zh-CN"),""];
+  L.push("【已学完的课程】");
+  var dl=C.lessons.filter(function(id){return !!S.done[id];});
+  L.push(dl.length?dl.map(function(id){return "✓ "+D[id].title;}).join("\n"):"（还没有打卡）");
+  L.push("","【12 周推进】");
+  var wk=[]; for(var j=0;j<12;j++) if(S.week[j]) wk.push("第 "+(j+1)+" 周");
+  L.push(wk.length?wk.join("、"):"（还没有打卡）");
+  L.push("","【随手记】");
+  var ns=Object.keys(S.notes).filter(function(k){return (S.notes[k]||"").trim();});
+  L.push(ns.length?ns.map(function(k){return "· "+(D[k]?D[k].title:k)+"："+S.notes[k];}).join("\n"):"（还没有写）");
+  L.push("","【工具表填写】");
+  var fs=Object.keys(S.fields).filter(function(k){ var v=S.fields[k]; return v!==0&&v!==""&&v!=null&&String(v).trim()!==""; });
+  var byTool={};
+  fs.forEach(function(k){ var t=k.split(":")[0]; if(!byTool[t]) byTool[t]=[]; byTool[t].push(String(S.fields[k])); });
+  var tk=Object.keys(byTool).sort();
+  L.push(tk.length?tk.map(function(t){return "· "+(D[t]?D[t].title:t)+"："+byTool[t].join(" / ");}).join("\n"):"（还没有填）");
+  L.push("","—— 这段文字粘到备忘录或微信收藏即可留底；要完整恢复请用 JSON 备份。");
+  return L.join("\n");
+}
+
+/* ---------- 关于 / 合规页 ---------- */
+function aboutHTML(){
+  return '<div class="crumb"><a href="#/home">首页</a><span>›</span><span>关于这套课</span></div>'+
+   '<div class="doc-h"><div class="kicker">说明</div><h1>关于这套课</h1></div>'+
+   '<div class="lead">家长阅读、家长对孩子执行。孩子不是这套课的读者。</div>'+
+   '<div class="toolbar no-print"><button class="btn" id="printBtn">打印本页</button><span class="spacer"></span></div>'+
+   '<div class="doc-body" id="docBody">'+
+     '<div class="front">'+D.intro.html+'</div>'+
+     '<div class="front" style="border-top:1px solid var(--line2);padding-top:24px;margin-top:28px">'+D.notice.html+'</div>'+
+     '<div class="end" style="border-top:1px solid var(--line2);padding-top:24px;margin-top:28px">'+D.end.html+'</div>'+
+   '</div>'+
+   '<div class="footer">本页内容与纸质手册一致 · 不评估 · 不承诺结果 · 不设站外联系方式</div>';
+}
+
+/* ---------- 工具表一览 ---------- */
+function toolsHTML(){
+  var subs=["含孩子签名栏，建议 3–5 条","每天一行，只记两件事","周日 15 分钟，复盘四问","12 句，可剪下贴冰箱","一页看全三段分龄","进度自查，断了不补","复盘而非追责"];
+  var cards=C.tools.map(function(id,i){
+    var d=D[id], label=d.title.replace(/^T\d+　?/,"");
+    return '<a class="toolcard" href="#/doc/'+id+'" style="display:block;padding:18px 20px">'+
+      '<div class="num" style="font-size:11px;letter-spacing:1px;color:var(--brown2)">'+esc(d.title.split("　")[0])+'</div>'+
+      '<b style="font-size:15px">'+esc(label)+'</b><span style="display:block;margin-top:5px">'+esc(subs[i])+'</span></a>';
+  }).join("");
+  return '<div class="crumb"><a href="#/home">首页</a><span>›</span><span>工具表一览</span></div>'+
+    '<div class="doc-h"><div class="kicker">7 张 · 可填写 · 可打印</div><h1>工具表一览</h1></div>'+
+    '<div class="lead">点开任意一张，网页里直接填、自动保存在本机；也可以打印出来手写，贴在孩子每天会经过的地方。表格只是提醒，不是考卷——空着、涂改、只填一半，都可以。</div>'+
+    '<div class="toolbar no-print"><button class="btn" id="printBtn">打印本页</button><span class="spacer"></span><span class="saved">填写内容不会上传</span></div>'+
+    '<div class="toolgrid" style="grid-template-columns:repeat(2,1fr)">'+cards+'</div>'+
+    '<div class="section"><h2>用之前的两句话</h2><div class="card"><p>一周只推进一个动作，做满 7 天再往下走。记录「没做到」比记录「做到了」更有用。</p><p>孩子各不相同，表里的内容按自家情况改。完成七八成就够了，不必逐条达标。</p></div></div>';
+}
+
+/* ---------- 我的进度 ---------- */
+function progressHTML(){
+  var done=C.lessons.filter(function(id){return !!S.done[id];}).length;
+  var pct=Math.round(done/C.lessons.length*100);
+  var rows=C.lessons.map(function(id){
+    var d=D[id];
+    return '<div class="listrow"><button class="chk'+(S.done[id]?" on":"")+'" data-done="'+id+'">'+(S.done[id]?"✓":"")+'</button>'+
+      '<a class="g" href="#/doc/'+id+'">'+esc(d.title)+'</a>'+(S.done[id]?'<span class="tiny">已学完</span>':"")+'</div>';
+  }).join("");
+  var weeks=""; for(var j=0;j<12;j++) weeks+='<button class="weekcell'+(S.week[j]?" on":"")+'" data-week="'+j+'">第 '+(j+1)+' 周'+(S.week[j]?" ✓":"")+'</button>';
+  var notes=Object.keys(S.notes).filter(function(k){return (S.notes[k]||"").trim();}).map(function(k){
+    return '<div class="notebox"><b><a href="#/doc/'+k+'">'+esc(D[k]?D[k].title:k)+'</a></b>'+esc(S.notes[k])+'</div>';
+  }).join("") || '<p class="tiny">还没有写随手记。每节课末尾都有一块随手记，写一句「今天挺不容易的」也算。</p>';
+  /* 取消勾选存的 0 不该算「已填」，否则数字只涨不降 */
+  var filled=Object.keys(S.fields).filter(function(k){
+    var v=S.fields[k]; return v!==0 && v!=="" && v!=null && String(v).trim()!=="";
+  }).length;
+  return '<div class="crumb"><a href="#/home">首页</a><span>›</span><span>我的进度与记录</span></div>'+
+   '<div class="doc-h"><div class="kicker">只存在这台设备的浏览器里</div><h1>我的进度与记录</h1></div>'+
+   '<div class="statrow"><div class="stat"><b>'+done+' / 16</b><span>已学完的课程 · '+pct+'%</span></div>'+
+     '<div class="stat"><b>'+Object.keys(S.week).filter(function(k){return S.week[k];}).length+' / 12</b><span>12 周推进打卡</span></div>'+
+     '<div class="stat"><b>'+filled+'</b><span>工具表已填格子</span></div></div>'+
+   '<div class="section" style="margin-top:8px"><h2>16 节课</h2><p class="sd">点方框可补打卡，点标题直接跳到那一课。</p>'+
+     '<div class="card">'+rows+'</div></div>'+
+   '<div class="section"><h2>12 周推进</h2><p class="sd">每周稳住了就点一下，和 T6 推进表同步。断了不补、不顺延、不加倍。</p>'+
+     '<div class="weekgrid">'+weeks+'</div><a class="btn" href="#/doc/t6">打开 T6 详细推进表 →</a></div>'+
+   '<div class="section"><h2>我的随手记</h2>'+notes+'</div>'+
+   '<div class="section"><h2>数据管理</h2><p class="sd">换设备、清浏览器缓存前，请先导出备份。</p>'+
+     '<div class="setting"><h3>导出备份</h3><p>记录只存在这台设备的浏览器里，换手机、换浏览器或清理缓存都会丢失。JSON 用于完整恢复；「复制成文字」可以直接粘进微信收藏或手机备忘录，最省事。</p>'+
+       '<div class="row"><button class="btn primary" id="exportBtn">导出 JSON 备份</button>'+
+         '<button class="btn" id="copyRecordBtn">复制记录为文字</button>'+
+         '<label class="btn" style="position:relative;overflow:hidden">导入备份<input type="file" id="importFile" accept=".json,application/json" style="position:absolute;inset:0;opacity:0;cursor:pointer"></label></div>'+
+       '<div class="import-confirm hidden" id="importConfirm"><b>这份备份会覆盖当前设备上的全部记录</b>（打卡、随手记、工具表内容），不能撤销。<br>确认无误再继续。<div><button class="btn" id="importYes">确认覆盖并导入</button> <button class="btn" id="importNo">取消</button></div></div></div>'+
+     '<div class="setting"><h3>本机访问遮罩</h3><p>开启后，每次重新打开需要输入访问码。这只是本机遮罩，不是加密，也不能替代购买核销；真正的兑换码与账号体系需要服务端支持。默认关闭。</p>'+
+       '<div class="row"><input type="password" id="lockInput" placeholder="设置 4–12 位访问码" maxlength="12" autocomplete="off">'+
+       '<button class="btn" id="lockOn">'+(S.lock?"更新访问码":"开启")+'</button>'+
+       (S.lock?'<button class="btn" id="lockOff">关闭遮罩</button>':"")+'</div></div>'+
+     '<div class="setting"><h3>清空全部记录</h3><p>删除本机的打卡、随手记与所有工具表内容，不可恢复。建议先导出备份。</p>'+
+       '<div class="row"><button class="btn" id="wipeBtn">清空全部记录</button></div></div>'+
+   '</div>'+
+   '<div class="footer">本系统不联网、不收集任何信息，所有记录都写在当前浏览器的本地存储里。清除浏览器数据会一并清掉，请自行备份。</div>';
+}
+
+/* ---------- 绑定 ---------- */
+function bindCommon(v){
+  $$("[data-go]",v).forEach(function(b){ b.onclick=function(){ location.hash=b.dataset.go; }; });
+  var p=$("#printBtn"); if(p) p.onclick=function(){ window.print(); };
+  var dbs=[$("#doneBtn"),$("#doneBtn2")].filter(Boolean);
+  dbs.forEach(function(db){ db.onclick=function(){
+    var id=currentId, isTool=D[id]&&D[id].kind==="tool";
+    S.done[id]=!S.done[id];
+    var tx = S.done[id] ? (isTool?"✓ 这张表已用过，点击取消":"✓ 已学完，点击取消")
+                        : (isTool?"标记这张表已用过":"标记这一课已学完");
+    dbs.forEach(function(x){ x.classList.toggle("is-done",!!S.done[id]); x.textContent=tx; });
+    updateNav(); save(); toast(S.done[id]?(isTool?"已记下这张表":"已记下这一课"):"已取消打卡");
+  }; });
+  var jr=$("#jumpRight"); if(jr) jr.onclick=function(){
+    var best=null;
+    $$("#view .tw").forEach(function(t){ if(!best||t.scrollWidth>best.scrollWidth) best=t; });
+    if(best) best.scrollTo({left:best.scrollWidth,behavior:"smooth"});
+  };
+  var cb=$("#clearTableBtn"); if(cb) cb.onclick=function(){
+    if(!confirm("清空这张工具表里填写的全部内容？此操作不可恢复。")) return;
+    var pre=currentId+":"; Object.keys(S.fields).forEach(function(k){ if(k.indexOf(pre)===0) delete S.fields[k]; });
+    if(currentId==="t6") S.week={}; save(); render({keepScroll:true}); toast("这张表已清空");
+  };
+  var n=$("#docBody"); if(n) markAgeRows(n);
+}
+function bindProgress(v){
+  $$("[data-done]",v).forEach(function(b){ b.onclick=function(){
+    var id=b.dataset.done; S.done[id]=!S.done[id]; save(); updateNav(); render({keepScroll:true}); }; });
+  $$("[data-week]",v).forEach(function(b){ b.onclick=function(){
+    var j=b.dataset.week; S.week[j]=!S.week[j]; save(); render({keepScroll:true}); }; });
+  $("#exportBtn").onclick=function(){
+    var blob=new Blob([JSON.stringify({app:"ziqu-course",version:1,exportedAt:new Date().toISOString(),data:S},null,2)],{type:"application/json"});
+    var a=document.createElement("a"); a.href=URL.createObjectURL(blob);
+    a.download="自驱力课程_我的记录_"+new Date().toISOString().slice(0,10)+".json"; a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href);},1000); toast("已导出 JSON 备份");
+  };
+  $("#copyRecordBtn").onclick=function(){
+    copyText(recordText(),"记录已复制，去粘贴到备忘录或微信收藏");
+  };
+  /* 导入会整份覆盖，先读出来、再让家长在页面里确认，不用系统弹窗 */
+  var pendingImport=null;
+  $("#importFile").onchange=function(e){
+    var f=e.target.files[0]; if(!f) return;
+    var fr=new FileReader(); fr.onload=function(){
+      try{ var o=JSON.parse(fr.result); if(!o.data) throw 0;
+        pendingImport=o.data; $("#importConfirm").classList.remove("hidden");
+        toast("备份已读取，请确认是否覆盖");
+      }catch(err){ pendingImport=null; toast("文件格式不对，请选择本系统导出的 JSON"); }
+    }; fr.readAsText(f);
+  };
+  $("#importYes").onclick=function(){
+    if(!pendingImport) return;
+    S=Object.assign({},defState,pendingImport);
+    ["done","notes","fields","week"].forEach(function(k){ if(!S[k]||typeof S[k]!=="object") S[k]={}; });
+    pendingImport=null; $("#importConfirm").classList.add("hidden"); $("#importFile").value="";
+    save(); applyPrefs(); render({keepScroll:true}); toast("备份已导入");
+  };
+  $("#importNo").onclick=function(){
+    pendingImport=null; $("#importConfirm").classList.add("hidden"); $("#importFile").value="";
+  };
+  $("#lockOn").onclick=function(){
+    var val=$("#lockInput").value.trim();
+    if(val.length<4){ toast("访问码至少 4 位"); return; }
+    S.lock=hash(val); save(); render({keepScroll:true}); toast("已开启，下次打开本页时生效");
+  };
+  var off=$("#lockOff"); if(off) off.onclick=function(){ S.lock=null; save(); render({keepScroll:true}); toast("本机遮罩已关闭"); };
+  $("#wipeBtn").onclick=function(){
+    if(!confirm("确定清空全部学习记录吗？打卡、随手记、工具表内容都会删除，且不可恢复。")) return;
+    if(!confirm("再确认一次：建议先导出 JSON 或复制记录为文字。仍要清空？")) return;
+    var keep={theme:S.theme,font:S.font,age:S.age,lock:S.lock,tipSeen:S.tipSeen};
+    S=Object.assign({},defState,keep); save(); applyPrefs(); render({keepScroll:true}); toast("已清空全部记录");
+  };
+}
+function bindTools(v){ /* 工具页链接已在 HTML 中 */ }
+
+/* ---------- 搜索：家长用自己的话也能搜到 ---------- */
+var SYN=[
+  [/不写作业|写作业磨蹭|磨蹭|拖拉|拖着|老催|要催|快点|磨叽|写得慢|拖延/, ["催","作业","拖延","坐不住"]],
+  [/玩手机|看平板|ipad|刷视频|打游戏|手机|屏幕|没收|抢手机/, ["电子产品"]],
+  [/怎么夸|夸奖|表扬|奖励|贴纸|积分|赞美|夸孩子/, ["正反馈","夸"]],
+  [/不自觉|不主动|没动力|懒|被动|推一下动一下|不自律/, ["自驱","主动"]],
+  [/顶嘴|不听话|发脾气|爱哭|闹|发火|吼|情绪/, ["不想做","受挫"]],
+  [/几岁|年龄|幼儿园|大班|一年级|低年级|高年级/, ["分龄","3–6","7–9","10–12"]],
+  [/计划|安排|作息|时间表|周末|周日/, ["周计划","复盘","次序"]],
+  [/老人|爷爷|奶奶|外婆|爸爸|意见不一致|管法|全家/, ["管法不一致"]],
+  [/自觉|自律|内驱|驱动力/, ["自驱"]],
+  [/坚持不住|断断续续|放弃|中断|三天打鱼|没坚持/, ["断断续续"]],
+  [/签名|约定|规矩|规则|底线/, ["规矩","约定"]],
+  [/专注|坐不住|走神|分心/, ["专注"]]
+];
+var SUGGEST=["作业拖延","电子产品","孩子说不想做","怎么夸孩子","家里管法不一致","周计划复盘"];
+function expandQuery(q){
+  var w=[q];
+  SYN.forEach(function(p){ if(p[0].test(q)) p[1].forEach(function(x){ if(w.indexOf(x)<0) w.push(x); }); });
+  return w;
+}
+function sugHTML(){
+  return '<div class="sug">'+SUGGEST.map(function(s){
+    return '<button type="button" data-sug="'+esc(s)+'">'+esc(s)+'</button>'; }).join("")+'</div>';
+}
+function bindSug(box){
+  $$("[data-sug]",box).forEach(function(b){ b.onclick=function(){
+    var i=$("#searchInput"); i.value=b.dataset.sug; runSearch(i.value); i.focus();
+  }; });
+}
+function openSearch(){
+  $("#searchPanel").classList.remove("hidden");
+  var i=$("#searchInput"); i.value=""; i.focus(); runSearch("");
+}
+function closeSearch(){ $("#searchPanel").classList.add("hidden"); }
+function runSearch(q){
+  q=q.trim(); var box=$("#searchRes");
+  if(!q){
+    box.innerHTML='<div class="sempty">输入关键词，例如「作业」「电子产品」「复盘」。<br>也可以直接说家里的情况，比如「一写作业就磨蹭」。'+sugHTML()+'</div>';
+    bindSug(box); return;
+  }
+  var words=expandQuery(q), hits=[];
+  C.searchIndex.forEach(function(it,order){
+    var title=it.title.toLowerCase(), plain=it.plain.toLowerCase(), score=0, hitWord=null;
+    words.forEach(function(w,i){
+      var lw=w.toLowerCase(), wgt=(i===0?3:1), p=plain.indexOf(lw);
+      if(title.indexOf(lw)>=0){ score+=14*wgt; if(!hitWord) hitWord=w; }
+      if(p>=0){
+        score+=5*wgt; if(!hitWord) hitWord=w;
+        var c=0,pos=0;
+        while((pos=plain.indexOf(lw,pos))>=0){ c++; pos+=lw.length; if(c>=6) break; }
+        score+=Math.min(c,5)*wgt;
+      }
+    });
+    if(score<=0) return;
+    var key=hitWord||words[0], low=key.toLowerCase();
+    var pos=plain.indexOf(low); if(pos<0) pos=0;
+    var s=Math.max(0,pos-28), e=Math.min(it.plain.length,pos+key.length+52);
+    var snip=(s?"…":"")+it.plain.slice(s,e)+(e<it.plain.length?"…":"");
+    var rank={lesson:2,tool:1,part:0,reading:0};
+    hits.push({id:it.id,title:it.title,kind:it.kind,snip:snip,score:score+(rank[it.kind]||0),order:order});
+  });
+  hits.sort(function(a,b){ return b.score-a.score || a.order-b.order; });
+  if(!hits.length){
+    box.innerHTML='<div class="sempty">没找到「'+esc(q)+'」。<br>试试这些家长常搜的说法：'+sugHTML()+'</div>';
+    bindSug(box); return;
+  }
+  var re=new RegExp(words.map(function(w){ return w.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"); }).join("|"),"gi");
+  var hl=function(t){ return esc(t).replace(re,function(m){ return "<mark>"+m+"</mark>"; }); };
+  box.innerHTML='<div class="scount">共 '+hits.length+' 条结果 · 按相关度排序'+
+    (words.length>1?'（已按家里的说法补全：'+esc(words.slice(1,4).join("、"))+'）':'')+'</div>'+
+    hits.slice(0,40).map(function(h){
+      var tag={lesson:"课程",tool:"工具表",part:"部分",reading:"说明"}[h.kind]||"";
+      return '<button class="sitem" data-hit="'+h.id+'"><b>'+hl(h.title)+'</b><span class="tag">'+tag+'</span>'+
+        '<p>'+hl(h.snip)+'</p></button>';
+    }).join("");
+  $$("[data-hit]",box).forEach(function(b){ b.onclick=function(){
+    var target="#/doc/"+b.dataset.hit, same=(location.hash===target);
+    pendingHighlight=$("#searchInput").value.trim(); closeSearch();
+    location.hash=target;
+    if(same) render();  /* hash 变了就交给 hashchange，避免渲染两次把高亮冲掉 */
+  }; });
+}
+function highlight(root,q){
+  if(!q) return;
+  var walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null,false), nodes=[];
+  while(walker.nextNode()) nodes.push(walker.currentNode);
+  nodes.forEach(function(n){
+    if(!n.nodeValue || n.nodeValue.indexOf(q)<0) return;
+    if(n.parentNode && /^(SCRIPT|STYLE|INPUT|TEXTAREA)$/.test(n.parentNode.nodeName)) return;
+    var s=document.createElement("span");
+    s.innerHTML=esc(n.nodeValue).replace(new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"),"g"),function(m){return "<mark>"+m+"</mark>";});
+    n.parentNode.replaceChild(s,n);
+  });
+}
+
+/* ---------- 访问遮罩 ---------- */
+function hash(s){ var h=5381; for(var i=0;i<s.length;i++) h=((h<<5)+h+s.charCodeAt(i))>>>0; return "h"+h.toString(36); }
+function checkGate(){
+  if(!S.lock){ $("#gate").classList.add("hidden"); return; }
+  var unlocked=false;
+  try{ unlocked = sessionStorage.getItem("ziqu.unlocked")===S.lock; }catch(e){}
+  if(unlocked){ $("#gate").classList.add("hidden"); return; }
+  $("#gate").classList.remove("hidden");
+}
+function tryUnlock(){
+  var v=$("#gateInput").value.trim();
+  if(hash(v)===S.lock){
+    try{ sessionStorage.setItem("ziqu.unlocked",S.lock); }catch(e){}
+    $("#gate").classList.add("hidden"); $("#gateErr").textContent="";
+  } else { $("#gateErr").textContent="访问码不对，再试一次"; $("#gateInput").value=""; }
+}
+
+/* ---------- 全局事件 ---------- */
+$("#menuBtn").onclick=function(){ document.body.classList.toggle("nav-open"); };
+$("#mask").onclick=closeNav;
+function toggleTheme(){ S.theme=S.theme==="dark"?"light":"dark"; applyPrefs(); save(); }
+$("#themeBtn").onclick=toggleTheme;
+$("#themeBtn2").onclick=toggleTheme;
+$("#fontBtn").onclick=cycleFont; $("#fontBtn2").onclick=cycleFont;
+/* 窄屏顶栏折成两行，用实测高度同步给侧栏/遮罩，避免固定值错位 */
+function syncTopH(){ document.documentElement.style.setProperty("--topH", $("#topbar").offsetHeight+"px"); }
+window.addEventListener("resize",syncTopH);
+window.addEventListener("orientationchange",function(){ setTimeout(syncTopH,150); });
+$("#searchBtn").onclick=openSearch; $("#searchBtnM").onclick=openSearch;
+$("#searchClose").onclick=closeSearch;
+$("#searchPanel").onclick=function(e){ if(e.target===this) closeSearch(); };
+$("#searchInput").oninput=function(){ runSearch(this.value); };
+$("#gateOk").onclick=tryUnlock;
+$("#gateInput").onkeydown=function(e){ if(e.key==="Enter") tryUnlock(); };
+$$("#agebar button").forEach(function(b){ b.onclick=function(){ setAge(b.dataset.age); }; });
+document.addEventListener("keydown",function(e){
+  if(e.key==="Escape"){ closeSearch(); closeNav(); return; }
+  var tag=(e.target.tagName||"").toLowerCase();
+  if(tag==="input"||tag==="textarea"||$("#searchPanel").classList.contains("hidden")===false) return;
+  if(e.key==="/"){ e.preventDefault(); openSearch(); return; }
+  if(e.key==="ArrowLeft"||e.key==="ArrowRight"){
+    var seq=D[currentId]&&D[currentId].kind==="tool"?C.tools:C.lessons, i=seq.indexOf(currentId);
+    if(i<0) return;
+    var j=e.key==="ArrowLeft"?i-1:i+1;
+    if(j>=0&&j<seq.length){ e.preventDefault(); location.hash="#/doc/"+seq[j]; }
+  }
+});
+window.addEventListener("hashchange",function(){ render(); });
+
+/* ---------- 启动 ---------- */
+applyPrefs(); syncTopH(); checkGate(); buildNav(); render(); initBackupTip();
+})();
+</script>
+</body>
+</html>
